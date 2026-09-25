@@ -2,7 +2,10 @@
 
 > **Ngôn ngữ**: [English](../../en/fr/quality-attributes.md) | Tiếng Việt
 
-Trạng thái: Đã lên kế hoạch (Planned). Các ràng buộc này áp dụng cho mọi năng lực trừ khi có một yêu cầu chức năng thu hẹp phạm vi của chúng một cách rõ ràng.
+- **Trạng thái**: Đang đặc tả (In Specification)
+- **Cập nhật lần cuối**: 2026-09-25
+- **Phạm vi**: Public MVP (All)
+- **Thẩm quyền**: Đặc tả Yêu cầu Chức năng (Bản dịch tham khảo)
 
 ## Tính đơn giản (Simplicity)
 

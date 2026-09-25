@@ -2,7 +2,10 @@
 
 > **Ngôn ngữ**: [English](../../en/fr/self-hosting.md) | Tiếng Việt
 
-Trạng thái: Đã lên kế hoạch (Planned). Giới thiệu: P0. Cửa kiểm phát hành: P5. Tác nhân: Người vận hành tự lưu trữ (self-host operator). Phụ thuộc vào FR-REPO-007 và FR-REPO-008. Ràng buộc áp dụng: NFR-PORT-001, NFR-PORT-002, và NFR-PORT-004.
+- **Trạng thái**: Đang đặc tả (In Specification)
+- **Cập nhật lần cuối**: 2026-09-25
+- **Phạm vi**: Public MVP (P0–P5)
+- **Thẩm quyền**: Đặc tả Yêu cầu Chức năng (Bản dịch tham khảo)
 
 ### FR-HOST-001 — Khởi chạy cục bộ
 Ứng dụng phải có khả năng khởi chạy cục bộ dựa trên các bước được ghi nhận trong tài liệu. Hoàn thành khi một bản sao mã nguồn mới (fresh clone) làm theo tài liệu hướng dẫn và có được ứng dụng hoạt động chính xác.

@@ -2,6 +2,11 @@
 
 > **Ngôn ngữ**: [English](../en/roadmap.md) | Tiếng Việt
 
+- **Trạng thái**: Đang đặc tả (In Specification)
+- **Cập nhật lần cuối**: 2026-09-25
+- **Phạm vi**: Public MVP (P0–P5)
+- **Thẩm quyền**: Đặc tả Lộ trình (Bản dịch tham khảo)
+
 > Phạm vi: **Chỉ áp dụng cho Phiên bản Cộng đồng / Kho mã nguồn Công khai (Community Edition)**  
 > Mục tiêu: Xây dựng một sản phẩm học tập và thực hành lập trình hữu ích, có thể tự lưu trữ (self-hostable), phi thương mại trước khi bất kỳ công việc nào về SaaS bắt đầu.
 
@@ -16,12 +21,12 @@ Trạng thái MVP hiện tại: **Kế hoạch cơ sở (Planning baseline)**. C
 
 | Nhóm năng lực MVP | Trạng thái hiện tại | Yêu cầu chi tiết |
 |---|---|---|
-| P0 Nền tảng kho mã nguồn | Đã lên kế hoạch (Planned) | [FR map](fr-map.md#danh-mục-fr-và-trạng-thái) |
-| P1 Mô hình tri thức, Lộ trình & Bài học | Đã lên kế hoạch (Planned) | [FR map](fr-map.md#danh-mục-fr-và-trạng-thái) |
-| P2 Tiến độ & Tiếp tục học | Đã lên kế hoạch (Planned) | [FR map](fr-map.md#danh-mục-fr-và-trạng-thái) |
-| P3 Thực hành tất định (Deterministic Practice) | Đã lên kế hoạch (Planned) | [FR map](fr-map.md#danh-mục-fr-và-trạng-thái) |
-| P4 Gỡ lỗi & Đánh giá code do AI tạo ra | Đã lên kế hoạch (Planned) | [FR map](fr-map.md#danh-mục-fr-và-trạng-thái) |
-| P5 Độ thuần thục, Tìm kiếm & Bản phát hành công khai | Đã lên kế hoạch (Planned) | [FR map](fr-map.md#danh-mục-fr-và-trạng-thái) |
+| P0 Nền tảng kho mã nguồn | Đang đặc tả (In Specification) | [FR map](fr-map.md#danh-mục-fr-và-trạng-thái) |
+| P1 Mô hình tri thức, Lộ trình & Bài học | Đang đặc tả (In Specification) | [FR map](fr-map.md#danh-mục-fr-và-trạng-thái) |
+| P2 Tiến độ & Tiếp tục học | Đang đặc tả (In Specification) | [FR map](fr-map.md#danh-mục-fr-và-trạng-thái) |
+| P3 Thực hành tất định (Deterministic Practice) | Đang đặc tả (In Specification) | [FR map](fr-map.md#danh-mục-fr-và-trạng-thái) |
+| P4 Gỡ lỗi & Đánh giá code do AI tạo ra | Đang đặc tả (In Specification) | [FR map](fr-map.md#danh-mục-fr-và-trạng-thái) |
+| P5 Độ thuần thục, Tìm kiếm & Bản phát hành công khai | Đang đặc tả (In Specification) | [FR map](fr-map.md#danh-mục-fr-và-trạng-thái) |
 
 ---
 
@@ -829,19 +834,25 @@ Và một người đóng góp có thể:
 
 ---
 
-# 11. Các kế hoạch sau khi hoàn thành MVP Công khai
+# 11. Định hướng Sau MVP / Không Thuộc Phạm vi Public MVP (Post-MVP)
 
-Những mục này **không nằm trong cam kết của bản MVP công khai**.
+Các tính năng này **hoàn toàn nằm ngoài phạm vi cam kết của bản Public MVP**. Chúng không sử dụng số thứ tự giai đoạn MVP (P0–P5) và sẽ không được lên lịch triển khai cho tới khi P0–P5 được nghiệm thu hoàn tất.
 
-Các cột mốc cộng đồng / công khai tiếp theo có thể bao gồm:
+Loại trừ rõ ràng khỏi Public MVP:
 
 ```text
-Lộ trình học ngôn ngữ Go
-So sánh phiên bản (Version Diff)
-So sánh khác biệt giữa PHP và Go (PHP → Go Lang Diff)
-Kiến thức nền tảng DevOps
-Kiến thức nền tảng Thiết kế Hệ thống (System Design)
-Môi trường Sandbox tương tác trực tiếp
+Lộ trình học ngôn ngữ Go đầy đủ
+Engine So sánh phiên bản (Version Diff)
+Engine So sánh ngôn ngữ PHP → Go (Lang Diff)
+Kiến thức nền tảng DevOps & Phòng lab
+Trình mô phỏng Thiết kế Hệ thống tương tác (System Design)
+Môi trường Sandbox thực thi mã nguồn trực tiếp
+Truy cập Terminal từ xa
+Model Context Protocol (MCP)
+Agent hỗ trợ di chuyển mã nguồn (Migration Agent)
+Đồng bộ đám mây đa thiết bị
+Thuê bao dịch vụ SaaS
+Tính năng Đội nhóm & Phân quyền doanh nghiệp (Enterprise RBAC)
 ```
 
 Các sản phẩm thương mại hoặc lưu trữ đám mây trong tương lai có thể được phát triển dựa trên Community Edition, nhưng chúng nên được lên kế hoạch riêng biệt sau khi kho mã nguồn công khai đạt được mức độ trưởng thành hữu ích.

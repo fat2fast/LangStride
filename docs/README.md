@@ -1,41 +1,55 @@
-# LangStride Documentation / Tài liệu LangStride
+# LangStride Documentation Hub / Trung tâm Tài liệu LangStride
 
-[English](en/README.md) | [Tiếng Việt](vi/README.md)
+> **Languages**: [English](en/README.md) | [Tiếng Việt](vi/README.md)
 
-Welcome to the LangStride documentation hub. LangStride is a community-first developer learning and practice platform.
+Welcome to the LangStride documentation hub. LangStride is a community-first, non-commercial developer learning and practice platform.
 
-Chào mừng bạn đến với trung tâm tài liệu của LangStride - nền tảng học tập và thực hành lập trình hướng cộng đồng.
-
----
-
-## Language Selection / Chọn ngôn ngữ
-
-- 🇬🇧 **[English Documentation](en/README.md)** — Architecture, roadmap, functional requirements, and community specifications.
-- 🇻🇳 **[Tài liệu Tiếng Việt](vi/README.md)** — Kiến trúc, lộ trình phát triển, đặc tả chức năng và hướng dẫn cộng đồng bằng tiếng Việt.
+Chào mừng bạn đến với trung tâm tài liệu của LangStride - nền tảng học tập và thực hành lập trình hướng cộng đồng, phi thương mại.
 
 ---
 
-## Document Map / Bản đồ tài liệu
+## Language Authority / Quy tắc Thẩm quyền Ngôn ngữ
 
-| Capability / Chức năng | English Specification | Đặc tả Tiếng Việt | Phase / Giai đoạn |
+> **IMPORTANT RULE**:
+> - 🇬🇧 **English (`docs/en/`)** is the **Canonical Specification (Source of Truth)** for all architectural and functional requirement definitions.
+> - 🇻🇳 **Tiếng Việt (`docs/vi/`)** is the **Reference Translation** provided to support Vietnamese-speaking learners and contributors.
+>
+> In the event of any discrepancies or pending translation updates, the English specification controls.
+>
+> *(QUY TẮC: Tiếng Anh là đặc tả chuẩn tắc; Tiếng Việt là bản dịch tham khảo. Khi có sự khác biệt, tài liệu tiếng Anh là căn cứ chuẩn).*
+
+---
+
+## Document Hierarchy & Authority Matrix / Bảng Phân cấp & Thẩm quyền Tài liệu
+
+| Document Area | Purpose | Phụ trách / Mục đích | Authority / Thẩm quyền |
 |---|---|---|---|
-| **Roadmap** | [MVP Roadmap](en/roadmap.md) | [Lộ trình MVP](vi/roadmap.md) | Overview |
-| **Requirements Map** | [FR Map](en/fr-map.md) | [Bản đồ FR](vi/fr-map.md) | Index |
-| **Repository Foundation** | [repository-foundation.md](en/fr/repository-foundation.md) | [repository-foundation.md](vi/fr/repository-foundation.md) | P0 |
-| **Self-Hosting** | [self-hosting.md](en/fr/self-hosting.md) | [self-hosting.md](vi/fr/self-hosting.md) | P0–P5 |
-| **Content Operations** | [content-operations.md](en/fr/content-operations.md) | [content-operations.md](vi/fr/content-operations.md) | P0–P5 |
-| **Knowledge & Content Model** | [knowledge-model.md](en/fr/knowledge-model.md) | [knowledge-model.md](vi/fr/knowledge-model.md) | P1 |
-| **PHP Roadmap** | [php-roadmap.md](en/fr/php-roadmap.md) | [php-roadmap.md](vi/fr/php-roadmap.md) | P1 |
-| **Lessons** | [lessons.md](en/fr/lessons.md) | [lessons.md](vi/fr/lessons.md) | P1–P3 |
-| **Content Contribution** | [content-contribution.md](en/fr/content-contribution.md) | [content-contribution.md](vi/fr/content-contribution.md) | P1–P5 |
-| **Learning Progress** | [learning-progress.md](en/fr/learning-progress.md) | [learning-progress.md](vi/fr/learning-progress.md) | P2 |
-| **Home / Continue Learning** | [home-continue-learning.md](en/fr/home-continue-learning.md) | [home-continue-learning.md](vi/fr/home-continue-learning.md) | P2 |
-| **Shared Practice Engine** | [practice-engine.md](en/fr/practice-engine.md) | [practice-engine.md](vi/fr/practice-engine.md) | P3 |
-| **Multiple Choice Practice** | [practice-multiple-choice.md](en/fr/practice-multiple-choice.md) | [practice-multiple-choice.md](vi/fr/practice-multiple-choice.md) | P3 |
-| **Predict Output Practice** | [practice-predict-output.md](en/fr/practice-predict-output.md) | [practice-predict-output.md](vi/fr/practice-predict-output.md) | P3 |
-| **Fix the Code Practice** | [practice-fix-the-code.md](en/fr/practice-fix-the-code.md) | [practice-fix-the-code.md](vi/fr/practice-fix-the-code.md) | P3 |
-| **Debugging Practice** | [debugging-practice.md](en/fr/debugging-practice.md) | [debugging-practice.md](vi/fr/debugging-practice.md) | P4 |
-| **AI-Generated Code Review** | [ai-generated-code-review.md](en/fr/ai-generated-code-review.md) | [ai-generated-code-review.md](vi/fr/ai-generated-code-review.md) | P4 |
-| **Mastery & Review** | [mastery-and-review.md](en/fr/mastery-and-review.md) | [mastery-and-review.md](vi/fr/mastery-and-review.md) | P5 |
-| **Search** | [search.md](en/fr/search.md) | [search.md](vi/fr/search.md) | P5 |
-| **Quality Attributes (NFR)** | [quality-attributes.md](en/fr/quality-attributes.md) | [quality-attributes.md](vi/fr/quality-attributes.md) | All |
+| [`README.md`](../README.md) | Project vision & visitor overview | Tổng quan dự án cho khách ghé thăm | **Informational** (Thông tin chung) |
+| [`roadmap.md`](en/roadmap.md) | Phased milestones, scope, exit criteria (**WHEN**) | Lộ trình theo giai đoạn, ranh giới MVP | **Source of Truth** (Nguồn chân lý thời gian) |
+| [`fr-map.md`](en/fr-map.md) | Requirement catalog, IDs, status (**WHAT**) | Danh mục đặc tả yêu cầu chức năng | **Source of Truth** (Nguồn chân lý yêu cầu) |
+| [`fr/`](en/fr/README.md) | Detailed testable specifications & acceptance criteria | 18 đặc tả chức năng chi tiết & nghiệm thu | **Normative Specification** (Đặc tả chuẩn tắc) |
+| [`architecture/`](en/architecture/overview.md) | Technical structure & modular monolith (**HOW**) | Cấu trúc kỹ thuật khối mô-đun hóa | **Technical Source** (Nguồn kỹ thuật) |
+| [`product/`](en/product/mvp-scope.md) | Product loop & explicit post-MVP boundary (**WHY**) | Vòng lặp học tập & ranh giới sản phẩm | **Product Boundary** (Ranh giới sản phẩm) |
+| [`adr/`](en/adr/README.md) | Architectural Decision Records (**WHY TECHNICAL DECISION**) | Bản ghi các quyết định kiến trúc cốt lõi | **Decision Record** (Hồ sơ quyết định) |
+| [`contribution/`](en/contribution/README.md) | Guides for lessons, challenges, reviews (**HOW TO CONTRIBUTE**) | Hướng dẫn đóng góp bài học, bài tập | **Contributor Guide** (Hướng dẫn đóng góp) |
+
+---
+
+## Recommended Reading Order / Thứ tự Đọc Khuyến nghị
+
+### 1. For New Learners & Visitors
+1. [Root README](../README.md) — High-level vision and philosophy.
+2. [Product MVP Scope](en/product/mvp-scope.md) — The core learning loop and what LangStride solves.
+3. [PHP Roadmap Spec](en/fr/php-roadmap.md) — The initial guided learning track.
+
+### 2. For Software Engineers & Maintainers
+1. [MVP Roadmap](en/roadmap.md) — Current development phase and exit criteria.
+2. [Architecture Overview](en/architecture/overview.md) — Modular monolith package layout.
+3. [ADR Index](en/adr/README.md) — Accepted architectural decisions (`ADR-0001` through `ADR-0007`).
+4. [Functional Requirements Map](en/fr-map.md) — Detailed requirement tracking.
+
+### 3. For Content & Challenge Contributors
+1. [Contributing Overview](../CONTRIBUTING.md) — How community contributions work.
+2. [Content Guide](en/contribution/content-guide.md) — Writing short, focused lessons.
+3. [Challenge Guide](en/contribution/challenge-guide.md) — Creating deterministic practice challenges.
+4. [Roadmap Guide](en/contribution/roadmap-guide.md) — Proposing new roadmap nodes and prerequisites.

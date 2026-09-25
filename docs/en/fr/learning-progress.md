@@ -2,7 +2,10 @@
 
 > **Languages**: English | [Tiếng Việt](../../vi/fr/learning-progress.md)
 
-Status: Planned. Introduced: P2. Release gate: P2. Actor: learner. Depends on FR-LESSON-001. Applicable constraints: NFR-PORT-001 and NFR-PORT-004.
+- **Status**: In Specification
+- **Last Updated**: 2026-09-25
+- **Scope**: Public MVP (P2)
+- **Authority**: Functional Requirement Specification (Canonical)
 
 ### FR-PROGRESS-001 — Mark started
 A learner shall be able to mark a lesson started. Done when opening or explicitly starting a lesson records an in-progress state.
@@ -19,6 +22,11 @@ A roadmap node shall reflect the learner's current progress state. Done when not
 ### FR-PROGRESS-005 — Resume position
 A learner shall be able to resume the last learning position. Done when the application retains enough lesson context to return the learner to their most recent unfinished position.
 
+#### Acceptance Criteria
+- **Given**: The learner previously started lesson B and closed the application.
+- **When**: The learner re-opens the application.
+- **Then**: The system identifies lesson B as the active resumption target without requiring manual navigation through the roadmap.
+
 ### FR-PROGRESS-006 — Bookmark lesson
 A learner should be able to bookmark a lesson. Done when a bookmark can be added, removed, and listed for that learner.
 
@@ -27,4 +35,3 @@ A learner should see recent learning activity. Done when recent starts and compl
 
 ### FR-PROGRESS-008 — No hosted-account dependency
 Progress shall work without a hosted LangStride account. Done when the supported local or self-hosted identity mode persists progress independently of LangStride SaaS.
-

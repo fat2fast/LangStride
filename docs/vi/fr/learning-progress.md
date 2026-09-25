@@ -2,7 +2,10 @@
 
 > **Ngôn ngữ**: [English](../../en/fr/learning-progress.md) | Tiếng Việt
 
-Trạng thái: Đã lên kế hoạch (Planned). Giới thiệu: P2. Cửa kiểm phát hành: P2. Tác nhân: Người học. Phụ thuộc vào FR-LESSON-001. Ràng buộc áp dụng: NFR-PORT-001 và NFR-PORT-004.
+- **Trạng thái**: Đang đặc tả (In Specification)
+- **Cập nhật lần cuối**: 2026-09-25
+- **Phạm vi**: Public MVP (P2)
+- **Thẩm quyền**: Đặc tả Yêu cầu Chức năng (Bản dịch tham khảo)
 
 ### FR-PROGRESS-001 — Đánh dấu đã bắt đầu
 Người học phải có thể đánh dấu một bài học là đã bắt đầu. Hoàn thành khi việc mở hoặc chủ động bắt đầu một bài học ghi nhận trạng thái đang tiến hành (in-progress).
@@ -18,6 +21,11 @@ Một nút trên lộ trình học phải phản ánh trạng thái tiến độ
 
 ### FR-PROGRESS-005 — Khôi phục vị trí đang học dở
 Người học phải có khả năng tiếp tục từ vị trí học tập gần nhất. Hoàn thành khi ứng dụng ghi nhớ đủ ngữ cảnh bài học để đưa người học trở lại vị trí chưa hoàn thành gần nhất của họ.
+
+#### Tiêu chí Nghiệm thu (Acceptance Criteria)
+- **Cho (Given)**: Người học trước đó đã bắt đầu bài học B và đóng ứng dụng.
+- **Khi (When)**: Người học mở lại ứng dụng.
+- **Thì (Then)**: Hệ thống nhận diện bài học B là mục tiêu tiếp tục học mà không đòi hỏi phải duyệt tìm thủ công trên lộ trình.
 
 ### FR-PROGRESS-006 — Đánh dấu bài học yêu thích (Bookmark)
 Người học nên có thể đánh dấu lưu lại bài học. Hoàn thành khi dấu trang có thể được thêm, xóa và hiển thị danh sách cho người học đó.

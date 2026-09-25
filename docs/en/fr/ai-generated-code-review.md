@@ -2,7 +2,10 @@
 
 > **Languages**: English | [Tiếng Việt](../../vi/fr/ai-generated-code-review.md)
 
-Status: Planned. Introduced: P4. Release gate: P4. Actor: learner and challenge contributor. Depends on FR-PRAC-001 through FR-PRAC-010. Applicable constraints: NFR-AI-001, NFR-AI-002, NFR-AI-003.
+- **Status**: In Specification
+- **Last Updated**: 2026-09-25
+- **Scope**: Public MVP (P4)
+- **Authority**: Functional Requirement Specification (Canonical)
 
 ### FR-AIREVIEW-001 — Generated-code label
 A challenge shall be labelable as generated-code review. Done when the learner can distinguish this exercise type from ordinary debugging practice.
@@ -21,4 +24,3 @@ An AI service shall not be required to generate or grade an exercise at runtime.
 
 ### FR-AIREVIEW-006 — Engineering judgment focus
 Exercises shall emphasize engineering judgment rather than prompt writing. Done when acceptance evaluates code safety, correctness, trade-offs, or verification rather than prompt phrasing.
-

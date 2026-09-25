@@ -2,7 +2,10 @@
 
 > **Ngôn ngữ**: [English](../../en/fr/ai-generated-code-review.md) | Tiếng Việt
 
-Trạng thái: Đã lên kế hoạch (Planned). Giới thiệu: P4. Cửa kiểm phát hành: P4. Tác nhân: Người học và người đóng góp bài tập. Phụ thuộc vào FR-PRAC-001 đến FR-PRAC-010. Ràng buộc áp dụng: NFR-AI-001, NFR-AI-002, NFR-AI-003.
+- **Trạng thái**: Đang đặc tả (In Specification)
+- **Cập nhật lần cuối**: 2026-09-25
+- **Phạm vi**: Public MVP (P4)
+- **Thẩm quyền**: Đặc tả Yêu cầu Chức năng (Bản dịch tham khảo)
 
 ### FR-AIREVIEW-001 — Nhãn bài tập đánh giá code do AI tạo
 Một bài tập phải có thể gắn nhãn là bài tập đánh giá mã nguồn do AI tạo. Hoàn thành khi người học có thể phân biệt loại bài tập này với các bài thực hành gỡ lỗi thông thường.

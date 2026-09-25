@@ -2,7 +2,10 @@
 
 > **Languages**: English | [Tiếng Việt](../../vi/fr/debugging-practice.md)
 
-Status: Planned. Introduced: P4. Release gate: P4. Actor: learner and challenge contributor. Depends on FR-PRAC-001 through FR-PRAC-010. Applicable constraints: NFR-AI-002.
+- **Status**: In Specification
+- **Last Updated**: 2026-09-25
+- **Scope**: Public MVP (P4)
+- **Authority**: Functional Requirement Specification (Canonical)
 
 ### FR-DEBUG-001 — Concept references
 A debug challenge shall reference one or more concepts. Done when every challenge points to valid concept identifiers.
@@ -36,4 +39,3 @@ A debug result shall contribute to concept practice history. Done when a complet
 
 ### FR-DEBUG-011 — No live terminal
 Live shell or terminal access is not required. Done when all P4 debug exercises work with static prepared artifacts.
-

@@ -2,7 +2,10 @@
 
 > **Ngôn ngữ**: [English](../../en/fr/debugging-practice.md) | Tiếng Việt
 
-Trạng thái: Đã lên kế hoạch (Planned). Giới thiệu: P4. Cửa kiểm phát hành: P4. Tác nhân: Người học và người đóng góp bài tập. Phụ thuộc vào FR-PRAC-001 đến FR-PRAC-010. Ràng buộc áp dụng: NFR-AI-002.
+- **Trạng thái**: Đang đặc tả (In Specification)
+- **Cập nhật lần cuối**: 2026-09-25
+- **Phạm vi**: Public MVP (P4)
+- **Thẩm quyền**: Đặc tả Yêu cầu Chức năng (Bản dịch tham khảo)
 
 ### FR-DEBUG-001 — Tham chiếu khái niệm
 Một bài tập gỡ lỗi phải tham chiếu đến một hoặc nhiều khái niệm. Hoàn thành khi mỗi bài tập chỉ đến các mã định danh khái niệm hợp lệ.

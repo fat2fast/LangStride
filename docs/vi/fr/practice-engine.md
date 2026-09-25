@@ -2,7 +2,10 @@
 
 > **Ngôn ngữ**: [English](../../en/fr/practice-engine.md) | Tiếng Việt
 
-Trạng thái: Đã lên kế hoạch (Planned). Giới thiệu: P3. Cửa kiểm phát hành: P3. Tác nhân: Người học và người đóng góp bài tập. Phụ thuộc vào FR-KNOW-001, FR-LESSON-006, và FR-PROGRESS-003. Ràng buộc áp dụng: NFR-CONTRIB-002 và NFR-AI-002.
+- **Trạng thái**: Đang đặc tả (In Specification)
+- **Cập nhật lần cuối**: 2026-09-25
+- **Phạm vi**: Public MVP (P3)
+- **Thẩm quyền**: Đặc tả Yêu cầu Chức năng (Bản dịch tham khảo)
 
 ### FR-PRAC-001 — Mã định danh bài tập ổn định
 Mỗi thử thách thực hành phải có một mã định danh duy nhất và ổn định. Hoàn thành khi các lượt làm bài và tham chiếu nội dung đều phân giải về một thử thách duy nhất qua các lần cập nhật nội dung.
@@ -30,6 +33,11 @@ Kết quả bài tập thực hành phải được lưu trữ bền vững. Ho�
 
 ### FR-PRAC-009 — Liên kết khắc phục khi làm sai (Failure Recovery Link)
 Một bài tập làm sai phải dẫn liên kết trở lại nội dung học tập tương ứng. Hoàn thành khi làm sai hiển thị ít nhất một khái niệm hoặc bài học liên kết từ danh sách tham chiếu khái niệm của bài tập đó.
+
+#### Tiêu chí Nghiệm thu (Acceptance Criteria)
+- **Cho (Given)**: Người học nộp đáp án sai cho bài tập "chal-php-arrays-001".
+- **Khi (When)**: Kết quả đánh giá "Thất bại (Failed)" hiển thị.
+- **Thì (Then)**: Giao diện hiển thị đường dẫn trực tiếp để ôn tập lại khái niệm liên kết "concept-arrays".
 
 ### FR-PRAC-010 — Bài tập được biên soạn trong kho mã nguồn
 Bài tập thực hành phải có thể biên soạn dưới dạng nội dung hoặc dữ liệu trong kho mã nguồn. Hoàn thành khi người đóng góp có thể thêm một bài tập hợp lệ thông qua một file mã nguồn có thể review được trong repository.

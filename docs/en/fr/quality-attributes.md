@@ -2,7 +2,10 @@
 
 > **Languages**: English | [Tiếng Việt](../../vi/fr/quality-attributes.md)
 
-Status: Planned. These constraints apply to every capability unless a requirement explicitly narrows them.
+- **Status**: In Specification
+- **Last Updated**: 2026-09-25
+- **Scope**: Public MVP (All)
+- **Authority**: Functional Requirement Specification (Canonical)
 
 ## Simplicity
 
@@ -54,4 +57,3 @@ Core grading shall use deterministic logic where possible. Done when each MVP ch
 
 ### NFR-AI-003 — Static review examples
 Generated-code-review exercises may use prepared static examples. Done when an exercise can be delivered and graded without an AI runtime call.
-

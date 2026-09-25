@@ -2,7 +2,10 @@
 
 > **Languages**: English | [Tiếng Việt](../../vi/fr/knowledge-model.md)
 
-Status: Planned. Introduced: P1. Release gate: P1. Actor: learner, content contributor, maintainer. Applies to roadmap, lessons, practice, debugging, and mastery. Applicable constraints: NFR-PORT-003, NFR-CONTRIB-001.
+- **Status**: In Specification
+- **Last Updated**: 2026-09-25
+- **Scope**: Public MVP (P1)
+- **Authority**: Functional Requirement Specification (Canonical)
 
 ### FR-KNOW-001 — Stable concept identifier
 Each concept shall have a stable unique identifier. Done when references from lessons, roadmap nodes, and challenges resolve to one concept.
@@ -30,4 +33,3 @@ Technical content should record source references. Done when an author can attac
 
 ### FR-KNOW-009 — Future language compatibility
 The model shall remain compatible with future Go and language-difference work. Done when adding a Go lesson can reuse a generic concept without reshaping the concept identity.
-

@@ -2,7 +2,10 @@
 
 > **Ngôn ngữ**: [English](../../en/fr/content-contribution.md) | Tiếng Việt
 
-Trạng thái: Đã lên kế hoạch (Planned). Giới thiệu: P1. Cửa kiểm phát hành: P5. Tác nhân: Người đóng góp nội dung và người duy trì dự án. Phụ thuộc vào FR-REPO-003, FR-KNOW-006, và FR-PRAC-010. Ràng buộc áp dụng: NFR-CONTRIB-001 đến NFR-CONTRIB-003.
+- **Trạng thái**: Đang đặc tả (In Specification)
+- **Cập nhật lần cuối**: 2026-09-25
+- **Phạm vi**: Public MVP (P1–P5)
+- **Thẩm quyền**: Đặc tả Yêu cầu Chức năng (Bản dịch tham khảo)
 
 ### FR-CONT-001 — Đóng góp bài học
 Người đóng góp phải có thể thêm hoặc sửa nội dung bài học thông qua các file trong kho mã nguồn. Hoàn thành khi quy trình pull request được tài liệu hóa chấp nhận một thay đổi nội dung bài học.

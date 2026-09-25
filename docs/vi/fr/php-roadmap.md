@@ -2,7 +2,10 @@
 
 > **Ngôn ngữ**: [English](../../en/fr/php-roadmap.md) | Tiếng Việt
 
-Trạng thái: Đã lên kế hoạch (Planned). Giới thiệu: P1. Cửa kiểm phát hành: P1. Tác nhân: Người học. Phụ thuộc vào FR-KNOW-001 và FR-KNOW-002.
+- **Trạng thái**: Đang đặc tả (In Specification)
+- **Cập nhật lần cuối**: 2026-09-25
+- **Phạm vi**: Public MVP (P1)
+- **Thẩm quyền**: Đặc tả Yêu cầu Chức năng (Bản dịch tham khảo)
 
 ### FR-PHP-001 — Mở lộ trình học
 Người học phải có khả năng mở lộ trình học PHP. Hoàn thành khi đường dẫn truy cập PHP hiển thị lộ trình học hiện tại.

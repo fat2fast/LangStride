@@ -2,7 +2,10 @@
 
 > **Ngôn ngữ**: [English](../../en/fr/practice-predict-output.md) | Tiếng Việt
 
-Trạng thái: Đã lên kế hoạch (Planned). Giới thiệu: P3. Cửa kiểm phát hành: P3. Tác nhân: Người học. Phụ thuộc vào FR-PRAC-001 đến FR-PRAC-010.
+- **Trạng thái**: Đang đặc tả (In Specification)
+- **Cập nhật lần cuối**: 2026-09-25
+- **Phạm vi**: Public MVP (P3)
+- **Thẩm quyền**: Đặc tả Yêu cầu Chức năng (Bản dịch tham khảo)
 
 ### FR-OUTPUT-001 — Đoạn mã nguồn mẫu
 Một bài tập đoán kết quả phải hiển thị một đoạn mã nguồn mẫu. Hoàn thành khi người học có thể kiểm tra chính xác đoạn code mà hành vi của nó đang được yêu cầu dự đoán.

@@ -2,7 +2,10 @@
 
 > **Languages**: English | [Tiếng Việt](../../vi/fr/content-contribution.md)
 
-Status: Planned. Introduced: P1. Release gate: P5. Actor: content contributor and maintainer. Depends on FR-REPO-003, FR-KNOW-006, and FR-PRAC-010. Applicable constraints: NFR-CONTRIB-001 through NFR-CONTRIB-003.
+- **Status**: In Specification
+- **Last Updated**: 2026-09-25
+- **Scope**: Public MVP (P1–P5)
+- **Authority**: Functional Requirement Specification (Canonical)
 
 ### FR-CONT-001 — Lesson contribution
 A contributor shall add or edit lesson content through repository files. Done when a documented pull-request workflow accepts a lesson content change.
@@ -27,4 +30,3 @@ CI should validate contributed content structure. Done when an invalid contribut
 
 ### FR-CONT-008 — Source metadata
 Technical content should include authoritative source metadata. Done when contributors can attach sources and reviewers can inspect them in the proposed content.
-

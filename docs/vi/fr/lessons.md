@@ -2,7 +2,10 @@
 
 > **Ngôn ngữ**: [English](../../en/fr/lessons.md) | Tiếng Việt
 
-Trạng thái: Đã lên kế hoạch (Planned). Giới thiệu: P1. Cửa kiểm phát hành: P1; tích hợp bài tập thực hành tại P3. Tác nhân: Người học và người đóng góp nội dung. Phụ thuộc vào FR-KNOW-005 và FR-KNOW-006.
+- **Trạng thái**: Đang đặc tả (In Specification)
+- **Cập nhật lần cuối**: 2026-09-25
+- **Phạm vi**: Public MVP (P1–P3)
+- **Thẩm quyền**: Đặc tả Yêu cầu Chức năng (Bản dịch tham khảo)
 
 ### FR-LESSON-001 — Tiêu đề khái niệm
 Một bài học phải hiển thị tiêu đề khái niệm của nó. Hoàn thành khi tiêu đề bài học định danh rõ ràng khái niệm mà bài học đó giảng dạy.

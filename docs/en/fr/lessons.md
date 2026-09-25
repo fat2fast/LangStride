@@ -2,7 +2,10 @@
 
 > **Languages**: English | [Tiếng Việt](../../vi/fr/lessons.md)
 
-Status: Planned. Introduced: P1. Release gate: P1; related practice integration gates at P3. Actor: learner and content contributor. Depends on FR-KNOW-005 and FR-KNOW-006.
+- **Status**: In Specification
+- **Last Updated**: 2026-09-25
+- **Scope**: Public MVP (P1–P3)
+- **Authority**: Functional Requirement Specification (Canonical)
 
 ### FR-LESSON-001 — Concept title
 A lesson shall display its concept title. Done when the lesson heading identifies the concept it teaches.
@@ -27,4 +30,3 @@ A lesson should link to prerequisite and related concepts. Done when the learner
 
 ### FR-LESSON-008 — Git-editable content
 Lesson content shall be editable through normal Git contribution. Done when a contributor can change a lesson content file and submit it in a pull request.
-

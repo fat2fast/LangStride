@@ -2,7 +2,10 @@
 
 > **Languages**: English | [Tiếng Việt](../../vi/fr/mastery-and-review.md)
 
-Status: Planned. Introduced: P5. Release gate: P5. Actor: learner. Depends on FR-PROGRESS-002, FR-PRAC-008, and FR-DEBUG-010.
+- **Status**: In Specification
+- **Last Updated**: 2026-09-25
+- **Scope**: Public MVP (P5)
+- **Authority**: Functional Requirement Specification (Canonical)
 
 ## MVP calculation boundary
 
@@ -34,4 +37,3 @@ The MVP shall not require a complex ML mastery model. Done when queue and weak-c
 
 ### FR-MAST-009 — Optional streak
 The product could display an optional streak. Done when a learner can see consecutive active periods without the streak blocking any core flow.
-

@@ -2,7 +2,10 @@
 
 > **Ngôn ngữ**: [English](../../en/fr/mastery-and-review.md) | Tiếng Việt
 
-Trạng thái: Đã lên kế hoạch (Planned). Giới thiệu: P5. Cửa kiểm phát hành: P5. Tác nhân: Người học. Phụ thuộc vào FR-PROGRESS-002, FR-PRAC-008, và FR-DEBUG-010.
+- **Trạng thái**: Đang đặc tả (In Specification)
+- **Cập nhật lần cuối**: 2026-09-25
+- **Phạm vi**: Public MVP (P5)
+- **Thẩm quyền**: Đặc tả Yêu cầu Chức năng (Bản dịch tham khảo)
 
 ## Ranh giới tính toán trong MVP
 

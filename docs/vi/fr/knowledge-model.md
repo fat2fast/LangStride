@@ -2,7 +2,10 @@
 
 > **Ngôn ngữ**: [English](../../en/fr/knowledge-model.md) | Tiếng Việt
 
-Trạng thái: Đã lên kế hoạch (Planned). Giới thiệu: P1. Cửa kiểm phát hành: P1. Tác nhân: Người học, người đóng góp nội dung, người duy trì dự án. Áp dụng cho: lộ trình học, bài học, thực hành, gỡ lỗi và mức độ thuần thục. Ràng buộc áp dụng: NFR-PORT-003, NFR-CONTRIB-001.
+- **Trạng thái**: Đang đặc tả (In Specification)
+- **Cập nhật lần cuối**: 2026-09-25
+- **Phạm vi**: Public MVP (P1)
+- **Thẩm quyền**: Đặc tả Yêu cầu Chức năng (Bản dịch tham khảo)
 
 ### FR-KNOW-001 — Mã định danh khái niệm ổn định (Stable Concept Identifier)
 Mỗi khái niệm phải có một mã định danh duy nhất và ổn định. Hoàn thành khi các tham chiếu từ bài học, các nút trên lộ trình học và bài tập thực hành đều phân giải chính xác về một khái niệm duy nhất.

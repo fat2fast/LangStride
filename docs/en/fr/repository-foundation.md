@@ -2,7 +2,10 @@
 
 > **Languages**: English | [Tiếng Việt](../../vi/fr/repository-foundation.md)
 
-Status: Planned. Introduced: P0. Release gate: P0. Actor: contributor or self-host operator. Applicable constraints: NFR-PORT-001, NFR-PORT-002.
+- **Status**: In Specification
+- **Last Updated**: 2026-09-25
+- **Scope**: Public MVP (P0)
+- **Authority**: Functional Requirement Specification (Canonical)
 
 ### FR-REPO-001 — Public README
 The repository shall provide a public README explaining purpose, current status, and entry points. Done when a new contributor can identify the MVP, documentation, and local-start path from the README.
@@ -37,3 +40,7 @@ CI shall validate build, lint, and tests. Done when each check executes for repo
 ### FR-REPO-011 — Standalone use
 The repository shall be usable without LangStride SaaS. Done when the supported local path completes core learning without a hosted LangStride dependency.
 
+#### Acceptance Criteria
+- **Given**: A local machine with no external network access to LangStride cloud services.
+- **When**: A developer boots the supported local application.
+- **Then**: Roadmaps, lessons, and practice challenges execute with zero phone-home network calls.

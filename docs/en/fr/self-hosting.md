@@ -2,7 +2,10 @@
 
 > **Languages**: English | [Tiếng Việt](../../vi/fr/self-hosting.md)
 
-Status: Planned. Introduced: P0. Release gate: P5. Actor: self-host operator. Depends on FR-REPO-007 and FR-REPO-008. Applicable constraints: NFR-PORT-001, NFR-PORT-002, and NFR-PORT-004.
+- **Status**: In Specification
+- **Last Updated**: 2026-09-25
+- **Scope**: Public MVP (P0–P5)
+- **Authority**: Functional Requirement Specification (Canonical)
 
 ### FR-HOST-001 — Local run
 The application shall run locally from documented steps. Done when a fresh clone follows the guide to a working application.

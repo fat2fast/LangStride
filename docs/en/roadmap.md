@@ -2,6 +2,11 @@
 
 > **Languages**: English | [Tiếng Việt](../vi/roadmap.md)
 
+- **Status**: In Specification
+- **Last Updated**: 2026-09-25
+- **Scope**: Public MVP (P0–P5)
+- **Authority**: Roadmap Specification (Canonical)
+
 > Scope: **Community Edition / Public Repository only**  
 > Goal: build a useful, self-hostable, non-commercial developer learning and practice product before any SaaS work begins.
 
@@ -16,12 +21,12 @@ Current MVP status: **planning baseline**. The requirements are specified as pla
 
 | MVP capability group | Current status | Requirements |
 |---|---|---|
-| P0 Foundation | Planned | [FR map](fr-map.md#fr-catalog-and-status) |
-| P1 Knowledge, roadmap, and lessons | Planned | [FR map](fr-map.md#fr-catalog-and-status) |
-| P2 Progress and Continue Learning | Planned | [FR map](fr-map.md#fr-catalog-and-status) |
-| P3 Deterministic practice | Planned | [FR map](fr-map.md#fr-catalog-and-status) |
-| P4 Debugging and generated-code review | Planned | [FR map](fr-map.md#fr-catalog-and-status) |
-| P5 Mastery, search, and public release | Planned | [FR map](fr-map.md#fr-catalog-and-status) |
+| P0 Foundation | In Specification | [FR map](fr-map.md#fr-catalog-and-status) |
+| P1 Knowledge, roadmap, and lessons | In Specification | [FR map](fr-map.md#fr-catalog-and-status) |
+| P2 Progress and Continue Learning | In Specification | [FR map](fr-map.md#fr-catalog-and-status) |
+| P3 Deterministic practice | In Specification | [FR map](fr-map.md#fr-catalog-and-status) |
+| P4 Debugging and generated-code review | In Specification | [FR map](fr-map.md#fr-catalog-and-status) |
+| P5 Mastery, search, and public release | In Specification | [FR map](fr-map.md#fr-catalog-and-status) |
 
 ---
 
@@ -824,19 +829,25 @@ And a contributor can:
 
 ---
 
-# 11. What Comes After the Public MVP
+# 11. Post-MVP Direction / Not Part of Public MVP
 
-These are **not part of the public MVP commitment**.
+These features are **explicitly outside the Public MVP commitment**. They do not use MVP phase numbers (P0–P5) and will not be scheduled until P0–P5 are validated.
 
-Possible next public/community milestones:
+Excluded from Public MVP:
 
 ```text
-Go Roadmap
-Version Diff
-PHP → Go Lang Diff
-DevOps Fundamentals
-System Design Fundamentals
-Interactive Sandbox
+Full Go Roadmap
+Version Diff Engine
+PHP → Go Lang Diff Engine
+DevOps Fundamentals & Labs
+Interactive System Design Simulator
+Interactive Sandbox (Live Execution)
+Remote Terminal Access
+Model Context Protocol (MCP)
+Autonomous Migration Agents
+Cloud Multi-Device Sync
+SaaS Subscriptions
+Teams & Enterprise RBAC
 ```
 
 Possible future hosted/commercial products may build on Community Edition, but they should be planned separately after the public repository reaches a useful level of maturity.

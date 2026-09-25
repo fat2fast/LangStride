@@ -2,7 +2,10 @@
 
 > **Ngôn ngữ**: [English](../../en/fr/repository-foundation.md) | Tiếng Việt
 
-Trạng thái: Đã lên kế hoạch (Planned). Giới thiệu: P0. Cửa kiểm phát hành: P0. Tác nhân: Người đóng góp (contributor) hoặc Người vận hành tự lưu trữ (self-host operator). Ràng buộc áp dụng: NFR-PORT-001, NFR-PORT-002.
+- **Trạng thái**: Đang đặc tả (In Specification)
+- **Cập nhật lần cuối**: 2026-09-25
+- **Phạm vi**: Public MVP (P0)
+- **Thẩm quyền**: Đặc tả Yêu cầu Chức năng (Bản dịch tham khảo)
 
 ### FR-REPO-001 — README công khai
 Kho mã nguồn phải cung cấp một file README công khai giải thích mục đích, trạng thái hiện tại và các điểm bắt đầu. Hoàn thành khi một người đóng góp mới có thể xác định được phạm vi MVP, tài liệu và lộ trình khởi chạy cục bộ ngay từ README.
@@ -36,3 +39,8 @@ CI phải xác thực quá trình build, lint và các bài kiểm thử (tests)
 
 ### FR-REPO-011 — Sử dụng độc lập (Standalone Use)
 Kho mã nguồn phải có khả năng sử dụng mà không cần dịch vụ SaaS của LangStride. Hoàn thành khi quy trình cục bộ được hỗ trợ có thể hoàn thành vòng lặp học tập cốt lõi mà không phụ thuộc vào dịch vụ lưu trữ của LangStride.
+
+#### Tiêu chí Nghiệm thu (Acceptance Criteria)
+- **Cho (Given)**: Một máy cục bộ không có kết nối mạng tới dịch vụ đám mây LangStride.
+- **Khi (When)**: Lập trình viên khởi động ứng dụng cục bộ được hỗ trợ.
+- **Thì (Then)**: Lộ trình, bài học và bài tập thực hành hoạt động bình thường mà không thực hiện cuộc gọi telemetry ra bên ngoài.

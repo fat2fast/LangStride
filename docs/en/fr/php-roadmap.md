@@ -2,7 +2,10 @@
 
 > **Languages**: English | [Tiếng Việt](../../vi/fr/php-roadmap.md)
 
-Status: Planned. Introduced: P1. Release gate: P1. Actor: learner. Depends on FR-KNOW-001 and FR-KNOW-002.
+- **Status**: In Specification
+- **Last Updated**: 2026-09-25
+- **Scope**: Public MVP (P1)
+- **Authority**: Functional Requirement Specification (Canonical)
 
 ### FR-PHP-001 — Open roadmap
 A learner shall be able to open the PHP learning roadmap. Done when the PHP entry route renders the current roadmap.
@@ -27,4 +30,3 @@ The initial release shall contain at least 10 complete lessons. Done when ten pu
 
 ### FR-PHP-008 — Planned nodes
 Incomplete or planned nodes should be visibly identified. Done when a learner can distinguish a node that cannot yet open a complete lesson.
-

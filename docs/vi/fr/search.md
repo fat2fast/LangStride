@@ -2,7 +2,10 @@
 
 > **Ngôn ngữ**: [English](../../en/fr/search.md) | Tiếng Việt
 
-Trạng thái: Đã lên kế hoạch (Planned). Giới thiệu: P5. Cửa kiểm phát hành: P5. Tác nhân: Người học. Phụ thuộc vào FR-KNOW-006 và FR-PRAC-010. Ràng buộc áp dụng: NFR-SIMPLE-005.
+- **Trạng thái**: Đang đặc tả (In Specification)
+- **Cập nhật lần cuối**: 2026-09-25
+- **Phạm vi**: Public MVP (P5)
+- **Thẩm quyền**: Đặc tả Yêu cầu Chức năng (Bản dịch tham khảo)
 
 ### FR-SEARCH-001 — Tìm kiếm khái niệm PHP
 Người học phải có thể tìm kiếm các khái niệm PHP. Hoàn thành khi một truy vấn trả về các khái niệm PHP đã xuất bản khớp với từ khóa và có thể mở kết quả được chọn.

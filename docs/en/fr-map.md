@@ -1,66 +1,71 @@
-# LangStride Community MVP — FR Map
+# LangStride Community MVP — Functional Requirements Map (FR Map)
 
 > **Languages**: English | [Tiếng Việt](../vi/fr-map.md)
 
-Status: Planning baseline. No capability is implemented unless its detailed FR document is explicitly updated to an implemented status with evidence.
+- **Status**: In Specification
+- **Last Updated**: 2026-09-25
+- **Scope**: Public MVP (P0–P5)
+- **Authority**: Functional Requirements Catalog (Canonical)
 
-## Document ownership
+This document is the master index of all Functional Requirements (FR) and Non-Functional Requirements (NFR) governing the LangStride Community Edition Public MVP.
 
-- [`roadmap.md`](roadmap.md) owns the large product direction, future possibilities, phase intent, and feature-level status.
-- This file owns the overview of Community MVP functional requirements: their catalog, phase, and current document status.
-- [`fr/`](fr/) owns the detailed, independently executable requirements and their acceptance criteria.
+## Document Ownership Hierarchy
 
-`fr/` is the normative requirement source. This map deliberately does not repeat detailed behaviour.
+- [`roadmap.md`](roadmap.md) owns **WHEN**: Phasing, milestone intent, and exit criteria.
+- **This file (`fr-map.md`)** owns **WHAT**: Requirement catalog, capability ownership, and lifecycle status.
+- [`fr/`](fr/) owns the **detailed normative specifications** and observable acceptance criteria.
+- [`../architecture/overview.md`](architecture/overview.md) owns **HOW**: Modular monolith design and implementation patterns.
+- [`../adr/`](adr/) owns **WHY THIS TECHNICAL DECISION**: Accepted architectural decisions.
+- [`../contribution/`](contribution/) owns **HOW TO CONTRIBUTE**: Contributor guides for lessons, challenges, and roadmaps.
 
-## MVP boundary
+## Scope Boundaries
 
-Included: self-hostable PHP learning roadmap, lessons, local progress, deterministic practice, static debugging/review practice, basic mastery, search, and repository-based community contribution.
+- **Included in MVP (P0–P5)**: Self-hostable PHP guided roadmap, lessons, local persistent progress, deterministic practice challenges, static debugging/review exercises, transparent mastery model, full-text search, and Git-based community contribution.
+- **Explicit Post-MVP Exclusions**: Cloud billing, cloud sync, Teams/Organizations, enterprise RBAC, live remote code sandboxes, interactive terminals, Model Context Protocol (MCP), migration agents, full Go roadmap, Version Diff, Lang Diff, DevOps labs, and System Design simulator.
 
-Excluded from this MVP: SaaS billing, cloud sync, teams/organizations, enterprise administration, live code sandbox, remote terminal, MCP, migration agents, Go roadmap, Version Diff, Lang Diff, DevOps labs, and System Design.
+## FR Catalog and Status
 
-## FR catalog and status
-
-| Phase | Capability | Detailed specification | IDs | Status |
+| Phase | Capability | Specification Document | Requirement IDs | Status |
 |---|---|---|---|---|
-| P0 | Repository foundation | [repository-foundation.md](fr/repository-foundation.md) | FR-REPO-001…011 | Planned |
-| P0–P5 | Self-hosting | [self-hosting.md](fr/self-hosting.md) | FR-HOST-001…006; FR-REPO-012 | Planned |
-| P0–P5 | Content operations | [content-operations.md](fr/content-operations.md) | FR-ADMIN-001…005 | Planned |
-| P1 | Knowledge and content model | [knowledge-model.md](fr/knowledge-model.md) | FR-KNOW-001…009 | Planned |
-| P1 | PHP roadmap | [php-roadmap.md](fr/php-roadmap.md) | FR-PHP-001…008 | Planned |
-| P1–P3 | Lessons | [lessons.md](fr/lessons.md) | FR-LESSON-001…008 | Planned |
-| P1–P5 | Content contribution | [content-contribution.md](fr/content-contribution.md) | FR-CONT-001…008 | Planned |
-| P2 | Learning progress | [learning-progress.md](fr/learning-progress.md) | FR-PROGRESS-001…008 | Planned |
-| P2 | Home / Continue Learning | [home-continue-learning.md](fr/home-continue-learning.md) | FR-HOME-001…004 | Planned |
-| P3 | Shared practice engine | [practice-engine.md](fr/practice-engine.md) | FR-PRAC-001…010 | Planned |
-| P3 | Multiple choice | [practice-multiple-choice.md](fr/practice-multiple-choice.md) | FR-MCQ-001…003 | Planned |
-| P3 | Predict output | [practice-predict-output.md](fr/practice-predict-output.md) | FR-OUTPUT-001…004 | Planned |
-| P3 | Fix the code | [practice-fix-the-code.md](fr/practice-fix-the-code.md) | FR-FIX-001…005 | Planned |
-| P4 | Debug practice | [debugging-practice.md](fr/debugging-practice.md) | FR-DEBUG-001…011 | Planned |
-| P4 | Generated-code review | [ai-generated-code-review.md](fr/ai-generated-code-review.md) | FR-AIREVIEW-001…006 | Planned |
-| P5 | Mastery and review | [mastery-and-review.md](fr/mastery-and-review.md) | FR-MAST-001…009 | Planned |
-| P5 | Search | [search.md](fr/search.md) | FR-SEARCH-001…006 | Planned |
-| All | Quality attributes | [quality-attributes.md](fr/quality-attributes.md) | NFR-SIMPLE-001…005; NFR-PORT-001…004; NFR-CONTRIB-001…003; NFR-AI-001…003 | Planned |
+| **P0** | Repository Foundation | [repository-foundation.md](fr/repository-foundation.md) | FR-REPO-001…011 | In Specification |
+| **P0–P5** | Self-Hosting | [self-hosting.md](fr/self-hosting.md) | FR-HOST-001…006; FR-REPO-012 | In Specification |
+| **P0–P5** | Content Operations | [content-operations.md](fr/content-operations.md) | FR-ADMIN-001…005 | In Specification |
+| **P1** | Knowledge Model | [knowledge-model.md](fr/knowledge-model.md) | FR-KNOW-001…009 | In Specification |
+| **P1** | PHP Roadmap | [php-roadmap.md](fr/php-roadmap.md) | FR-PHP-001…008 | In Specification |
+| **P1–P3** | Lessons | [lessons.md](fr/lessons.md) | FR-LESSON-001…008 | In Specification |
+| **P1–P5** | Content Contribution | [content-contribution.md](fr/content-contribution.md) | FR-CONT-001…008 | In Specification |
+| **P2** | Learning Progress | [learning-progress.md](fr/learning-progress.md) | FR-PROGRESS-001…008 | In Specification |
+| **P2** | Home / Continue Learning | [home-continue-learning.md](fr/home-continue-learning.md) | FR-HOME-001…004 | In Specification |
+| **P3** | Shared Practice Engine | [practice-engine.md](fr/practice-engine.md) | FR-PRAC-001…010 | In Specification |
+| **P3** | Multiple Choice Practice | [practice-multiple-choice.md](fr/practice-multiple-choice.md) | FR-MCQ-001…003 | In Specification |
+| **P3** | Predict Output Practice | [practice-predict-output.md](fr/practice-predict-output.md) | FR-OUTPUT-001…004 | In Specification |
+| **P3** | Fix the Code Practice | [practice-fix-the-code.md](fr/practice-fix-the-code.md) | FR-FIX-001…005 | In Specification |
+| **P4** | Debugging Practice | [debugging-practice.md](fr/debugging-practice.md) | FR-DEBUG-001…011 | In Specification |
+| **P4** | AI-Generated Code Review | [ai-generated-code-review.md](fr/ai-generated-code-review.md) | FR-AIREVIEW-001…006 | In Specification |
+| **P5** | Mastery & Review Queue | [mastery-and-review.md](fr/mastery-and-review.md) | FR-MAST-001…009 | In Specification |
+| **P5** | Search | [search.md](fr/search.md) | FR-SEARCH-001…006 | In Specification |
+| **All** | Quality Attributes (NFR) | [quality-attributes.md](fr/quality-attributes.md) | NFR-SIMPLE-001…005; NFR-PORT-001…004; NFR-CONTRIB-001…003; NFR-AI-001…003 | In Specification |
 
-## Dependency overview
+## Capability Dependency Graph
 
 ```text
-Repository foundation
+Repository Foundation (P0)
         ↓
-Knowledge model → PHP roadmap → Lessons
-        ↓                 ↓
-Learning progress      Practice engine → Debug / code review
-        ↓                 ↓
-Continue Learning      Mastery and review
-                          ↓
-                        Search
+Knowledge Model (P1) → PHP Roadmap (P1) → Lessons (P1)
+        ↓                     ↓
+Learning Progress (P2)     Practice Engine (P3) → Debugging & AI Code Review (P4)
+        ↓                     ↓
+Continue Learning (P2)     Mastery & Review Queue (P5)
+                              ↓
+                            Search (P5)
 ```
 
-Content contribution, self-hosting, content operations, and quality attributes are cross-cutting requirements.
+## Standard Status Vocabulary
 
-## Status vocabulary
-
-- **Planned** — specified but not evidenced as implemented.
-- **In progress** — active implementation work exists; detailed FR records its evidence.
-- **Implemented** — all acceptance criteria have evidence.
-- **Deferred** — intentionally outside the current delivery window.
-- **Superseded** — retained for history; replaced by a linked requirement.
+- **Planned**: Specified as a backlog requirement; pending active specification review.
+- **In Specification**: Currently undergoing formal definition and acceptance criteria detailing.
+- **Ready for Implementation**: Fully specified with observable acceptance criteria; unblocked for coding.
+- **In Progress**: Active code or content implementation underway.
+- **Implemented**: All acceptance criteria are demonstrably met with automated test evidence.
+- **Validated**: Formally verified in end-to-end user workflows.
+- **Deferred**: Post-MVP requirement; intentionally outside current release scope.

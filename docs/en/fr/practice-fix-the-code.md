@@ -2,7 +2,10 @@
 
 > **Languages**: English | [Tiếng Việt](../../vi/fr/practice-fix-the-code.md)
 
-Status: Planned. Introduced: P3. Release gate: P3. Actor: learner. Depends on FR-PRAC-001 through FR-PRAC-010.
+- **Status**: In Specification
+- **Last Updated**: 2026-09-25
+- **Scope**: Public MVP (P3)
+- **Authority**: Functional Requirement Specification (Canonical)
 
 ### FR-FIX-001 — Incorrect code
 A fix-the-code challenge shall display incorrect code. Done when the learner receives a reproducible faulty snippet or prepared correction choice.
@@ -18,4 +21,3 @@ The challenge shall explain the root issue after completion. Done when the expla
 
 ### FR-FIX-005 — No remote execution
 Live remote code execution is not required. Done when all MVP validation works without executing learner code in a remote environment.
-

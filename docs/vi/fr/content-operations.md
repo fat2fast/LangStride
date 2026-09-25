@@ -2,7 +2,10 @@
 
 > **Ngôn ngữ**: [English](../../en/fr/content-operations.md) | Tiếng Việt
 
-Trạng thái: Đã lên kế hoạch (Planned). Giới thiệu: P0. Cửa kiểm phát hành: P5. Tác nhân: Người duy trì dự án (maintainer). Phụ thuộc vào FR-REPO-009, FR-KNOW-007, và FR-CONT-005.
+- **Trạng thái**: Đang đặc tả (In Specification)
+- **Cập nhật lần cuối**: 2026-09-25
+- **Phạm vi**: Public MVP (P0–P5)
+- **Thẩm quyền**: Đặc tả Yêu cầu Chức năng (Bản dịch tham khảo)
 
 ### FR-ADMIN-001 — Khởi tạo / Nhập nội dung
 Người duy trì dự án phải có khả năng nạp dữ liệu mẫu (seed) hoặc nhập nội dung kho mã nguồn. Hoàn thành khi một thao tác lặp lại được ghi trong tài liệu có thể nạp nội dung thuộc sở hữu của kho mã nguồn vào môi trường được hỗ trợ.

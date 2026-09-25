@@ -2,7 +2,10 @@
 
 > **Ngôn ngữ**: [English](../../en/fr/practice-fix-the-code.md) | Tiếng Việt
 
-Trạng thái: Đã lên kế hoạch (Planned). Giới thiệu: P3. Cửa kiểm phát hành: P3. Tác nhân: Người học. Phụ thuộc vào FR-PRAC-001 đến FR-PRAC-010.
+- **Trạng thái**: Đang đặc tả (In Specification)
+- **Cập nhật lần cuối**: 2026-09-25
+- **Phạm vi**: Public MVP (P3)
+- **Thẩm quyền**: Đặc tả Yêu cầu Chức năng (Bản dịch tham khảo)
 
 ### FR-FIX-001 — Hiển thị đoạn mã bị lỗi
 Một bài tập sửa mã phải hiển thị đoạn code có chứa lỗi. Hoàn thành khi người học nhận được một đoạn code lỗi có thể tái tạo hoặc một lựa chọn sửa đổi đã chuẩn bị sẵn.

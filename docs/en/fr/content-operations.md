@@ -2,7 +2,10 @@
 
 > **Languages**: English | [Tiếng Việt](../../vi/fr/content-operations.md)
 
-Status: Planned. Introduced: P0. Release gate: P5. Actor: maintainer. Depends on FR-REPO-009, FR-KNOW-007, and FR-CONT-005.
+- **Status**: In Specification
+- **Last Updated**: 2026-09-25
+- **Scope**: Public MVP (P0–P5)
+- **Authority**: Functional Requirement Specification (Canonical)
 
 ### FR-ADMIN-001 — Seed/import content
 A maintainer shall seed or import repository content. Done when a repeatable documented operation loads repository-owned content into a supported environment.
@@ -18,4 +21,3 @@ A full CMS is not required. Done when all required content operations can be com
 
 ### FR-ADMIN-005 — Git source of truth
 Git shall remain a supported source-of-truth workflow for educational content. Done when a reviewed repository change can be applied by the documented import or deployment process.
-

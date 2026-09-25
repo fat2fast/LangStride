@@ -2,7 +2,10 @@
 
 > **Ngôn ngữ**: [English](../../en/fr/home-continue-learning.md) | Tiếng Việt
 
-Trạng thái: Đã lên kế hoạch (Planned). Giới thiệu: P2. Cửa kiểm phát hành: P2. Tác nhân: Người học. Phụ thuộc vào FR-PROGRESS-003 và FR-PROGRESS-005.
+- **Trạng thái**: Đang đặc tả (In Specification)
+- **Cập nhật lần cuối**: 2026-09-25
+- **Phạm vi**: Public MVP (P2)
+- **Thẩm quyền**: Đặc tả Yêu cầu Chức năng (Bản dịch tham khảo)
 
 ## Quy tắc lựa chọn bài học (Selection rule)
 
@@ -13,6 +16,11 @@ Trang chủ phải hiển thị hành động Tiếp tục học (Continue Learn
 
 ### FR-HOME-002 — Mở bài học phù hợp
 Nút Tiếp tục học phải mở bài học chưa hoàn thành phù hợp nhất. Hoàn thành khi hành động tuân thủ chính xác quy tắc lựa chọn ở trên.
+
+#### Tiêu chí Nghiệm thu (Acceptance Criteria)
+- **Cho (Given)**: Người học trước đó đã mở bài học "php-control-flow" nhưng chưa hoàn thành.
+- **Khi (When)**: Người học truy cập vào Trang chủ.
+- **Thì (Then)**: Nút "Tiếp tục học" mở trực tiếp "/php/concepts/php-control-flow" mà không bắt người học chọn giữa nhiều hành động cạnh tranh.
 
 ### FR-HOME-003 — Tiến độ lộ trình cơ bản
 Trang chủ nên hiển thị tiến độ lộ trình PHP cơ bản. Hoàn thành khi người học có thể nhìn thấy số lượng bài học PHP đã hoàn thành trên tổng số bài học hiện có.

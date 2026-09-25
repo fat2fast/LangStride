@@ -2,7 +2,10 @@
 
 > **Languages**: English | [Tiếng Việt](../../vi/fr/practice-predict-output.md)
 
-Status: Planned. Introduced: P3. Release gate: P3. Actor: learner. Depends on FR-PRAC-001 through FR-PRAC-010.
+- **Status**: In Specification
+- **Last Updated**: 2026-09-25
+- **Scope**: Public MVP (P3)
+- **Authority**: Functional Requirement Specification (Canonical)
 
 ### FR-OUTPUT-001 — Code snippet
 A predict-output challenge shall display a code snippet. Done when the learner can inspect the exact source whose behaviour is being predicted.
@@ -15,4 +18,3 @@ Validation shall be deterministic. Done when normalization rules and expected ou
 
 ### FR-OUTPUT-004 — Causal explanation
 The explanation shall describe why the output occurs. Done when it connects the expected behaviour to the relevant code or concept.
-
