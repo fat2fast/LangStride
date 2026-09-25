@@ -1,0 +1,38 @@
+name: Content Correction
+description: Propose a correction or improvement to lessons, concepts, or roadmaps
+labels: ["content", "documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping keep LangStride educational material accurate, modern, and aligned with official technical specifications.
+  - type: input
+    id: content_file
+    attributes:
+      label: Content File or URL
+      description: The file path in the repository (e.g., `content/programming/php/lessons/variables.md`).
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Current Content & Inaccuracy
+      description: What is currently stated and why is it inaccurate, misleading, or outdated?
+    validations:
+      required: true
+  - type: textarea
+    id: proposed_change
+    attributes:
+      label: Proposed Correction
+      description: Provide the revised explanation, code snippet, or mental model.
+    validations:
+      required: true
+  - type: textarea
+    id: authoritative_sources
+    attributes:
+      label: Authoritative Sources / Documentation Links
+      description: Links to official RFCs, language specs, or primary documentation backing this correction.
+      placeholder: |
+        - https://www.php.net/manual/en/...
+    validations:
+      required: true
