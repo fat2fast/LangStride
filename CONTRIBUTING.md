@@ -18,13 +18,27 @@ You do **not** need to be a software engineer or understand our application code
 | **Technical Review** | Review pull requests for accuracy and clear explanations | [Technical Review Guide](docs/en/contribution/technical-review-guide.md) |
 | **Code & Infrastructure** | Work on modular packages, testing, local runner, CI | [Architecture Overview](docs/en/architecture/overview.md) |
 
-## Quick Contribution Workflow
+## Filesystem Content Locations
+- **Generic Knowledge Concepts**: `content/knowledge/concepts.json`
+- **Roadmap Definitions**: `roadmaps/php.json`
+- **Language Lessons**: `content/programming/php/lessons/*.md`
+- **Content Guide**: [Content Contribution Guide](docs/en/contribution/content-guide.md)
 
-1. **Fork the repository** on GitHub.
-2. **Create a topic branch**: `git checkout -b content/php-functions-lesson`.
-3. **Make your changes** in the appropriate directory (`content/`, `challenges/`, `roadmaps/`, or `docs/`).
-4. **Verify locally**: Ensure markdown formatting is clean and all relative links are valid.
-5. **Submit a Pull Request** with a descriptive summary of your changes.
+## Contribution & PR Workflow
+
+1. **Fork the repository** on GitHub and clone locally.
+2. **Install dependencies**: `pnpm install`
+3. **Start local database**: `pnpm local:setup`
+4. **Create a topic branch**: `git checkout -b content/php-variables-lesson`
+5. **Make your changes** in the appropriate directory (`content/`, `roadmaps/`, or `docs/`).
+6. **Validate content & run checks**:
+   ```bash
+   pnpm content:validate
+   pnpm test
+   pnpm lint
+   ```
+7. **Verify local app**: Start `pnpm dev` and preview your changes at `/php`.
+8. **Submit a Pull Request** with validation evidence and a clear summary.
 
 ## Core Rules
 

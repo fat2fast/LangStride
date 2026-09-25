@@ -112,12 +112,51 @@ See [Technical Architecture Overview](docs/en/architecture/overview.md).
 
 ## 6. Getting Started
 
-> **Current Repository Status**:  
-> LangStride is currently in the **repository and specification phase**.  
-> The runnable Community Edition application has not been fully bootstrapped yet.  
-> Application implementation begins with **P0 (Repository Foundation)**.
+### Prerequisites
 
-Once P0 foundation is merged, runnable setup and local seeding commands will be documented here. In the meantime, contributors are invited to review specifications in [Documentation Hub](docs/README.md) and participate in [Community Contributions](CONTRIBUTING.md).
+- **Node.js**: `v22.0.0+` (or `v26+`, see `.nvmrc`)
+- **pnpm**: `v9.0.0+` (tested with `v12.x`)
+- **Docker**: Docker Desktop / Docker Engine (for local containerized Supabase/PostgreSQL)
+- **Supabase CLI**: installed via Homebrew (`brew install supabase`) or binary
+
+### Local Setup & Development
+
+1. **Clone and install dependencies**:
+   ```bash
+   git clone https://github.com/fat2fast/LangStride.git
+   cd langstride
+   pnpm install
+   ```
+
+2. **Configure environment variables**:
+   ```bash
+   cp .env.example .env.local
+   ```
+   *(Safe local defaults are preconfigured in `.env.example`; no external secrets or cloud accounts required.)*
+
+3. **Start local database**:
+   ```bash
+   pnpm local:setup
+   ```
+
+4. **Validate and sync repository content**:
+   ```bash
+   pnpm content:validate
+   pnpm content:sync
+   ```
+
+5. **Start development web application**:
+   ```bash
+   pnpm dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) or navigate directly to the PHP roadmap at [http://localhost:3000/php](/php).
+
+6. **Run tests and checks**:
+   ```bash
+   pnpm lint
+   pnpm test
+   pnpm build
+   ```
 
 ---
 
