@@ -3,6 +3,24 @@
 > Scope: **Community Edition / Public Repository only**  
 > Goal: build a useful, self-hostable, non-commercial developer learning and practice product before any SaaS work begins.
 
+## Document ownership and current status
+
+This roadmap is the product-level view: intended direction, future scope, phase sequencing, and feature status. It does not define detailed functional behaviour.
+
+- [`fr-map.md`](fr-map.md) lists the Community MVP requirement capabilities, their current status, and links to their specifications.
+- [`fr/`](fr/) contains the detailed functional requirements and acceptance criteria used to implement a capability.
+
+Current MVP status: **planning baseline**. The requirements are specified as planned; implementation status must be recorded in the relevant detailed FR and reflected in `fr-map.md`.
+
+| MVP capability group | Current status | Requirements |
+|---|---|---|
+| P0 Foundation | Planned | [FR map](fr-map.md#fr-catalog-and-status) |
+| P1 Knowledge, roadmap, and lessons | Planned | [FR map](fr-map.md#fr-catalog-and-status) |
+| P2 Progress and Continue Learning | Planned | [FR map](fr-map.md#fr-catalog-and-status) |
+| P3 Deterministic practice | Planned | [FR map](fr-map.md#fr-catalog-and-status) |
+| P4 Debugging and generated-code review | Planned | [FR map](fr-map.md#fr-catalog-and-status) |
+| P5 Mastery, search, and public release | Planned | [FR map](fr-map.md#fr-catalog-and-status) |
+
 ---
 
 ## 1. MVP Objective
