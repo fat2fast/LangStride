@@ -1,5 +1,7 @@
 # Lessons
 
+> **Languages**: English | [Tiếng Việt](../../vi/fr/lessons.md)
+
 Status: Planned. Introduced: P1. Release gate: P1; related practice integration gates at P3. Actor: learner and content contributor. Depends on FR-KNOW-005 and FR-KNOW-006.
 
 ### FR-LESSON-001 — Concept title

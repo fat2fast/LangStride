@@ -1,5 +1,7 @@
 # Self-Hosting
 
+> **Languages**: English | [Tiếng Việt](../../vi/fr/self-hosting.md)
+
 Status: Planned. Introduced: P0. Release gate: P5. Actor: self-host operator. Depends on FR-REPO-007 and FR-REPO-008. Applicable constraints: NFR-PORT-001, NFR-PORT-002, and NFR-PORT-004.
 
 ### FR-HOST-001 — Local run

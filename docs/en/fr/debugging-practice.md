@@ -1,5 +1,7 @@
 # Debugging Practice
 
+> **Languages**: English | [Tiếng Việt](../../vi/fr/debugging-practice.md)
+
 Status: Planned. Introduced: P4. Release gate: P4. Actor: learner and challenge contributor. Depends on FR-PRAC-001 through FR-PRAC-010. Applicable constraints: NFR-AI-002.
 
 ### FR-DEBUG-001 — Concept references

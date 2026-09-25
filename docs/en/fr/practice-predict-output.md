@@ -1,5 +1,7 @@
 # Predict-Output Practice
 
+> **Languages**: English | [Tiếng Việt](../../vi/fr/practice-predict-output.md)
+
 Status: Planned. Introduced: P3. Release gate: P3. Actor: learner. Depends on FR-PRAC-001 through FR-PRAC-010.
 
 ### FR-OUTPUT-001 — Code snippet

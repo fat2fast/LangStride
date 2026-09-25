@@ -1,5 +1,7 @@
 # Home and Continue Learning
 
+> **Languages**: English | [Tiếng Việt](../../vi/fr/home-continue-learning.md)
+
 Status: Planned. Introduced: P2. Release gate: P2. Actor: learner. Depends on FR-PROGRESS-003 and FR-PROGRESS-005.
 
 ## Selection rule

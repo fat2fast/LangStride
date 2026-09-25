@@ -1,5 +1,7 @@
 # AI-Generated Code Review Practice
 
+> **Languages**: English | [Tiếng Việt](../../vi/fr/ai-generated-code-review.md)
+
 Status: Planned. Introduced: P4. Release gate: P4. Actor: learner and challenge contributor. Depends on FR-PRAC-001 through FR-PRAC-010. Applicable constraints: NFR-AI-001, NFR-AI-002, NFR-AI-003.
 
 ### FR-AIREVIEW-001 — Generated-code label

@@ -1,5 +1,7 @@
 # PHP Roadmap
 
+> **Languages**: English | [Tiếng Việt](../../vi/fr/php-roadmap.md)
+
 Status: Planned. Introduced: P1. Release gate: P1. Actor: learner. Depends on FR-KNOW-001 and FR-KNOW-002.
 
 ### FR-PHP-001 — Open roadmap

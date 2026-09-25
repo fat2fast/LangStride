@@ -1,5 +1,7 @@
 # Search
 
+> **Languages**: English | [Tiếng Việt](../../vi/fr/search.md)
+
 Status: Planned. Introduced: P5. Release gate: P5. Actor: learner. Depends on FR-KNOW-006 and FR-PRAC-010. Applicable constraints: NFR-SIMPLE-005.
 
 ### FR-SEARCH-001 — Search PHP concepts

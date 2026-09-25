@@ -1,5 +1,7 @@
 # Practice Engine
 
+> **Languages**: English | [Tiếng Việt](../../vi/fr/practice-engine.md)
+
 Status: Planned. Introduced: P3. Release gate: P3. Actor: learner and challenge contributor. Depends on FR-KNOW-001, FR-LESSON-006, and FR-PROGRESS-003. Applicable constraints: NFR-CONTRIB-002 and NFR-AI-002.
 
 ### FR-PRAC-001 — Stable challenge identifier

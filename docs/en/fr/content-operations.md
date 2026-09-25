@@ -1,5 +1,7 @@
 # Content Operations
 
+> **Languages**: English | [Tiếng Việt](../../vi/fr/content-operations.md)
+
 Status: Planned. Introduced: P0. Release gate: P5. Actor: maintainer. Depends on FR-REPO-009, FR-KNOW-007, and FR-CONT-005.
 
 ### FR-ADMIN-001 — Seed/import content

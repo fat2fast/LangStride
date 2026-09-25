@@ -1,5 +1,7 @@
 # Knowledge and Content Model
 
+> **Languages**: English | [Tiếng Việt](../../vi/fr/knowledge-model.md)
+
 Status: Planned. Introduced: P1. Release gate: P1. Actor: learner, content contributor, maintainer. Applies to roadmap, lessons, practice, debugging, and mastery. Applicable constraints: NFR-PORT-003, NFR-CONTRIB-001.
 
 ### FR-KNOW-001 — Stable concept identifier

@@ -1,12 +1,15 @@
 # LangStride
 
+> **Languages**: English | [Tiếng Việt](README.vi.md)
+
 > A community-first developer learning and practice platform.
 
 LangStride Community Edition is the public repository of LangStride. It is intended for personal learning, education, research, community contribution, and non-commercial self-hosting.
 
 The repository should remain useful on its own. A developer should eventually be able to clone it, run it locally, learn from structured roadmaps, practice, and contribute improvements without depending on any commercial LangStride service.
 
-> Status: Early development / Community Edition
+> Status: Early development / Community Edition  
+> Detailed Documentation: [Documentation Hub](docs/README.md) | [English Docs](docs/en/README.md) | [Tài liệu Tiếng Việt](docs/vi/README.md)
 
 ## What LangStride is trying to solve
 
@@ -38,6 +41,10 @@ Parallel tracks will include:
 - Interactive System Design
 - Debugging
 - Developer fundamentals
+
+See detailed specification in [Knowledge and Content Model](docs/en/fr/knowledge-model.md).
+
+---
 
 ## Core principles
 
@@ -83,6 +90,8 @@ Quick check
 Practice
 ```
 
+See specification: [Lessons (FR-LESSON)](docs/en/fr/lessons.md).
+
 ### Reusable knowledge
 
 Concepts should not be locked to a single programming language.
@@ -96,6 +105,8 @@ Concepts should not be locked to a single programming language.
 ```
 
 This allows the same knowledge model to support learning, practice, Version Diff, and Lang Diff.
+
+See specification: [Knowledge Model (FR-KNOW)](docs/en/fr/knowledge-model.md).
 
 ### Community-maintained technical knowledge
 
@@ -168,6 +179,10 @@ Fundamentals
 → HTTP
 ```
 
+Related specifications:
+- [PHP Roadmap (FR-PHP)](docs/en/fr/php-roadmap.md)
+- [Lessons Specification (FR-LESSON)](docs/en/fr/lessons.md)
+
 ## Practice Challenges
 
 Planned challenge formats include:
@@ -181,6 +196,12 @@ Planned challenge formats include:
 - interview-style questions.
 
 A failed challenge should point the learner back to the concept they need to review.
+
+Related specifications:
+- [Shared Practice Engine (FR-PRAC)](docs/en/fr/practice-engine.md)
+- [Multiple-Choice Practice (FR-MCQ)](docs/en/fr/practice-multiple-choice.md)
+- [Predict-Output Practice (FR-OUTPUT)](docs/en/fr/practice-predict-output.md)
+- [Fix-the-Code Practice (FR-FIX)](docs/en/fr/practice-fix-the-code.md)
 
 ## Debugging
 
@@ -198,6 +219,10 @@ Error Messages
 ```
 
 Debug scenarios may include source files, logs, stack traces, HTTP traces, database logs, metrics, and traces.
+
+Related specifications:
+- [Debugging Practice (FR-DEBUG)](docs/en/fr/debugging-practice.md)
+- [AI-Generated Code Review (FR-AIREVIEW)](docs/en/fr/ai-generated-code-review.md)
 
 ## DevOps
 
@@ -351,6 +376,12 @@ As development progresses, the public repository may include:
 
 Features of any separate commercial or hosted LangStride products are outside the scope of this repository.
 
+Related specifications:
+- [Learning Progress (FR-PROGRESS)](docs/en/fr/learning-progress.md)
+- [Home & Continue Learning (FR-HOME)](docs/en/fr/home-continue-learning.md)
+- [Mastery and Review (FR-MAST)](docs/en/fr/mastery-and-review.md)
+- [Search (FR-SEARCH)](docs/en/fr/search.md)
+
 ---
 
 # Community contributions
@@ -382,7 +413,10 @@ Useful contributions include:
 - adding translations;
 - improving tests and tooling.
 
-Detailed rules will live in `CONTRIBUTING.md`.
+Related specifications:
+- [Content Contribution (FR-CONT)](docs/en/fr/content-contribution.md)
+- [Content Operations (FR-ADMIN)](docs/en/fr/content-operations.md)
+- Detailed rules will live in `CONTRIBUTING.md`.
 
 ---
 
@@ -411,12 +445,24 @@ langstride/
 ├── challenges/
 ├── roadmaps/
 ├── supabase/
-└── docs/
-    ├── roadmap.md
-    └── fr-map.md
+├── docs/
+│   ├── README.md               # Multilingual documentation hub
+│   ├── en/                     # English documentation
+│   │   ├── roadmap.md
+│   │   ├── fr-map.md
+│   │   └── fr/
+│   └── vi/                     # Vietnamese documentation
+│       ├── roadmap.md
+│       ├── fr-map.md
+│       └── fr/
+├── README.md                   # English root README
+└── README.vi.md                # Vietnamese root README
 ```
 
 The structure may evolve as the implementation matures.
+
+Related specification:
+- [Repository Foundation (FR-REPO)](docs/en/fr/repository-foundation.md)
 
 ---
 
@@ -435,6 +481,9 @@ The structure may evolve as the implementation matures.
 | System Design canvas | tldraw (planned) |
 
 Early development should avoid unnecessary infrastructure such as Kubernetes, Kafka, Elasticsearch, a dedicated vector database, or microservices.
+
+Related specification:
+- [Quality Attributes & Non-Functional Requirements (NFR)](docs/en/fr/quality-attributes.md)
 
 ---
 
@@ -455,10 +504,11 @@ Early development should avoid unnecessary infrastructure such as Kubernetes, Ka
 | P10 | Interactive Sandbox |
 | P11 | MCP / Agent / Migration Tooling |
 
-Detailed planning:
+Detailed planning and functional requirements:
 
-- [`roadmap.md`](./roadmap.md)
-- [`fr-map.md`](./fr-map.md)
+- 🇬🇧 **[MVP Roadmap (English)](docs/en/roadmap.md)** | 🇻🇳 **[Lộ trình MVP (Tiếng Việt)](docs/vi/roadmap.md)**
+- 🇬🇧 **[Functional Requirements Map (English)](docs/en/fr-map.md)** | 🇻🇳 **[Bản đồ FR (Tiếng Việt)](docs/vi/fr-map.md)**
+- 📚 **[Documentation Hub](docs/README.md)**
 
 ---
 
@@ -478,6 +528,10 @@ pnpm dev
 
 A Docker-based self-hosting workflow may be added as Community Edition matures.
 
+Related specifications:
+- [Local Installation (FR-REPO-007)](docs/en/fr/repository-foundation.md)
+- [Self-Hosting (FR-HOST)](docs/en/fr/self-hosting.md)
+
 ---
 
 # Self-hosting
@@ -494,6 +548,9 @@ Examples include:
 - free community learning instances.
 
 All use remains subject to the repository license.
+
+Related specification:
+- [Self-Hosting Specification (FR-HOST)](docs/en/fr/self-hosting.md)
 
 ---
 
@@ -517,7 +574,7 @@ In practical terms, non-commercial use may include:
 
 Commercial use is not granted by this license.
 
-The legal text in [`LICENSE`](./LICENSE) controls if this summary differs from the license itself.
+The legal text in [`LICENSE.md`](LICENSE.md) controls if this summary differs from the license itself.
 
 LangStride Community Edition is therefore **source-available for non-commercial use** and should not be described as OSI-approved open source.
 

@@ -1,5 +1,7 @@
 # Repository Foundation
 
+> **Languages**: English | [Tiếng Việt](../../vi/fr/repository-foundation.md)
+
 Status: Planned. Introduced: P0. Release gate: P0. Actor: contributor or self-host operator. Applicable constraints: NFR-PORT-001, NFR-PORT-002.
 
 ### FR-REPO-001 — Public README

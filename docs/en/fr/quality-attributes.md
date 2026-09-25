@@ -1,5 +1,7 @@
 # Quality Attributes
 
+> **Languages**: English | [Tiếng Việt](../../vi/fr/quality-attributes.md)
+
 Status: Planned. These constraints apply to every capability unless a requirement explicitly narrows them.
 
 ## Simplicity

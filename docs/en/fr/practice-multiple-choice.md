@@ -1,5 +1,7 @@
 # Multiple-Choice Practice
 
+> **Languages**: English | [Tiếng Việt](../../vi/fr/practice-multiple-choice.md)
+
 Status: Planned. Introduced: P3. Release gate: P3. Actor: learner. Depends on FR-PRAC-001 through FR-PRAC-010.
 
 ### FR-MCQ-001 — Answer options

@@ -1,5 +1,7 @@
 # Content Contribution
 
+> **Languages**: English | [Tiếng Việt](../../vi/fr/content-contribution.md)
+
 Status: Planned. Introduced: P1. Release gate: P5. Actor: content contributor and maintainer. Depends on FR-REPO-003, FR-KNOW-006, and FR-PRAC-010. Applicable constraints: NFR-CONTRIB-001 through NFR-CONTRIB-003.
 
 ### FR-CONT-001 — Lesson contribution

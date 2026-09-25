@@ -1,5 +1,7 @@
 # Fix-the-Code Practice
 
+> **Languages**: English | [Tiếng Việt](../../vi/fr/practice-fix-the-code.md)
+
 Status: Planned. Introduced: P3. Release gate: P3. Actor: learner. Depends on FR-PRAC-001 through FR-PRAC-010.
 
 ### FR-FIX-001 — Incorrect code

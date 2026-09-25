@@ -1,5 +1,7 @@
 # Learning Progress
 
+> **Languages**: English | [Tiếng Việt](../../vi/fr/learning-progress.md)
+
 Status: Planned. Introduced: P2. Release gate: P2. Actor: learner. Depends on FR-LESSON-001. Applicable constraints: NFR-PORT-001 and NFR-PORT-004.
 
 ### FR-PROGRESS-001 — Mark started

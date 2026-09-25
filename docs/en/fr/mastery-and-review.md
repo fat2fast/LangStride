@@ -1,5 +1,7 @@
 # Mastery and Review
 
+> **Languages**: English | [Tiếng Việt](../../vi/fr/mastery-and-review.md)
+
 Status: Planned. Introduced: P5. Release gate: P5. Actor: learner. Depends on FR-PROGRESS-002, FR-PRAC-008, and FR-DEBUG-010.
 
 ## MVP calculation boundary
