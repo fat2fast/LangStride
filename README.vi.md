@@ -117,7 +117,7 @@ Xem [Tổng quan Kiến trúc Kỹ thuật](docs/vi/architecture/overview.md).
 > Ứng dụng Community Edition có thể chạy được chưa được khởi tạo hoàn chỉnh.  
 > Việc lập trình triển khai ứng dụng sẽ bắt đầu với **P0 (Nền tảng Kho mã nguồn)**.
 
-Sau khi nền tảng P0 được merge, các lệnh cài đặt và nạp dữ liệu cục bộ thực tế sẽ được cập nhật tại đây. Trong thời gian này, các cộng tác viên được khuyến khích xem xét các đặc tả trong [Trung tâm Tài liệu](docs/README.md) và tham gia [Đóng góp Cộng đồng](CONTRIBUTING.md).
+Sau khi nền tảng P0 được merge, các lệnh cài đặt và nạp dữ liệu cục bộ thực tế sẽ được cập nhật tại đây. Trong thời gian này, các cộng tác viên được khuyến khích xem xét các đặc tả trong [Trung tâm Tài liệu](docs/README.md) và tham gia [Đóng góp Cộng đồng](CONTRIBUTING.vi.md).
 
 ---
 
@@ -141,7 +141,7 @@ Chúng tôi nhiệt liệt chào đón các đóng góp kỹ thuật từ các l
 - **Bài tập**: Biên soạn câu hỏi thực hành tất định ([Hướng dẫn Bài tập](docs/vi/contribution/challenge-guide.md)).
 - **Thẩm định**: Review pull request đảm bảo tính chuẩn xác kỹ thuật ([Hướng dẫn Thẩm định](docs/vi/contribution/technical-review-guide.md)).
 
-Đọc toàn bộ [Hướng dẫn Đóng góp (CONTRIBUTING.md)](CONTRIBUTING.md) để bắt đầu.
+Đọc toàn bộ [Hướng dẫn Đóng góp (CONTRIBUTING.vi.md)](CONTRIBUTING.vi.md) để bắt đầu.
 
 ---
 

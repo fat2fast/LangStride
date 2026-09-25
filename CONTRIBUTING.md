@@ -1,6 +1,6 @@
 # Contributing to LangStride Community Edition
 
-> **Languages**: English | [Tiếng Việt](docs/vi/contribution/README.md)
+> **Languages**: English | [Tiếng Việt](CONTRIBUTING.vi.md)
 
 Welcome! Thank you for your interest in contributing to **LangStride Community Edition**.
 

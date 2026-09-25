@@ -49,7 +49,7 @@ Chào mừng bạn đến với trung tâm tài liệu của LangStride - nền 
 4. [Functional Requirements Map](en/fr-map.md) — Detailed requirement tracking.
 
 ### 3. For Content & Challenge Contributors
-1. [Contributing Overview](../CONTRIBUTING.md) — How community contributions work.
+1. [Contributing Overview (EN)](../CONTRIBUTING.md) | [Hướng dẫn Đóng góp (VI)](../CONTRIBUTING.vi.md) — How community contributions work.
 2. [Content Guide](en/contribution/content-guide.md) — Writing short, focused lessons.
 3. [Challenge Guide](en/contribution/challenge-guide.md) — Creating deterministic practice challenges.
 4. [Roadmap Guide](en/contribution/roadmap-guide.md) — Proposing new roadmap nodes and prerequisites.
