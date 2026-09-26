@@ -18,16 +18,14 @@ Tiêu đề khái niệm (Concept Title)
 ↓
 Vì sao điều này quan trọng (Why It Matters)
 ↓
-Mô hình tư duy / Minh họa trực quan (Visual Explanation)
+Mô hình tư duy / Minh họa trực quan (Mental Model)
 ↓
 Ví dụ mã nguồn có định dạng chuẩn (Formatted Code Example)
 ↓
 Các lỗi thường gặp (Common Mistakes)
-↓
-Kiểm tra nhanh (Quick Check)
-↓
-Liên kết bài tập thực hành liên quan (Practice Links)
 ```
+
+> **Lưu ý về các giai đoạn tiếp theo**: Kiểm tra nhanh (Quick Check - P2) và Bài tập thực hành (Practice Challenges - P3) được lên lịch ở các phase sau và được chủ động hoãn lại trong proof slice P1 này. Trong giai đoạn hiện tại, cộng tác viên chỉ cần hoàn thiện 4 phần bắt buộc bên dưới.
 
 ## Nguyên tắc nội dung
 

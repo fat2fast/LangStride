@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Lesson } from '@langstride/learning';
+import { MarkdownProse } from './markdown-prose';
 
 interface LessonRendererProps {
   lesson: Lesson;
@@ -130,8 +131,8 @@ export function LessonRenderer({ lesson }: LessonRendererProps) {
           <span className="w-1.5 h-6 bg-blue-600 rounded-full inline-block"></span>
           Why it matters
         </h2>
-        <div className="text-base text-slate-700 leading-relaxed pl-3.5 space-y-3">
-          <p>{whyItMatters}</p>
+        <div className="text-base text-slate-700 leading-relaxed pl-3.5">
+          <MarkdownProse content={whyItMatters} />
         </div>
       </section>
 
@@ -142,7 +143,7 @@ export function LessonRenderer({ lesson }: LessonRendererProps) {
           Mental model
         </h2>
         <div className="text-base text-slate-700 leading-relaxed pl-3.5 bg-indigo-50/50 p-4 rounded-xl border border-indigo-100">
-          <p>{mentalModel}</p>
+          <MarkdownProse content={mentalModel} />
         </div>
       </section>
 
@@ -174,8 +175,8 @@ export function LessonRenderer({ lesson }: LessonRendererProps) {
           <span className="w-1.5 h-6 bg-rose-600 rounded-full inline-block"></span>
           Common mistakes
         </h2>
-        <div className="text-base text-slate-700 leading-relaxed pl-3.5 whitespace-pre-line bg-rose-50/50 p-4 rounded-xl border border-rose-100">
-          {commonMistakes}
+        <div className="text-base text-slate-700 leading-relaxed pl-3.5 bg-rose-50/50 p-4 rounded-xl border border-rose-100">
+          <MarkdownProse content={commonMistakes} />
         </div>
       </section>
 

@@ -8,7 +8,7 @@ LangStride Community Edition là kho mã nguồn công khai của LangStride. D�
 
 Kho mã nguồn này được thiết kế để tự thân nó đã là một sản phẩm hoàn chỉnh và hữu ích. Bất kỳ lập trình viên nào cũng có thể clone về máy, chạy cục bộ, học theo các lộ trình có cấu trúc, làm bài tập thực hành tất định và đóng góp cải tiến mà không cần phụ thuộc vào bất kỳ dịch vụ thương mại đám mây nào của LangStride.
 
-- **Trạng thái**: Giai đoạn Thiết lập Kho mã nguồn & Đặc tả (Pre-Implementation)
+- **Trạng thái**: Hoàn thành P0 Foundation & P1 PHP First Vertical Slice (Proof Slice; đang mở rộng P1)
 - **Phạm vi**: Public MVP (P0–P5)
 - **Giấy phép**: PolyForm Noncommercial License 1.0.0 ([LICENSE.md](LICENSE.md))
 - **Tài liệu chi tiết**: [Trung tâm Tài liệu](docs/README.md) | [Tài liệu Tiếng Việt](docs/vi/README.md) | [Tài liệu Tiếng Anh](docs/en/README.md)
@@ -112,12 +112,51 @@ Xem [Tổng quan Kiến trúc Kỹ thuật](docs/vi/architecture/overview.md).
 
 ## 6. Bắt đầu Sử dụng (Getting Started)
 
-> **Trạng thái Hiện tại của Kho mã nguồn**:  
-> LangStride hiện đang ở **giai đoạn thiết lập kho mã nguồn và đặc tả tài liệu**.  
-> Ứng dụng Community Edition có thể chạy được chưa được khởi tạo hoàn chỉnh.  
-> Việc lập trình triển khai ứng dụng sẽ bắt đầu với **P0 (Nền tảng Kho mã nguồn)**.
+### Yêu cầu Tiên quyết (Prerequisites)
 
-Sau khi nền tảng P0 được merge, các lệnh cài đặt và nạp dữ liệu cục bộ thực tế sẽ được cập nhật tại đây. Trong thời gian này, các cộng tác viên được khuyến khích xem xét các đặc tả trong [Trung tâm Tài liệu](docs/README.md) và tham gia [Đóng góp Cộng đồng](CONTRIBUTING.vi.md).
+- **Node.js**: `v22.0.0+` (hoặc `v26+`, xem `.nvmrc`)
+- **pnpm**: `v9.0.0+` (khuyến nghị `v12.x`)
+- **Docker**: Docker Desktop / Docker Engine (cho PostgreSQL/Supabase cục bộ)
+- **Supabase CLI**: được quản lý tự động qua `devDependencies` (`supabase` v2.118.0) và Docker
+
+### Thiết lập & Phát triển Cục bộ (Local Setup)
+
+1. **Clone và cài đặt phụ thuộc**:
+   ```bash
+   git clone https://github.com/fat2fast/LangStride.git
+   cd langstride
+   pnpm install
+   ```
+
+2. **Cấu hình biến môi trường**:
+   ```bash
+   cp .env.example .env.local
+   ```
+   *(Các giá trị mặc định an toàn cho môi trường cục bộ đã được thiết lập sẵn trong `.env.example`; không cần secret bên ngoài hay tài khoản đám mây).*
+
+3. **Khởi động database cục bộ**:
+   ```bash
+   pnpm local:setup
+   ```
+
+4. **Xác thực và đồng bộ dữ liệu nội dung**:
+   ```bash
+   pnpm content:validate
+   pnpm content:sync
+   ```
+
+5. **Khởi chạy ứng dụng web phát triển**:
+   ```bash
+   pnpm dev
+   ```
+   Mở [http://localhost:3000](http://localhost:3000) hoặc truy cập trực tiếp lộ trình PHP tại [http://localhost:3000/php](/php).
+
+6. **Chạy kiểm thử và kiểm tra chất lượng**:
+   ```bash
+   pnpm lint
+   pnpm test
+   pnpm build
+   ```
 
 ---
 

@@ -99,4 +99,24 @@ describe('UI Component rendering (Task 3.2, FR-PHP-003..008, FR-LESSON-001..007)
     const sourceLink = screen.getByRole('link', { name: /Official PHP Doc/i });
     expect(sourceLink.getAttribute('href')).toBe('https://www.php.net/manual');
   });
+
+  it('LessonRenderer renders formatted Markdown lists and emphasis via MarkdownProse', () => {
+    const lessonWithMarkdown: Lesson = {
+      ...sampleLesson,
+      mentalModel: 'Root hierarchy:\n1. Error: Fatal issues.\n2. Exception: Domain issues.',
+      commonMistakes: '1. **Swallowing exceptions**: Never do `catch (Exception $e) {}`.\n2. **Wrong type**: Do not catch generic Exception.',
+    };
+
+    render(<LessonRenderer lesson={lessonWithMarkdown} />);
+
+    // Ordered list items should be in <ol> and <li> elements
+    const listItems = screen.getAllByRole('listitem');
+    expect(listItems.length).toBeGreaterThanOrEqual(4);
+
+    // Bold text should be rendered with strong
+    expect(screen.getByText('Swallowing exceptions')).toBeDefined();
+
+    // Inline code should be rendered with code tag
+    expect(screen.getByText('catch (Exception $e) {}')).toBeDefined();
+  });
 });

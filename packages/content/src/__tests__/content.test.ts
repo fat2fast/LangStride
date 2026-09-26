@@ -4,7 +4,7 @@ import {
   RoadmapFileSchema,
   LessonFrontmatterSchema,
 } from '../schemas';
-import { validateContentData, detectPrerequisiteCycles } from '../validate';
+import { validateContentData, detectPrerequisiteCycles, detectRoadmapNodeCycles } from '../validate';
 import { parseLessonContent } from '../load-content';
 import type { Concept, Roadmap } from '@langstride/learning';
 
@@ -255,5 +255,225 @@ Mental model text.
     const result = validateContentData(concepts, [{ language: 'php', roadmap }], [{ language: 'php', lessons: [parsed] }]);
     expect(result.valid).toBe(false);
     expect(result.errors.some((e) => e.includes('Planned roadmap node') && e.includes('has a published lesson'))).toBe(true);
+  });
+
+  it('rejects duplicate roadmap section IDs', () => {
+    const concepts: Concept[] = [
+      { id: 'concept-variables', slug: 'variables', title: 'Variables', prerequisites: [], related: [] },
+    ];
+    const roadmap: Roadmap = {
+      language: 'php',
+      title: 'PHP Roadmap',
+      sections: [
+        { id: 'dup-sec', title: 'Section 1', order: 0, nodes: [] },
+        { id: 'dup-sec', title: 'Section 2', order: 1, nodes: [] },
+      ],
+    };
+    const result = validateContentData(concepts, [{ language: 'php', roadmap }], []);
+    expect(result.valid).toBe(false);
+    expect(result.errors.some((e) => e.includes('Duplicate section ID "dup-sec"'))).toBe(true);
+  });
+
+  it('rejects published node when conceptId does not match its lesson conceptId', () => {
+    const parsed = parseLessonContent(validMarkdown, 'test.md'); // has conceptId: concept-variables
+    const concepts: Concept[] = [
+      { id: 'concept-variables', slug: 'variables', title: 'Variables', prerequisites: [], related: [] },
+      { id: 'concept-other', slug: 'other', title: 'Other', prerequisites: [], related: [] },
+    ];
+    const roadmap: Roadmap = {
+      language: 'php',
+      title: 'PHP Roadmap',
+      sections: [
+        {
+          id: 'basics',
+          title: 'Basics',
+          order: 0,
+          nodes: [
+            {
+              id: 'node-var',
+              conceptId: 'concept-other', // Mismatched conceptId!
+              title: 'Variables',
+              lessonSlug: 'php-variables',
+              status: 'published',
+              order: 0,
+            },
+          ],
+        },
+      ],
+    };
+    const result = validateContentData(concepts, [{ language: 'php', roadmap }], [{ language: 'php', lessons: [parsed] }]);
+    expect(result.valid).toBe(false);
+    expect(result.errors.some((e) => e.includes('has conceptId "concept-other" but references lesson "php-variables" with conceptId "concept-variables"'))).toBe(true);
+  });
+
+  it('rejects dangling roadmap node prerequisites', () => {
+    const concepts: Concept[] = [
+      { id: 'concept-variables', slug: 'variables', title: 'Variables', prerequisites: [], related: [] },
+    ];
+    const roadmap: Roadmap = {
+      language: 'php',
+      title: 'PHP Roadmap',
+      sections: [
+        {
+          id: 'basics',
+          title: 'Basics',
+          order: 0,
+          nodes: [
+            {
+              id: 'node-var',
+              conceptId: 'concept-variables',
+              title: 'Variables',
+              status: 'planned',
+              order: 0,
+              prerequisites: ['non-existent-node-id'],
+            },
+          ],
+        },
+      ],
+    };
+    const result = validateContentData(concepts, [{ language: 'php', roadmap }], []);
+    expect(result.valid).toBe(false);
+    expect(result.errors.some((e) => e.includes('references non-existent prerequisite node "non-existent-node-id"'))).toBe(true);
+  });
+
+  it('detects prerequisite cycles in roadmap nodes', () => {
+    const concepts: Concept[] = [
+      { id: 'c1', slug: 'c1', title: 'C1', prerequisites: [], related: [] },
+      { id: 'c2', slug: 'c2', title: 'C2', prerequisites: [], related: [] },
+    ];
+    const cyclicalRoadmap: Roadmap = {
+      language: 'php',
+      title: 'PHP Roadmap',
+      sections: [
+        {
+          id: 's1',
+          title: 'Section 1',
+          order: 0,
+          nodes: [
+            { id: 'node-1', conceptId: 'c1', title: 'Node 1', status: 'planned', order: 0, prerequisites: ['node-2'] },
+            { id: 'node-2', conceptId: 'c2', title: 'Node 2', status: 'planned', order: 1, prerequisites: ['node-1'] },
+          ],
+        },
+      ],
+    };
+    const cycleErrors = detectRoadmapNodeCycles(cyclicalRoadmap);
+    expect(cycleErrors.length).toBeGreaterThan(0);
+    expect(cycleErrors[0]).toContain('Prerequisite cycle detected in roadmap nodes');
+
+    const result = validateContentData(concepts, [{ language: 'php', roadmap: cyclicalRoadmap }], []);
+    expect(result.valid).toBe(false);
+    expect(result.errors.some((e) => e.includes('Prerequisite cycle detected in roadmap nodes'))).toBe(true);
+  });
+
+  it('rejects published lesson with no sources', () => {
+    const markdownNoSources = `---
+id: php-variables
+slug: php-variables
+title: Variables and Types in PHP
+conceptId: concept-variables
+language: php
+status: published
+sources: []
+---
+
+## Why it matters
+Why it matters text.
+
+## Mental model
+Mental model text.
+
+## Code example
+\`\`\`php
+<?php echo 1;
+\`\`\`
+
+## Common mistakes
+Common mistakes text.
+`;
+    const parsed = parseLessonContent(markdownNoSources, 'test.md');
+    const concepts: Concept[] = [
+      { id: 'concept-variables', slug: 'variables', title: 'Variables', prerequisites: [], related: [] },
+    ];
+    const roadmap: Roadmap = {
+      language: 'php',
+      title: 'PHP Roadmap',
+      sections: [
+        {
+          id: 'basics',
+          title: 'Basics',
+          order: 0,
+          nodes: [
+            {
+              id: 'node-var',
+              conceptId: 'concept-variables',
+              title: 'Variables',
+              lessonSlug: 'php-variables',
+              status: 'published',
+              order: 0,
+            },
+          ],
+        },
+      ],
+    };
+    const result = validateContentData(concepts, [{ language: 'php', roadmap }], [{ language: 'php', lessons: [parsed] }]);
+    expect(result.valid).toBe(false);
+    expect(result.errors.some((e) => e.includes('must have at least one authoritative source reference'))).toBe(true);
+  });
+
+  it('rejects lesson when language does not match roadmap language', () => {
+    const markdownGoLesson = `---
+id: go-variables
+slug: go-variables
+title: Variables in Go
+conceptId: concept-variables
+language: go
+status: published
+sources:
+  - title: Go Spec
+    url: https://go.dev/ref/spec
+---
+
+## Why it matters
+Why it matters text.
+
+## Mental model
+Mental model text.
+
+## Code example
+\`\`\`go
+var a = 1
+\`\`\`
+
+## Common mistakes
+Common mistakes text.
+`;
+    const parsed = parseLessonContent(markdownGoLesson, 'test.md');
+    const concepts: Concept[] = [
+      { id: 'concept-variables', slug: 'variables', title: 'Variables', prerequisites: [], related: [] },
+    ];
+    const roadmap: Roadmap = {
+      language: 'php',
+      title: 'PHP Roadmap',
+      sections: [
+        {
+          id: 'basics',
+          title: 'Basics',
+          order: 0,
+          nodes: [
+            {
+              id: 'node-var',
+              conceptId: 'concept-variables',
+              title: 'Variables',
+              lessonSlug: 'go-variables',
+              status: 'published',
+              order: 0,
+            },
+          ],
+        },
+      ],
+    };
+    const result = validateContentData(concepts, [{ language: 'php', roadmap }], [{ language: 'php', lessons: [parsed] }]);
+    expect(result.valid).toBe(false);
+    expect(result.errors.some((e) => e.includes('does not match expected language "php"') || e.includes('with language "go"'))).toBe(true);
   });
 });

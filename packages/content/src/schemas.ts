@@ -18,7 +18,7 @@ export const RoadmapNodeSchema = z.object({
   lessonSlug: z.string().optional(),
   status: z.enum(['published', 'planned']),
   order: z.number().int().nonnegative(),
-  prerequisites: z.array(z.string()).optional(),
+  prerequisites: z.array(z.string()).default([]),
 });
 
 export const RoadmapSectionSchema = z.object({
