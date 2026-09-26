@@ -31,6 +31,7 @@ export async function syncContentToDatabase(
     // Clean existing read-model state idempotently
     await client.query('DELETE FROM sources');
     await client.query('DELETE FROM concept_relations');
+    await client.query('DELETE FROM roadmap_node_prerequisites');
     await client.query('DELETE FROM roadmap_nodes');
     await client.query('DELETE FROM roadmap_sections');
     await client.query('DELETE FROM roadmaps');
@@ -82,6 +83,18 @@ export async function syncContentToDatabase(
             'INSERT INTO roadmap_nodes (id, section_id, concept_id, title, lesson_slug, status, display_order) VALUES ($1, $2, $3, $4, $5, $6, $7)',
             [node.id, section.id, node.conceptId, node.title, node.lessonSlug || null, node.status, node.order]
           );
+        }
+      }
+
+      // 2b. Insert node prerequisites after all nodes exist
+      for (const section of phpRoadmap.sections) {
+        for (const node of section.nodes) {
+          for (const prereqNodeId of node.prerequisites || []) {
+            await client.query(
+              'INSERT INTO roadmap_node_prerequisites (node_id, prerequisite_node_id) VALUES ($1, $2)',
+              [node.id, prereqNodeId]
+            );
+          }
         }
       }
     }

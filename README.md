@@ -8,7 +8,7 @@ LangStride Community Edition is the public repository of LangStride. It is built
 
 This repository is designed to be independently useful. A developer should be able to clone it, run it locally, follow structured roadmaps, practice deterministic coding challenges, and contribute improvements without depending on any hosted commercial LangStride service.
 
-- **Status**: Repository & Specification Phase (Pre-Implementation)
+- **Status**: P0 Foundation & P1 PHP First Vertical Slice Completed (Proof Slice; P1 Expansion in progress)
 - **Scope**: Public MVP (P0–P5)
 - **License**: PolyForm Noncommercial License 1.0.0 ([LICENSE.md](LICENSE.md))
 - **Documentation**: [Documentation Hub](docs/README.md) | [English Docs](docs/en/README.md) | [Tài liệu Tiếng Việt](docs/vi/README.md)
@@ -117,7 +117,7 @@ See [Technical Architecture Overview](docs/en/architecture/overview.md).
 - **Node.js**: `v22.0.0+` (or `v26+`, see `.nvmrc`)
 - **pnpm**: `v9.0.0+` (tested with `v12.x`)
 - **Docker**: Docker Desktop / Docker Engine (for local containerized Supabase/PostgreSQL)
-- **Supabase CLI**: installed via Homebrew (`brew install supabase`) or binary
+- **Supabase CLI**: managed automatically via project `devDependencies` (`supabase` v2.118.0) and Docker
 
 ### Local Setup & Development
 

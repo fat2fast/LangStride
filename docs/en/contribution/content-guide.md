@@ -23,11 +23,9 @@ Mental Model / Visual Explanation
 Formatted Code Example
 ↓
 Common Mistakes
-↓
-Quick Check (Self-test question)
-↓
-Related Practice Links
 ```
+
+> **Note on Future Milestones**: Interactive Quick Checks (P2) and Deterministic Practice Challenges (P3) are planned for subsequent phases and are intentionally deferred in this P1 proof slice. Contributors in this phase need only provide the 4 required sections below.
 
 ## Mandatory Lesson Headings
 

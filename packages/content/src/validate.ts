@@ -1,6 +1,6 @@
 import path from 'path';
 import { loadConcepts, loadRoadmap, loadLessons, getProjectRoot, type RawParsedLesson } from './load-content';
-import type { Concept, Roadmap } from '@langstride/learning';
+import type { Concept, Roadmap, RoadmapNode } from '@langstride/learning';
 
 export interface ValidationResult {
   valid: boolean;
@@ -51,6 +51,54 @@ export function detectPrerequisiteCycles(concepts: Concept[]): string[] {
   return errors;
 }
 
+export function detectRoadmapNodeCycles(roadmap: Roadmap): string[] {
+  const errors: string[] = [];
+  const nodeMap = new Map<string, RoadmapNode>();
+  for (const section of roadmap.sections) {
+    for (const node of section.nodes) {
+      nodeMap.set(node.id, node);
+    }
+  }
+
+  const visited = new Set<string>();
+  const recursionStack = new Set<string>();
+
+  function dfs(nodeId: string, currentPath: string[]): boolean {
+    visited.add(nodeId);
+    recursionStack.add(nodeId);
+    currentPath.push(nodeId);
+
+    const node = nodeMap.get(nodeId);
+    if (node && node.prerequisites) {
+      for (const prereqId of node.prerequisites) {
+        if (!visited.has(prereqId)) {
+          if (dfs(prereqId, currentPath)) {
+            return true;
+          }
+        } else if (recursionStack.has(prereqId)) {
+          const cyclePath = [...currentPath, prereqId].join(' -> ');
+          errors.push(`Prerequisite cycle detected in roadmap nodes for "${roadmap.language}": ${cyclePath}`);
+          return true;
+        }
+      }
+    }
+
+    recursionStack.delete(nodeId);
+    currentPath.pop();
+    return false;
+  }
+
+  for (const section of roadmap.sections) {
+    for (const node of section.nodes) {
+      if (!visited.has(node.id)) {
+        dfs(node.id, []);
+      }
+    }
+  }
+
+  return errors;
+}
+
 export function validateContentData(
   concepts: Concept[],
   roadmaps: { language: string; roadmap: Roadmap | null }[],
@@ -87,7 +135,7 @@ export function validateContentData(
     }
   }
 
-  // Detect prerequisite cycles
+  // Detect prerequisite cycles in concepts
   const cycleErrors = detectPrerequisiteCycles(concepts);
   errors.push(...cycleErrors);
 
@@ -118,7 +166,17 @@ export function validateContentData(
         errors.push(`Lesson "${lesson.frontmatter.slug}" references non-existent concept "${lesson.frontmatter.conceptId}"`);
       }
 
-      // Validate required sections
+      // Validate lesson language matches roadmap language
+      if (lesson.frontmatter.language !== language) {
+        errors.push(`Lesson "${lesson.frontmatter.slug}" has language "${lesson.frontmatter.language}" which does not match expected language "${language}"`);
+      }
+
+      // Validate code example language matches roadmap language
+      if (lesson.codeExample.language !== language) {
+        errors.push(`Lesson "${lesson.frontmatter.slug}" code example has language "${lesson.codeExample.language}" which does not match expected language "${language}"`);
+      }
+
+      // Validate mandatory sections
       if (!lesson.whyItMatters || lesson.whyItMatters.trim().length === 0) {
         errors.push(`Lesson "${lesson.frontmatter.slug}" is missing mandatory section: "Why it matters"`);
       }
@@ -132,6 +190,13 @@ export function validateContentData(
         errors.push(`Lesson "${lesson.frontmatter.slug}" is missing mandatory section: "Common mistakes"`);
       }
 
+      // Published lesson must have non-empty sources
+      if (lesson.frontmatter.status === 'published') {
+        if (!lesson.frontmatter.sources || lesson.frontmatter.sources.length === 0) {
+          errors.push(`Published lesson "${lesson.frontmatter.slug}" must have at least one authoritative source reference`);
+        }
+      }
+
       // Validate source references
       for (const source of lesson.frontmatter.sources || []) {
         if (!source.title || !source.url) {
@@ -140,21 +205,42 @@ export function validateContentData(
       }
     }
 
-    const nodeIdSet = new Set<string>();
-
+    // Validate Sections: unique IDs and non-empty titles
+    const sectionIdSet = new Set<string>();
     for (const section of roadmap.sections) {
+      if (sectionIdSet.has(section.id)) {
+        errors.push(`Duplicate section ID "${section.id}" in roadmap "${language}"`);
+      }
+      sectionIdSet.add(section.id);
+
       if (!section.title || section.title.trim().length === 0) {
         errors.push(`Section "${section.id}" in roadmap "${language}" must have a non-empty title`);
       }
+    }
 
+    // Collect all node IDs in roadmap
+    const nodeIdSet = new Set<string>();
+    for (const section of roadmap.sections) {
       for (const node of section.nodes) {
         if (nodeIdSet.has(node.id)) {
           errors.push(`Duplicate node ID "${node.id}" in roadmap "${language}"`);
         }
         nodeIdSet.add(node.id);
+      }
+    }
 
+    // Validate nodes, prerequisites, concept identity and lesson alignment
+    for (const section of roadmap.sections) {
+      for (const node of section.nodes) {
         if (!conceptIdSet.has(node.conceptId)) {
           errors.push(`Roadmap node "${node.id}" references non-existent concept "${node.conceptId}"`);
+        }
+
+        // Validate node prerequisites reference existing nodes
+        for (const prereqNodeId of node.prerequisites || []) {
+          if (!nodeIdSet.has(prereqNodeId)) {
+            errors.push(`Roadmap node "${node.id}" references non-existent prerequisite node "${prereqNodeId}"`);
+          }
         }
 
         // Node status check
@@ -165,8 +251,16 @@ export function validateContentData(
             const matchingLesson = lessonSlugMap.get(node.lessonSlug);
             if (!matchingLesson) {
               errors.push(`Published roadmap node "${node.id}" references lesson slug "${node.lessonSlug}" which was not found`);
-            } else if (matchingLesson.frontmatter.status !== 'published') {
-              errors.push(`Published roadmap node "${node.id}" references lesson "${node.lessonSlug}" which is not published (status: ${matchingLesson.frontmatter.status})`);
+            } else {
+              if (matchingLesson.frontmatter.status !== 'published') {
+                errors.push(`Published roadmap node "${node.id}" references lesson "${node.lessonSlug}" which is not published (status: ${matchingLesson.frontmatter.status})`);
+              }
+              if (matchingLesson.frontmatter.conceptId !== node.conceptId) {
+                errors.push(`Published roadmap node "${node.id}" has conceptId "${node.conceptId}" but references lesson "${node.lessonSlug}" with conceptId "${matchingLesson.frontmatter.conceptId}"`);
+              }
+              if (matchingLesson.frontmatter.language !== language) {
+                errors.push(`Published roadmap node "${node.id}" in language "${language}" references lesson "${node.lessonSlug}" with language "${matchingLesson.frontmatter.language}"`);
+              }
             }
           }
         } else if (node.status === 'planned') {
@@ -179,6 +273,10 @@ export function validateContentData(
         }
       }
     }
+
+    // Detect roadmap node prerequisite cycles
+    const nodeCycleErrors = detectRoadmapNodeCycles(roadmap);
+    errors.push(...nodeCycleErrors);
   }
 
   return {

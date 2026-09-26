@@ -1,3 +1,4 @@
+import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPhpLesson, getPhpRoadmap } from '@/lib/learning-content';

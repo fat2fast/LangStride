@@ -42,6 +42,12 @@ CREATE TABLE IF NOT EXISTS roadmap_nodes (
   display_order INT NOT NULL DEFAULT 0
 );
 
+CREATE TABLE IF NOT EXISTS roadmap_node_prerequisites (
+  node_id TEXT NOT NULL REFERENCES roadmap_nodes(id) ON DELETE CASCADE,
+  prerequisite_node_id TEXT NOT NULL REFERENCES roadmap_nodes(id) ON DELETE CASCADE,
+  PRIMARY KEY (node_id, prerequisite_node_id)
+);
+
 CREATE TABLE IF NOT EXISTS lessons (
   id TEXT PRIMARY KEY,
   slug TEXT NOT NULL,
