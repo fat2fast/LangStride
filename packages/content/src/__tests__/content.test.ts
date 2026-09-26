@@ -476,4 +476,18 @@ Common mistakes text.
     expect(result.valid).toBe(false);
     expect(result.errors.some((e) => e.includes('does not match expected language "php"') || e.includes('with language "go"'))).toBe(true);
   });
+
+  it('rejects roadmap when declared language does not match collection language', () => {
+    const concepts: Concept[] = [
+      { id: 'concept-variables', slug: 'variables', title: 'Variables', prerequisites: [], related: [] },
+    ];
+    const mismatchedRoadmap: Roadmap = {
+      language: 'go', // Mismatched! Declared 'go' but validated in 'php' collection
+      title: 'Go Roadmap in PHP slot',
+      sections: [],
+    };
+    const result = validateContentData(concepts, [{ language: 'php', roadmap: mismatchedRoadmap }], []);
+    expect(result.valid).toBe(false);
+    expect(result.errors.some((e) => e.includes('Roadmap declared language "go" does not match expected collection language "php"'))).toBe(true);
+  });
 });

@@ -132,7 +132,7 @@ See [Technical Architecture Overview](docs/en/architecture/overview.md).
    ```bash
    cp .env.example .env.local
    ```
-   *(Safe local defaults are preconfigured in `.env.example`; no external secrets or cloud accounts required.)*
+   *(Safe local defaults are preconfigured in `.env.example`; no external secrets or cloud accounts required. By default, `USE_DB_READ_MODEL=true` connects the web application to the local PostgreSQL read-model populated by `pnpm content:sync`. Set `USE_DB_READ_MODEL=false` to bypass the database and load directly from repository Git files for offline work or standalone static builds).*
 
 3. **Start local database**:
    ```bash

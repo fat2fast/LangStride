@@ -28,6 +28,15 @@ export async function syncContentToDatabase(
   try {
     await client.query('BEGIN');
 
+    // Ensure table exists for forward-compatibility on older schemas
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS roadmap_node_prerequisites (
+        node_id TEXT NOT NULL REFERENCES roadmap_nodes(id) ON DELETE CASCADE,
+        prerequisite_node_id TEXT NOT NULL REFERENCES roadmap_nodes(id) ON DELETE CASCADE,
+        PRIMARY KEY (node_id, prerequisite_node_id)
+      )
+    `);
+
     // Clean existing read-model state idempotently
     await client.query('DELETE FROM sources');
     await client.query('DELETE FROM concept_relations');

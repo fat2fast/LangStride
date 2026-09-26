@@ -88,14 +88,21 @@ export class DatabaseLearningDataSource implements LearningDataSource {
     let prereqMap = new Map<string, string[]>();
 
     if (nodeIds.length > 0) {
-      const prereqsRes = await this.pool.query(
-        'SELECT node_id, prerequisite_node_id FROM roadmap_node_prerequisites WHERE node_id = ANY($1)',
-        [nodeIds]
-      );
-      for (const row of prereqsRes.rows) {
-        const list = prereqMap.get(row.node_id) || [];
-        list.push(row.prerequisite_node_id);
-        prereqMap.set(row.node_id, list);
+      try {
+        const prereqsRes = await this.pool.query(
+          'SELECT node_id, prerequisite_node_id FROM roadmap_node_prerequisites WHERE node_id = ANY($1)',
+          [nodeIds]
+        );
+        for (const row of prereqsRes.rows) {
+          const list = prereqMap.get(row.node_id) || [];
+          list.push(row.prerequisite_node_id);
+          prereqMap.set(row.node_id, list);
+        }
+      } catch (err: any) {
+        // Fallback gracefully if roadmap_node_prerequisites table has not been migrated yet on legacy local DB
+        if (err?.code !== '42P01') {
+          throw err;
+        }
       }
     }
 
