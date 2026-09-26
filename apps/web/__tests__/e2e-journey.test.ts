@@ -108,8 +108,11 @@ describe('End-to-End local learner journey (Task 3.3, FR-REPO-007..011, FR-PHP-0
     try {
       await PhpConceptPage({ params: Promise.resolve({ slug: 'nonexistent-lesson-404' }) });
     } catch (err: any) {
-      // Next.js notFound() throws NEXT_NOT_FOUND digest
-      notFoundTriggered = err?.message === 'NEXT_NOT_FOUND' || err?.digest === 'NEXT_NOT_FOUND' || true;
+      // Next.js notFound() throws error with digest 'NEXT_HTTP_ERROR_FALLBACK;404' or 'NEXT_NOT_FOUND'
+      notFoundTriggered =
+        err?.digest === 'NEXT_HTTP_ERROR_FALLBACK;404' ||
+        err?.digest === 'NEXT_NOT_FOUND' ||
+        err?.message === 'NEXT_NOT_FOUND';
     }
     expect(notFoundTriggered).toBe(true);
 

@@ -14,11 +14,7 @@ import {
 } from '@langstride/content';
 
 export function createConfiguredLearningDataSource(): LearningDataSource {
-  if (process.env.USE_DB_READ_MODEL === 'true' && process.env.DATABASE_URL) {
-    return createDatabaseLearningDataSource(process.env.DATABASE_URL);
-  }
-
-  return {
+  const fileSource: LearningDataSource = {
     loadConcepts: async () => loadConcepts(getProjectRoot()),
     loadRoadmap: async (lang: string) => loadRoadmap(lang, getProjectRoot()),
     loadLessons: async (lang: string) => {
@@ -31,6 +27,47 @@ export function createConfiguredLearningDataSource(): LearningDataSource {
         codeExample: r.codeExample,
         commonMistakes: r.commonMistakes,
       }));
+    },
+  };
+
+  const useDb = (process.env.USE_DB_READ_MODEL === 'true' || (process.env.USE_DB_READ_MODEL !== 'false' && Boolean(process.env.DATABASE_URL))) && Boolean(process.env.DATABASE_URL);
+
+  if (!useDb || !process.env.DATABASE_URL) {
+    return fileSource;
+  }
+
+  const dbSource = createDatabaseLearningDataSource(process.env.DATABASE_URL);
+
+  return {
+    loadConcepts: async () => {
+      try {
+        const concepts = await dbSource.loadConcepts();
+        if (concepts && concepts.length > 0) return concepts;
+        return await fileSource.loadConcepts();
+      } catch (err: any) {
+        console.warn('[learning-content] Failed to load concepts from DB, falling back to files:', err?.message);
+        return fileSource.loadConcepts();
+      }
+    },
+    loadRoadmap: async (lang: string) => {
+      try {
+        const roadmap = await dbSource.loadRoadmap(lang);
+        if (roadmap) return roadmap;
+        return await fileSource.loadRoadmap(lang);
+      } catch (err: any) {
+        console.warn(`[learning-content] Failed to load roadmap for ${lang} from DB, falling back to files:`, err?.message);
+        return fileSource.loadRoadmap(lang);
+      }
+    },
+    loadLessons: async (lang: string) => {
+      try {
+        const lessons = await dbSource.loadLessons(lang);
+        if (lessons && lessons.length > 0) return lessons;
+        return await fileSource.loadLessons(lang);
+      } catch (err: any) {
+        console.warn(`[learning-content] Failed to load lessons for ${lang} from DB, falling back to files:`, err?.message);
+        return fileSource.loadLessons(lang);
+      }
     },
   };
 }

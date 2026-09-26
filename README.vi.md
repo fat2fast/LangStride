@@ -132,7 +132,7 @@ Xem [Tổng quan Kiến trúc Kỹ thuật](docs/vi/architecture/overview.md).
    ```bash
    cp .env.example .env.local
    ```
-   *(Các giá trị mặc định an toàn cho môi trường cục bộ đã được thiết lập sẵn trong `.env.example`; không cần secret bên ngoài hay tài khoản đám mây).*
+   *(Các giá trị mặc định an toàn cho môi trường cục bộ đã được thiết lập sẵn trong `.env.example`; không cần secret bên ngoài hay tài khoản đám mây. Theo mặc định, `USE_DB_READ_MODEL=true` kết nối ứng dụng web với mô hình đọc PostgreSQL cục bộ được đồng bộ bằng `pnpm content:sync`. Đặt `USE_DB_READ_MODEL=false` để đọc trực tiếp từ các file Git trong repository phục vụ chế độ offline hoặc build tĩnh độc lập).*
 
 3. **Khởi động database cục bộ**:
    ```bash

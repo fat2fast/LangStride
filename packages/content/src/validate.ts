@@ -146,6 +146,10 @@ export function validateContentData(
       continue;
     }
 
+    if (roadmap.language !== language) {
+      errors.push(`Roadmap declared language "${roadmap.language}" does not match expected collection language "${language}"`);
+    }
+
     const langLessons = lessonsByLanguage.find((l) => l.language === language)?.lessons || [];
     const lessonSlugMap = new Map<string, RawParsedLesson>();
     const lessonIdSet = new Set<string>();

@@ -49,6 +49,24 @@ Visual analogy or engine-level abstraction explaining how it works.
 2. Trap 2 and how to avoid it.
 ```
 
+## Supported Markdown Formatting (MarkdownProse)
+
+To ensure rendering safety and zero raw HTML injection, lesson prose is rendered using a secure, constrained Markdown subset (`MarkdownProse`):
+
+| Element | Supported Syntax | Notes |
+|---|---|---|
+| **Paragraphs** | Standard text blocks separated by blank lines | Normalized and safely escaped |
+| **Ordered Lists** | `1. First item`<br>`2. Second item` | Rendered as semantic `<ol>` |
+| **Unordered Lists** | `- First item` or `* First item` | Rendered as semantic `<ul>` |
+| **Blockquotes** | `> Callout quote or key takeaway` | Rendered with visual styling |
+| **Subheadings** | `### Section Subheading`<br>`#### Minor Heading` | `###` (h3) and `####` (h4) supported inside sections |
+| **Bold** | `**bold**` or `__bold__` | Inline bold formatting |
+| **Italic** | `*italic*` or `_italic_` | Inline italic formatting |
+| **Inline Code** | `` `code` `` | Formatted monospaced text |
+| **Safe Links** | `[Title](https://...)` or `[Internal](/php)` | Restricted to `https://`, `http://`, `/`, or `mailto:` |
+
+> **Security Notice**: Raw HTML tags (`<script>`, `<iframe>`, `<div>`, etc.) and unsafe link schemes (`javascript:`, `data:`) are intentionally not supported and will not be executed. All code blocks must use fenced markdown syntax with the language specifier (e.g. ` ```php `).
+
 ## Lesson Content Rules
 
 1. **Explain WHY and WHERE**: Code shows WHAT; lessons explain WHY a pattern is used and WHERE common traps occur.
