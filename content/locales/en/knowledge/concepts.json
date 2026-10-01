@@ -1,0 +1,58 @@
+[
+  {
+    "id": "concept-variables",
+    "slug": "variables-and-types",
+    "title": "Variables and Data Types",
+    "description": "Fundamental storage identifiers, value vs reference semantics, and type representations.",
+    "prerequisites": [],
+    "related": ["concept-control-flow", "concept-functions"]
+  },
+  {
+    "id": "concept-control-flow",
+    "slug": "control-flow",
+    "title": "Control Flow",
+    "description": "Branching conditionals, loops, and expression-based pattern matching.",
+    "prerequisites": ["concept-variables"],
+    "related": ["concept-functions"]
+  },
+  {
+    "id": "concept-functions",
+    "slug": "functions-and-scope",
+    "title": "Functions and Scope",
+    "description": "Reusable callable routines, lexical scoping, closures, and type signatures.",
+    "prerequisites": ["concept-variables"],
+    "related": ["concept-classes-and-objects"]
+  },
+  {
+    "id": "concept-classes-and-objects",
+    "slug": "classes-and-objects",
+    "title": "Classes and Objects",
+    "description": "Object-oriented blueprints, encapsulation, constructors, and property visibility.",
+    "prerequisites": ["concept-functions"],
+    "related": ["concept-interfaces"]
+  },
+  {
+    "id": "concept-interfaces",
+    "slug": "interfaces",
+    "title": "Interfaces and Contracts",
+    "description": "Abstract behavioural contracts, polymorphism, and decoupling implementations from abstractions.",
+    "prerequisites": ["concept-classes-and-objects"],
+    "related": ["concept-classes-and-objects"]
+  },
+  {
+    "id": "concept-exceptions",
+    "slug": "exceptions-and-errors",
+    "title": "Exception Handling",
+    "description": "Runtime error propagation, try/catch mechanisms, and robust failure containment.",
+    "prerequisites": ["concept-classes-and-objects"],
+    "related": []
+  },
+  {
+    "id": "concept-fibers",
+    "slug": "fibers-and-concurrency",
+    "title": "Fibers and Concurrency",
+    "description": "Cooperative multitasking, coroutines, and non-blocking asynchronous execution.",
+    "prerequisites": ["concept-functions"],
+    "related": ["concept-exceptions"]
+  }
+]

@@ -74,16 +74,47 @@ Phép loại suy trực quan hoặc mô hình trừu tượng ở mức engine g
 3. **Code độc lập**: Ví dụ code phải đúng cú pháp và có thể nhẩm chạy được.
 4. **Văn phong tự nhiên**: Viết mạch lạc, dễ hiểu, tránh các từ ngữ sáo rỗng tạo bởi AI.
 
+## Quy tắc Bản địa hóa & Đồng bộ Song ngữ (Localization & Parity)
+
+LangStride hỗ trợ tiếng Anh chuẩn tắc (`en`) và tiếng Việt tham khảo (`vi`). Để đảm bảo chất lượng và tính nhất quán:
+
+### 1. Các định danh bất biến qua các ngôn ngữ
+Khi biên soạn hoặc dịch nội dung, các thuộc tính sau BẮT BUỘC phải giữ nguyên chính xác giữa `en` và `vi`:
+- `conceptId`: Định danh khái niệm chung (ví dụ: `concept-functions`).
+- `id` của node và `id` của section lộ trình: Định danh đồ thị cấu trúc.
+- `id` và `slug` của bài học: Khóa định tuyến URL (ví dụ: `functions`).
+- `status`: Trạng thái phát hành của node và bài học (`published` hoặc `planned`).
+- `order` và `prerequisites`: Thứ tự hiển thị và mối quan hệ phụ thuộc.
+- `codeExample`: Khối mã nguồn ví dụ, cú pháp ngôn ngữ và nội dung code.
+- `sources[].url`: URL tài liệu tham khảo chính thức.
+
+Những phần được phép bản địa hóa:
+- `title` bài học, tiêu đề các mục, văn bản giải thích và metadata.
+- `title` và `description` của section, `title` của node lộ trình.
+- `title` và `description` của khái niệm (concept).
+- `title` hiển thị của nguồn tài liệu tham khảo.
+
+### 2. Yêu cầu độ phủ tuyệt đối (Không fallback ngầm)
+Mỗi bài học đã phát hành ở tiếng Anh bắt buộc phải có bài học tiếng Việt tương ứng. Thiếu bài học tiếng Việt trên route `/vi` là **lỗi kiểm tra tính hợp lệ (validation failure)** khi chạy `pnpm content:validate`, KHÔNG tự động hiển thị nội dung tiếng Anh để lấp chỗ trống.
+
+### 3. Danh sách kiểm tra chất lượng dịch thuật (Review Checklist)
+Trước khi gửi bản dịch bài học hoặc cập nhật lộ trình, hãy kiểm tra:
+- [ ] **Thuật ngữ (Terminology)**: Giữ nguyên từ khóa kỹ thuật chuẩn (PHP, RFC, tên hàm/kiểu dữ liệu); dịch văn phong kỹ thuật chuẩn xác, tự nhiên.
+- [ ] **Toàn vẹn mã nguồn (Code Integrity)**: Giữ nguyên khối code fence, thụt lề, nội dung mã và kết quả mẫu giống hệt bản tiếng Anh.
+- [ ] **Liên kết & Nguồn tham chiếu**: Kiểm tra tất cả liên kết nội bộ dùng đường dẫn tương đối không hardcode tiền tố ngôn ngữ; URL nguồn tham chiếu khớp chuẩn.
+- [ ] **Khả năng tiếp cận (Accessibility)**: Tiêu đề các mục tuân theo chuẩn (`Why it matters`, `Mental model`, `Code example`, `Common mistakes` hoặc các bản dịch tiếng Việt được duyệt).
+- [ ] **Kiểm tra hợp lệ**: Chạy `pnpm content:validate` vượt qua với 0 lỗi cho tất cả các locale.
+
 ## Các bước đóng góp
 
-1. Đảm bảo khái niệm chung đã tồn tại trong `content/knowledge/concepts.json` (hoặc đề xuất mới).
-2. Định vị hoặc thêm node lộ trình trong `roadmaps/php.json`.
-3. Tạo file bài học tại `content/programming/php/lessons/<lesson-slug>.md` với frontmatter:
+1. Đảm bảo khái niệm chung đã tồn tại trong `content/locales/en/knowledge/concepts.json` và bản tiếng Việt tại `content/locales/vi/knowledge/concepts.json`.
+2. Định vị hoặc thêm node lộ trình trong `content/locales/en/roadmaps/php.json` và `content/locales/vi/roadmaps/php.json`.
+3. Tạo file bài học chuẩn tại `content/locales/en/programming/php/lessons/<lesson-slug>.md` và bản tiếng Việt tại `content/locales/vi/programming/php/lessons/<lesson-slug>.md` với frontmatter tương ứng:
    ```yaml
    ---
    id: php-functions
    slug: functions
-   title: Functions, Signatures and Closures in PHP
+   title: Hàm, Chữ ký Hàm và Closures trong PHP
    conceptId: concept-functions
    language: php
    status: published
@@ -98,3 +129,4 @@ Phép loại suy trực quan hoặc mô hình trừu tượng ở mức engine g
    pnpm content:validate
    ```
 6. Tạo Pull Request với tiêu đề `content(php): add/update <topic>`.
+

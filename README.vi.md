@@ -172,10 +172,12 @@ Khi chạy ở **Chế độ Đầy đủ với Database**, các dịch vụ sau
 
 | Dịch vụ | URL / Cổng Cục bộ | Mục đích |
 |---|---|---|
-| **Ứng dụng Web** | [http://localhost:3000](http://localhost:3000) | Giao diện nền tảng học tập & lộ trình tương tác |
+| **Ứng dụng Web** | [http://localhost:3000](http://localhost:3000) (hỗ trợ song ngữ: `/en`, `/vi`) | Giao diện nền tảng học tập & lộ trình tương tác |
 | **Supabase Studio** | [http://127.0.0.1:54323](http://127.0.0.1:54323) | Giao diện web quản lý và truy vấn bảng dữ liệu PostgreSQL |
 | **PostgreSQL Database** | `postgresql://postgres:postgres@127.0.0.1:54322/postgres` | Chuỗi kết nối trực tiếp vào database PostgreSQL |
 | **Kong API Gateway** | `http://127.0.0.1:54321` | Điểm kết nối API Gateway cục bộ |
+
+> **Bản địa hóa Song ngữ (i18n)**: LangStride hỗ trợ song ngữ toàn diện Tiếng Anh và Tiếng Việt (`en` và `vi`). Các đường dẫn URL chuẩn tắc đều có tiền tố ngôn ngữ (`/en`, `/vi`, `/en/php`, `/vi/php/concepts/:slug`), và các tệp nội dung được phân vùng độc lập tại `content/locales/{en,vi}/`. Xem [Kiến trúc Bản địa hóa](docs/vi/architecture/localization.md).
 
 ### Bảng Lệnh Phát triển Hữu ích
 

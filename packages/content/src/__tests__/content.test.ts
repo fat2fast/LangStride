@@ -4,8 +4,8 @@ import {
   RoadmapFileSchema,
   LessonFrontmatterSchema,
 } from '../schemas';
-import { validateContentData, detectPrerequisiteCycles, detectRoadmapNodeCycles } from '../validate';
-import { parseLessonContent } from '../load-content';
+import { validateContentData, detectPrerequisiteCycles, detectRoadmapNodeCycles, validateBilingualParity } from '../validate';
+import { parseLessonContent, type RawParsedLesson } from '../load-content';
 import type { Concept, Roadmap } from '@langstride/learning';
 
 describe('Language-neutral domain contracts and schemas (FR-KNOW-001..009)', () => {
@@ -491,3 +491,199 @@ Common mistakes text.
     expect(result.errors.some((e) => e.includes('Roadmap declared language "go" does not match expected collection language "php"'))).toBe(true);
   });
 });
+
+describe('Bilingual Parity Validation (validateBilingualParity)', () => {
+  const sampleEnConcept: Concept = {
+    id: 'concept-test',
+    slug: 'test-slug',
+    title: 'Test Concept',
+    description: 'English description',
+    prerequisites: [],
+    related: [],
+  };
+
+  const sampleViConcept: Concept = {
+    id: 'concept-test',
+    slug: 'test-slug',
+    title: 'Khái niệm kiểm thử',
+    description: 'Mô tả tiếng Việt',
+    prerequisites: [],
+    related: [],
+  };
+
+  const sampleEnRoadmap: Roadmap = {
+    language: 'php',
+    title: 'PHP Roadmap',
+    description: 'English roadmap',
+    sections: [
+      {
+        id: 'sec-1',
+        title: 'Section 1',
+        order: 1,
+        nodes: [
+          {
+            id: 'node-1',
+            conceptId: 'concept-test',
+            title: 'Test Node',
+            lessonSlug: 'test-slug',
+            status: 'published',
+            order: 1,
+          },
+        ],
+      },
+    ],
+  };
+
+  const sampleViRoadmap: Roadmap = {
+    language: 'php',
+    title: 'Lộ trình PHP',
+    description: 'Lộ trình tiếng Việt',
+    sections: [
+      {
+        id: 'sec-1',
+        title: 'Phần 1',
+        order: 1,
+        nodes: [
+          {
+            id: 'node-1',
+            conceptId: 'concept-test',
+            title: 'Nút kiểm thử',
+            lessonSlug: 'test-slug',
+            status: 'published',
+            order: 1,
+          },
+        ],
+      },
+    ],
+  };
+
+  const sampleEnLesson: RawParsedLesson = {
+    frontmatter: {
+      id: 'php-test',
+      slug: 'test-slug',
+      title: 'Test Lesson',
+      conceptId: 'concept-test',
+      language: 'php',
+      status: 'published',
+      sources: [{ title: 'PHP Docs', url: 'https://www.php.net' }],
+    },
+    rawContent: '',
+    whyItMatters: 'English explanation',
+    mentalModel: 'English model',
+    codeExample: {
+      language: 'php',
+      code: '<?php echo "Hello"; ?>',
+    },
+    commonMistakes: 'English mistake',
+    filePath: 'content/locales/en/programming/php/lessons/test-slug.md',
+  };
+
+  const sampleViLesson: RawParsedLesson = {
+    frontmatter: {
+      id: 'php-test',
+      slug: 'test-slug',
+      title: 'Bài học kiểm thử',
+      conceptId: 'concept-test',
+      language: 'php',
+      status: 'published',
+      sources: [{ title: 'Tài liệu PHP', url: 'https://www.php.net' }],
+    },
+    rawContent: '',
+    whyItMatters: 'Giải thích tiếng Việt',
+    mentalModel: 'Mô hình tư duy tiếng Việt',
+    codeExample: {
+      language: 'php',
+      code: '<?php echo "Hello"; ?>',
+    },
+    commonMistakes: 'Lỗi thường gặp tiếng Việt',
+    filePath: 'content/locales/vi/programming/php/lessons/test-slug.md',
+  };
+
+  it('passes when EN and VI content have full structural and code parity', () => {
+    const errors = validateBilingualParity(
+      [sampleEnConcept],
+      [sampleViConcept],
+      sampleEnRoadmap,
+      sampleViRoadmap,
+      [sampleEnLesson],
+      [sampleViLesson]
+    );
+    expect(errors).toEqual([]);
+  });
+
+  it('rejects when Vietnamese concept is missing for an English concept ID', () => {
+    const errors = validateBilingualParity(
+      [sampleEnConcept],
+      [], // missing VI concept
+      sampleEnRoadmap,
+      sampleViRoadmap,
+      [sampleEnLesson],
+      [sampleViLesson]
+    );
+    expect(errors.some((e) => e.includes('Missing Vietnamese concept record for canonical concept ID "concept-test"'))).toBe(true);
+  });
+
+  it('rejects when Vietnamese concept slug diverges from English', () => {
+    const mismatchedViConcept = { ...sampleViConcept, slug: 'different-slug' };
+    const errors = validateBilingualParity(
+      [sampleEnConcept],
+      [mismatchedViConcept],
+      sampleEnRoadmap,
+      sampleViRoadmap,
+      [sampleEnLesson],
+      [sampleViLesson]
+    );
+    expect(errors.some((e) => e.includes('slug mismatch'))).toBe(true);
+  });
+
+  it('rejects when Vietnamese published lesson is missing for an English published lesson', () => {
+    const errors = validateBilingualParity(
+      [sampleEnConcept],
+      [sampleViConcept],
+      sampleEnRoadmap,
+      sampleViRoadmap,
+      [sampleEnLesson],
+      [] // missing VI lesson
+    );
+    expect(errors.some((e) => e.includes('Missing required Vietnamese published lesson'))).toBe(true);
+  });
+
+  it('rejects when Vietnamese lesson code example diverges from English canonical code', () => {
+    const driftedViLesson: RawParsedLesson = {
+      ...sampleViLesson,
+      codeExample: {
+        language: 'php',
+        code: '<?php echo "Different Code"; ?>',
+      },
+    };
+    const errors = validateBilingualParity(
+      [sampleEnConcept],
+      [sampleViConcept],
+      sampleEnRoadmap,
+      sampleViRoadmap,
+      [sampleEnLesson],
+      [driftedViLesson]
+    );
+    expect(errors.some((e) => e.includes('code example does not match canonical English code'))).toBe(true);
+  });
+
+  it('rejects when Vietnamese lesson source URLs do not match canonical English sources', () => {
+    const driftedSourcesViLesson: RawParsedLesson = {
+      ...sampleViLesson,
+      frontmatter: {
+        ...sampleViLesson.frontmatter,
+        sources: [{ title: 'Other Doc', url: 'https://example.com/other' }],
+      },
+    };
+    const errors = validateBilingualParity(
+      [sampleEnConcept],
+      [sampleViConcept],
+      sampleEnRoadmap,
+      sampleViRoadmap,
+      [sampleEnLesson],
+      [driftedSourcesViLesson]
+    );
+    expect(errors.some((e) => e.includes('source URLs do not match canonical English source URLs'))).toBe(true);
+  });
+});
+

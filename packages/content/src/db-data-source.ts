@@ -1,5 +1,5 @@
 import { Pool } from 'pg';
-import type { Concept, Roadmap, Lesson, LearningDataSource, RoadmapSection, RoadmapNode } from '@langstride/learning';
+import type { Concept, Roadmap, Lesson, LearningDataSource, RoadmapSection, RoadmapNode, Locale } from '@langstride/learning';
 
 export class DatabaseLearningDataSource implements LearningDataSource {
   private pool: Pool;
@@ -20,9 +20,15 @@ export class DatabaseLearningDataSource implements LearningDataSource {
     }
   }
 
-  async loadConcepts(): Promise<Concept[]> {
+  async loadConcepts(locale: Locale = 'en'): Promise<Concept[]> {
     const conceptsRes = await this.pool.query(
-      'SELECT id, slug, title, description FROM concepts ORDER BY id ASC'
+      `SELECT c.id, c.slug,
+              COALESCE(ct.title, c.title) AS title,
+              COALESCE(ct.description, c.description) AS description
+       FROM concepts c
+       LEFT JOIN concept_translations ct ON c.id = ct.concept_id AND ct.locale = $1
+       ORDER BY c.id ASC`,
+      [locale]
     );
     const relationsRes = await this.pool.query(
       'SELECT concept_id, target_concept_id, relation_type FROM concept_relations'
@@ -53,10 +59,10 @@ export class DatabaseLearningDataSource implements LearningDataSource {
     }));
   }
 
-  async loadRoadmap(language: string): Promise<Roadmap | null> {
+  async loadRoadmap(language: string, locale: Locale = 'en'): Promise<Roadmap | null> {
     const roadmapRes = await this.pool.query(
-      'SELECT id, language, title, description FROM roadmaps WHERE language = $1',
-      [language]
+      'SELECT id, language, title, description FROM roadmaps WHERE language = $1 AND locale = $2',
+      [language, locale]
     );
 
     if (roadmapRes.rows.length === 0) {
@@ -64,70 +70,48 @@ export class DatabaseLearningDataSource implements LearningDataSource {
     }
 
     const roadmapRow = roadmapRes.rows[0];
+
     const sectionsRes = await this.pool.query(
       'SELECT id, title, description, display_order FROM roadmap_sections WHERE roadmap_id = $1 ORDER BY display_order ASC',
       [roadmapRow.id]
     );
 
-    if (sectionsRes.rows.length === 0) {
-      return {
-        language: roadmapRow.language,
-        title: roadmapRow.title,
-        description: roadmapRow.description || undefined,
-        sections: [],
-      };
-    }
+    const sections: RoadmapSection[] = [];
 
-    const sectionIds = sectionsRes.rows.map((s) => s.id);
-    const nodesRes = await this.pool.query(
-      'SELECT id, section_id, concept_id, title, lesson_slug, status, display_order FROM roadmap_nodes WHERE section_id = ANY($1) ORDER BY display_order ASC',
-      [sectionIds]
-    );
+    for (const sRow of sectionsRes.rows) {
+      const nodesRes = await this.pool.query(
+        'SELECT id, concept_id, title, lesson_slug, status, display_order FROM roadmap_nodes WHERE section_id = $1 ORDER BY display_order ASC',
+        [sRow.id]
+      );
 
-    const nodeIds = nodesRes.rows.map((n) => n.id);
-    let prereqMap = new Map<string, string[]>();
+      const sectionNodes: RoadmapNode[] = [];
 
-    if (nodeIds.length > 0) {
-      try {
-        const prereqsRes = await this.pool.query(
-          'SELECT node_id, prerequisite_node_id FROM roadmap_node_prerequisites WHERE node_id = ANY($1)',
-          [nodeIds]
+      for (const nRow of nodesRes.rows) {
+        const prereqRes = await this.pool.query(
+          'SELECT prerequisite_node_id FROM roadmap_node_prerequisites WHERE node_id = $1',
+          [nRow.id]
         );
-        for (const row of prereqsRes.rows) {
-          const list = prereqMap.get(row.node_id) || [];
-          list.push(row.prerequisite_node_id);
-          prereqMap.set(row.node_id, list);
-        }
-      } catch (err: any) {
-        // Fallback gracefully if roadmap_node_prerequisites table has not been migrated yet on legacy local DB
-        if (err?.code !== '42P01') {
-          throw err;
-        }
+        const prereqs = prereqRes.rows.map((r) => r.prerequisite_node_id.replace(/^(en|vi):/, ''));
+
+        sectionNodes.push({
+          id: nRow.id.replace(/^(en|vi):/, ''),
+          conceptId: nRow.concept_id,
+          title: nRow.title,
+          lessonSlug: nRow.lesson_slug || undefined,
+          status: nRow.status as RoadmapNode['status'],
+          order: nRow.display_order,
+          prerequisites: prereqs.length > 0 ? prereqs : undefined,
+        });
       }
-    }
 
-    const nodesBySection = new Map<string, RoadmapNode[]>();
-    for (const row of nodesRes.rows) {
-      const list = nodesBySection.get(row.section_id) || [];
-      list.push({
-        id: row.id,
-        conceptId: row.concept_id,
-        title: row.title,
-        lessonSlug: row.lesson_slug || undefined,
-        status: row.status,
-        order: row.display_order,
-        prerequisites: prereqMap.get(row.id) || [],
+      sections.push({
+        id: sRow.id.replace(/^(en|vi):/, ''),
+        title: sRow.title,
+        description: sRow.description || undefined,
+        order: sRow.display_order,
+        nodes: sectionNodes,
       });
-      nodesBySection.set(row.section_id, list);
     }
-
-    const sections: RoadmapSection[] = sectionsRes.rows.map((row) => ({
-      id: row.id,
-      title: row.title,
-      description: row.description || undefined,
-      order: row.display_order,
-      nodes: nodesBySection.get(row.id) || [],
-    }));
 
     return {
       language: roadmapRow.language,
@@ -137,51 +121,51 @@ export class DatabaseLearningDataSource implements LearningDataSource {
     };
   }
 
-  async loadLessons(language: string): Promise<Lesson[]> {
+  async loadLessons(language: string, locale: Locale = 'en'): Promise<Lesson[]> {
     const lessonsRes = await this.pool.query(
-      'SELECT id, slug, concept_id, language, title, status, why_it_matters, mental_model, code_example, common_mistakes, raw_content FROM lessons WHERE language = $1',
-      [language]
+      `SELECT id, slug, concept_id, language, title, status, why_it_matters, mental_model, code_example, common_mistakes, raw_content
+       FROM lessons
+       WHERE language = $1 AND locale = $2
+       ORDER BY id ASC`,
+      [language, locale]
     );
 
-    if (lessonsRes.rows.length === 0) {
-      return [];
-    }
+    const lessons: Lesson[] = [];
 
-    const lessonIds = lessonsRes.rows.map((l) => l.id);
-    const sourcesRes = await this.pool.query(
-      'SELECT lesson_id, title, url FROM sources WHERE lesson_id = ANY($1)',
-      [lessonIds]
-    );
+    for (const row of lessonsRes.rows) {
+      const sourcesRes = await this.pool.query(
+        'SELECT title, url FROM sources WHERE lesson_id = $1 ORDER BY id ASC',
+        [row.id]
+      );
 
-    const sourcesByLesson = new Map<string, { title: string; url: string }[]>();
-    for (const s of sourcesRes.rows) {
-      const list = sourcesByLesson.get(s.lesson_id) || [];
-      list.push({ title: s.title, url: s.url });
-      sourcesByLesson.set(s.lesson_id, list);
-    }
+      const sources = sourcesRes.rows.map((s) => ({
+        title: s.title,
+        url: s.url,
+      }));
 
-    return lessonsRes.rows.map((row) => {
-      const parsedCode = typeof row.code_example === 'string'
+      const codeExample = typeof row.code_example === 'string'
         ? JSON.parse(row.code_example)
         : row.code_example;
 
-      return {
+      lessons.push({
         frontmatter: {
-          id: row.id,
+          id: row.id.replace(/^(en|vi):/, ''),
           slug: row.slug,
+          title: row.title,
           conceptId: row.concept_id,
           language: row.language,
-          title: row.title,
           status: row.status,
-          sources: sourcesByLesson.get(row.id) || [],
+          sources: sources.length > 0 ? sources : undefined,
         },
         rawContent: row.raw_content,
         whyItMatters: row.why_it_matters,
         mentalModel: row.mental_model,
-        codeExample: parsedCode,
+        codeExample,
         commonMistakes: row.common_mistakes,
-      };
-    });
+      });
+    }
+
+    return lessons;
   }
 }
 

@@ -1,0 +1,93 @@
+{
+  "language": "php",
+  "title": "Lộ trình Kỹ thuật PHP",
+  "description": "Lộ trình có cấu trúc cho PHP 8.x hiện đại, từ biểu diễn dữ liệu nền tảng đến kiến trúc hướng đối tượng và quản lý lỗi runtime.",
+  "sections": [
+    {
+      "id": "section-fundamentals",
+      "title": "Nền tảng PHP",
+      "description": "Cơ chế cốt lõi của ngôn ngữ, biến, luồng điều khiển và hàm.",
+      "order": 1,
+      "nodes": [
+        {
+          "id": "node-php-variables",
+          "conceptId": "concept-variables",
+          "title": "Biến và Hệ thống Kiểu Dữ liệu",
+          "lessonSlug": "variables-and-types",
+          "status": "published",
+          "order": 1,
+          "prerequisites": []
+        },
+        {
+          "id": "node-php-control-flow",
+          "conceptId": "concept-control-flow",
+          "title": "Luồng Điều Khiển và Biểu Thức Match",
+          "lessonSlug": "control-flow",
+          "status": "published",
+          "order": 2,
+          "prerequisites": ["node-php-variables"]
+        },
+        {
+          "id": "node-php-functions",
+          "conceptId": "concept-functions",
+          "title": "Hàm, Chữ Ký Hàm và Closures",
+          "lessonSlug": "functions",
+          "status": "published",
+          "order": 3,
+          "prerequisites": ["node-php-variables"]
+        }
+      ]
+    },
+    {
+      "id": "section-oop",
+      "title": "Kiến trúc Hướng Đối Tượng",
+      "description": "Mô hình hóa nghiệp vụ chuẩn mực với lớp trong PHP hiện đại, constructor promotion và giao diện hợp đồng.",
+      "order": 2,
+      "nodes": [
+        {
+          "id": "node-php-classes",
+          "conceptId": "concept-classes-and-objects",
+          "title": "Lớp, Tính Hiển Thị và Constructor Promotion",
+          "lessonSlug": "classes-and-objects",
+          "status": "published",
+          "order": 1,
+          "prerequisites": ["node-php-functions"]
+        },
+        {
+          "id": "node-php-interfaces",
+          "conceptId": "concept-interfaces",
+          "title": "Giao diện và Thiết kế Theo Hợp đồng",
+          "lessonSlug": "interfaces",
+          "status": "published",
+          "order": 2,
+          "prerequisites": ["node-php-classes"]
+        }
+      ]
+    },
+    {
+      "id": "section-robustness",
+      "title": "An toàn Runtime & Xử lý Lỗi",
+      "description": "Xử lý trạng thái bất định, phân cấp ngoại lệ và cơ chế thực thi đồng thời.",
+      "order": 3,
+      "nodes": [
+        {
+          "id": "node-php-exceptions",
+          "conceptId": "concept-exceptions",
+          "title": "Phân Cấp Ngoại Lệ và Bẫy Lỗi Phòng Thủ",
+          "lessonSlug": "exceptions",
+          "status": "published",
+          "order": 1,
+          "prerequisites": ["node-php-classes"]
+        },
+        {
+          "id": "node-php-fibers",
+          "conceptId": "concept-fibers",
+          "title": "Đồng thời Bất đồng bộ với Fibers",
+          "status": "planned",
+          "order": 2,
+          "prerequisites": ["node-php-functions"]
+        }
+      ]
+    }
+  ]
+}
