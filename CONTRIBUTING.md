@@ -22,13 +22,14 @@ You do **not** need to be a software engineer or understand our application code
 - **Generic Knowledge Concepts**: `content/knowledge/concepts.json`
 - **Roadmap Definitions**: `roadmaps/php.json`
 - **Language Lessons**: `content/programming/php/lessons/*.md`
-- **Content Guide**: [Content Contribution Guide](docs/en/contribution/content-guide.md)
+- **Content Guide**: [Content Contribution Guide](docs/en/contribution/content-guide.md) | [Local Development Guide](docs/en/development/local-setup.md)
 
 ## Contribution & PR Workflow
 
 1. **Fork the repository** on GitHub and clone locally.
 2. **Install dependencies**: `pnpm install`
-3. **Start local database**: `pnpm local:setup`
+3. **Configure environment**: `cp .env.example .env.local`
+   *(For zero-Docker fast start, set `USE_DB_READ_MODEL=false`; or run `pnpm local:setup` for full PostgreSQL/Supabase database mode).*
 4. **Create a topic branch**: `git checkout -b content/php-variables-lesson`
 5. **Make your changes** in the appropriate directory (`content/`, `roadmaps/`, or `docs/`).
 6. **Validate content & run checks**:

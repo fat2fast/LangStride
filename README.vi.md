@@ -114,49 +114,82 @@ Xem [Tổng quan Kiến trúc Kỹ thuật](docs/vi/architecture/overview.md).
 
 ### Yêu cầu Tiên quyết (Prerequisites)
 
-- **Node.js**: `v22.0.0+` (hoặc `v26+`, xem `.nvmrc`)
+- **Node.js**: `v22.0.0+` (hoặc `v26+`, xem [.nvmrc](.nvmrc))
 - **pnpm**: `v9.0.0+` (khuyến nghị `v12.x`)
-- **Docker**: Docker Desktop / Docker Engine (cho PostgreSQL/Supabase cục bộ)
-- **Supabase CLI**: được quản lý tự động qua `devDependencies` (`supabase` v2.118.0) và Docker
+- **Docker**: Docker Desktop hoặc Docker Engine (*không bắt buộc: chỉ cần khi chạy Chế độ Database*)
+- **Git**: `>= 2.30.0`
 
-### Thiết lập & Phát triển Cục bộ (Local Setup)
+### Lựa chọn Chế độ Chạy Cục bộ
 
-1. **Clone và cài đặt phụ thuộc**:
-   ```bash
-   git clone https://github.com/fat2fast/LangStride.git
-   cd langstride
-   pnpm install
-   ```
+LangStride được thiết kế để chạy 100% độc lập mà không cần dịch vụ AI đám mây hay phụ thuộc SaaS bên thứ ba ([ADR-0006](docs/vi/adr/ADR-0006-deterministic-validation-before-ai.md), [ADR-0007](docs/vi/adr/ADR-0007-community-edition-must-not-depend-on-saas.md)). Bạn có thể chọn 1 trong 2 cách sau:
 
-2. **Cấu hình biến môi trường**:
-   ```bash
-   cp .env.example .env.local
-   ```
-   *(Các giá trị mặc định an toàn cho môi trường cục bộ đã được thiết lập sẵn trong `.env.example`; không cần secret bên ngoài hay tài khoản đám mây. Theo mặc định, `USE_DB_READ_MODEL=true` kết nối ứng dụng web với mô hình đọc PostgreSQL cục bộ được đồng bộ bằng `pnpm content:sync`. Đặt `USE_DB_READ_MODEL=false` để đọc trực tiếp từ các file Git trong repository phục vụ chế độ offline hoặc build tĩnh độc lập).*
+#### Lựa chọn 1: Khởi động Nhanh Không cần Docker / Chế độ File (Nhanh & Nhẹ nhất)
+*Khuyến nghị cho người học, người viết bài học và người đóng góp tài liệu — đọc trực tiếp file Markdown/JSON Git mà không cần bật bất kỳ container nào.*
 
-3. **Khởi động database cục bộ**:
-   ```bash
-   pnpm local:setup
-   ```
+```bash
+# 1. Clone kho mã nguồn và cài đặt phụ thuộc
+git clone https://github.com/fat2fast/LangStride.git
+cd langstride
+pnpm install
 
-4. **Xác thực và đồng bộ dữ liệu nội dung**:
-   ```bash
-   pnpm content:validate
-   pnpm content:sync
-   ```
+# 2. Cấu hình môi trường cục bộ (Chế độ đọc file trực tiếp)
+cp .env.example .env.local
+sed -i 's/USE_DB_READ_MODEL=true/USE_DB_READ_MODEL=false/' .env.local
 
-5. **Khởi chạy ứng dụng web phát triển**:
-   ```bash
-   pnpm dev
-   ```
-   Mở [http://localhost:3000](http://localhost:3000) hoặc truy cập trực tiếp lộ trình PHP tại [http://localhost:3000/php](/php).
+# 3. Khởi chạy máy chủ phát triển cục bộ
+pnpm dev
+```
+Mở [http://localhost:3000](http://localhost:3000) hoặc truy cập trực tiếp lộ trình PHP tại [http://localhost:3000/php](/php). Mọi thay đổi trong các file bài học (`content/`) hoặc lộ trình (`roadmaps/`) sẽ tự động cập nhật ngay khi bạn F5 lại trình duyệt.
 
-6. **Chạy kiểm thử và kiểm tra chất lượng**:
-   ```bash
-   pnpm lint
-   pnpm test
-   pnpm build
-   ```
+---
+
+#### Lựa chọn 2: Chế độ Đầy đủ với Database (PostgreSQL + Supabase Studio)
+*Khuyến nghị cho lập trình viên full-stack làm việc với database migration, tìm kiếm toàn văn FTS hoặc đồng bộ schema.*
+
+```bash
+# 1. Clone kho mã nguồn và cài đặt phụ thuộc
+git clone https://github.com/fat2fast/LangStride.git
+cd langstride
+pnpm install
+
+# 2. Cấu hình biến môi trường (mặc định đã cấu hình sẵn cho Supabase cục bộ)
+cp .env.example .env.local
+
+# 3. Khởi động cụm container Supabase cục bộ (PostgreSQL, Studio UI, Auth cục bộ)
+pnpm local:setup
+
+# 4. Xác thực định dạng nội dung và đồng bộ vào bảng PostgreSQL
+pnpm content:validate
+pnpm content:sync
+
+# 5. Khởi chạy ứng dụng web phát triển
+pnpm dev
+```
+
+### Danh mục Dịch vụ & Cổng Mạng Cục bộ
+
+Khi chạy ở **Chế độ Đầy đủ với Database**, các dịch vụ sau sẽ khả dụng:
+
+| Dịch vụ | URL / Cổng Cục bộ | Mục đích |
+|---|---|---|
+| **Ứng dụng Web** | [http://localhost:3000](http://localhost:3000) | Giao diện nền tảng học tập & lộ trình tương tác |
+| **Supabase Studio** | [http://127.0.0.1:54323](http://127.0.0.1:54323) | Giao diện web quản lý và truy vấn bảng dữ liệu PostgreSQL |
+| **PostgreSQL Database** | `postgresql://postgres:postgres@127.0.0.1:54322/postgres` | Chuỗi kết nối trực tiếp vào database PostgreSQL |
+| **Kong API Gateway** | `http://127.0.0.1:54321` | Điểm kết nối API Gateway cục bộ |
+
+### Bảng Lệnh Phát triển Hữu ích
+
+| Lệnh Dòng lệnh | Hành động |
+|---|---|
+| `pnpm dev` | Khởi chạy máy chủ phát triển Next.js hỗ trợ hot-reload |
+| `pnpm content:validate` | Xác thực tính hợp lệ của frontmatter Markdown, bài học và roadmap JSON |
+| `pnpm content:sync` | Đồng bộ file nội dung Git vào mô hình đọc PostgreSQL cục bộ |
+| `pnpm test` | Chạy toàn bộ bộ kiểm thử tự động với Vitest |
+| `pnpm lint` | Kiểm tra cú pháp và quy chuẩn mã nguồn với ESLint |
+| `pnpm build` | Đóng gói bản build production của ứng dụng web |
+| `pnpm dlx supabase stop` | Dừng các container database chạy ngầm khi kết thúc làm việc |
+
+📖 Để xem hướng dẫn đầy đủ, quy trình biên soạn nội dung và cách xử lý sự cố thường gặp, hãy đọc **[Hướng dẫn Phát triển Cục bộ (docs/vi/development/local-setup.md)](docs/vi/development/local-setup.md)**.
 
 ---
 

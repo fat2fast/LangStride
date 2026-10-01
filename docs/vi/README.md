@@ -14,6 +14,8 @@ Thư mục này chứa **bản dịch tham khảo tiếng Việt** của hệ th
 ```text
 docs/vi/
 ├── README.md               # Mục lục tài liệu tiếng Việt (file này)
+├── development/
+│   └── local-setup.md      # Hướng dẫn chạy cục bộ, 2 chế độ, lệnh & xử lý sự cố
 ├── roadmap.md              # Lộ trình Public MVP (P0–P5) & ranh giới sau MVP (KHI NÀO)
 ├── fr-map.md               # Bản đồ Yêu cầu Chức năng & Trạng thái (CÁI GÌ)
 ├── fr/                     # 18 tài liệu đặc tả chức năng chuẩn tắc chi tiết
@@ -42,6 +44,7 @@ docs/vi/
 
 | Tài liệu | Vai trò | Thẩm quyền |
 |---|---|---|
+| [`development/local-setup.md`](development/local-setup.md) | Cài đặt cục bộ, các chế độ chạy & bảng lệnh | **Hướng dẫn Phát triển & Vận hành** |
 | [`roadmap.md`](roadmap.md) | Cột mốc giai đoạn, tiêu chí hoàn thành | **Nguồn chân lý thời gian (KHI NÀO)** |
 | [`fr-map.md`](fr-map.md) | Danh mục yêu cầu & trạng thái | **Nguồn chân lý yêu cầu (CÁI GÌ)** |
 | [`architecture/overview.md`](architecture/overview.md) | Mô hình triển khai kỹ thuật | **Nguồn kỹ thuật (CÁCH THỨC)** |

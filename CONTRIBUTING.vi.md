@@ -18,13 +18,28 @@ Bạn **không nhất thiết** phải là kỹ sư phần mềm hay hiểu toà
 | **Thẩm định Kỹ thuật** | Review pull request đảm bảo tính chính xác và rõ ràng | [Hướng dẫn Thẩm định Kỹ thuật](docs/vi/contribution/technical-review-guide.md) |
 | **Mã nguồn & Hạ tầng** | Phát triển các package mô-đun, kiểm thử, công cụ runner, CI | [Tổng quan Kiến trúc Kỹ thuật](docs/vi/architecture/overview.md) |
 
-## Quy trình Đóng góp Nhanh
+## Vị trí File Nội dung trên Hệ thống File
+- **Khái niệm tri thức chung**: `content/knowledge/concepts.json`
+- **Định nghĩa lộ trình (Roadmaps)**: `roadmaps/php.json`
+- **Các bài học ngôn ngữ**: `content/programming/php/lessons/*.md`
+- **Hướng dẫn chi tiết**: [Hướng dẫn Đóng góp Nội dung](docs/vi/contribution/content-guide.md) | [Hướng dẫn Phát triển Cục bộ](docs/vi/development/local-setup.md)
 
-1. **Fork kho mã nguồn** trên GitHub.
-2. **Tạo một branch riêng**: `git checkout -b content/php-functions-lesson`.
-3. **Thực hiện thay đổi** trong thư mục phù hợp (`content/`, `challenges/`, `roadmaps/`, hoặc `docs/`).
-4. **Kiểm tra cục bộ**: Đảm bảo định dạng Markdown chuẩn xác và toàn bộ liên kết tương đối hoạt động bình thường.
-5. **Gửi một Pull Request** với phần tóm tắt rõ ràng về những thay đổi đề xuất.
+## Quy trình Đóng góp & Tạo Pull Request
+
+1. **Fork kho mã nguồn** trên GitHub và clone về máy tính cá nhân.
+2. **Cài đặt các gói phụ thuộc**: `pnpm install`
+3. **Cấu hình môi trường**: `cp .env.example .env.local`
+   *(Để chạy nhanh không cần Docker, đặt `USE_DB_READ_MODEL=false`; hoặc chạy `pnpm local:setup` nếu muốn chạy cùng PostgreSQL).*
+4. **Tạo branch riêng**: `git checkout -b content/php-functions-lesson`
+5. **Thực hiện thay đổi** trong thư mục phù hợp (`content/`, `challenges/`, `roadmaps/`, hoặc `docs/`).
+6. **Xác thực nội dung và chạy kiểm tra tự động**:
+   ```bash
+   pnpm content:validate
+   pnpm test
+   pnpm lint
+   ```
+7. **Xem trước trên ứng dụng cục bộ**: Chạy `pnpm dev` và kiểm tra trực quan tại `http://localhost:3000/php`.
+8. **Gửi Pull Request** kèm theo tóm tắt rõ ràng và bằng chứng kiểm thử (validation evidence).
 
 ## Nguyên tắc Cốt lõi
 

@@ -114,49 +114,82 @@ See [Technical Architecture Overview](docs/en/architecture/overview.md).
 
 ### Prerequisites
 
-- **Node.js**: `v22.0.0+` (or `v26+`, see `.nvmrc`)
+- **Node.js**: `v22.0.0+` (or `v26+`, see [.nvmrc](.nvmrc))
 - **pnpm**: `v9.0.0+` (tested with `v12.x`)
-- **Docker**: Docker Desktop / Docker Engine (for local containerized Supabase/PostgreSQL)
-- **Supabase CLI**: managed automatically via project `devDependencies` (`supabase` v2.118.0) and Docker
+- **Docker**: Docker Desktop / Docker Engine (*optional: only required for Full Database Mode*)
+- **Git**: `>= 2.30.0`
 
-### Local Setup & Development
+### Choose Your Local Execution Mode
 
-1. **Clone and install dependencies**:
-   ```bash
-   git clone https://github.com/fat2fast/LangStride.git
-   cd langstride
-   pnpm install
-   ```
+LangStride is designed to run 100% offline without external AI services or cloud vendor locks ([ADR-0006](docs/en/adr/ADR-0006-deterministic-validation-before-ai.md), [ADR-0007](docs/en/adr/ADR-0007-community-edition-must-not-depend-on-saas.md)). You can run it in two ways:
 
-2. **Configure environment variables**:
-   ```bash
-   cp .env.example .env.local
-   ```
-   *(Safe local defaults are preconfigured in `.env.example`; no external secrets or cloud accounts required. By default, `USE_DB_READ_MODEL=true` connects the web application to the local PostgreSQL read-model populated by `pnpm content:sync`. Set `USE_DB_READ_MODEL=false` to bypass the database and load directly from repository Git files for offline work or standalone static builds).*
+#### Option 1: Quickstart Zero-Docker / File Mode (Fastest & Lightest)
+*Recommended for learners, lesson authors, and documentation contributors — runs purely on Git markdown/JSON without starting any containers.*
 
-3. **Start local database**:
-   ```bash
-   pnpm local:setup
-   ```
+```bash
+# 1. Clone repository and install dependencies
+git clone https://github.com/fat2fast/LangStride.git
+cd langstride
+pnpm install
 
-4. **Validate and sync repository content**:
-   ```bash
-   pnpm content:validate
-   pnpm content:sync
-   ```
+# 2. Configure local environment (File-backed mode)
+cp .env.example .env.local
+sed -i 's/USE_DB_READ_MODEL=true/USE_DB_READ_MODEL=false/' .env.local
 
-5. **Start development web application**:
-   ```bash
-   pnpm dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) or navigate directly to the PHP roadmap at [http://localhost:3000/php](/php).
+# 3. Start local development server
+pnpm dev
+```
+Open [http://localhost:3000](http://localhost:3000) or navigate directly to [http://localhost:3000/php](/php). Edits to Markdown lessons (`content/`) or roadmaps (`roadmaps/`) reload immediately upon browser refresh.
 
-6. **Run tests and checks**:
-   ```bash
-   pnpm lint
-   pnpm test
-   pnpm build
-   ```
+---
+
+#### Option 2: Full Database Read-Model Mode (PostgreSQL + Supabase Studio)
+*Recommended for full-stack developers working on database migrations, search indexes, or schema sync.*
+
+```bash
+# 1. Clone repository and install dependencies
+git clone https://github.com/fat2fast/LangStride.git
+cd langstride
+pnpm install
+
+# 2. Configure environment variables (defaults preconfigured for local Supabase)
+cp .env.example .env.local
+
+# 3. Start containerized local Supabase (PostgreSQL, Studio UI, local Auth)
+pnpm local:setup
+
+# 4. Validate content schemas and sync into PostgreSQL tables
+pnpm content:validate
+pnpm content:sync
+
+# 5. Start development web application
+pnpm dev
+```
+
+### Local Services & Ports
+
+When running in **Full Database Mode**, the following local services are available:
+
+| Service | Local URL / Endpoint | Purpose |
+|---|---|---|
+| **Web Application** | [http://localhost:3000](http://localhost:3000) | Main learning platform UI & interactive roadmaps |
+| **Supabase Studio** | [http://127.0.0.1:54323](http://127.0.0.1:54323) | Web GUI to view and query PostgreSQL tables |
+| **PostgreSQL Database** | `postgresql://postgres:postgres@127.0.0.1:54322/postgres` | Direct PostgreSQL connection string |
+| **Kong API Gateway** | `http://127.0.0.1:54321` | Local API Gateway endpoints |
+
+### Useful Development Commands
+
+| Command | Action |
+|---|---|
+| `pnpm dev` | Start Next.js development server with hot-reload |
+| `pnpm content:validate` | Validate Markdown frontmatter, lessons, and JSON roadmaps |
+| `pnpm content:sync` | Sync Git content files into local PostgreSQL read-model |
+| `pnpm test` | Run full test suite with Vitest |
+| `pnpm lint` | Run ESLint code style and syntax checks |
+| `pnpm build` | Compile optimized production web application build |
+| `pnpm dlx supabase stop` | Stop background database containers when finished |
+
+📖 For complete details, content authoring workflow, and troubleshooting, read the **[Local Development Guide (docs/en/development/local-setup.md)](docs/en/development/local-setup.md)**.
 
 ---
 
