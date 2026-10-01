@@ -14,6 +14,8 @@ This directory houses the **canonical specifications** for LangStride Community 
 ```text
 docs/en/
 ├── README.md               # This index & reading guide
+├── development/
+│   └── local-setup.md      # Local installation, modes, scripts & troubleshooting
 ├── roadmap.md              # Public MVP Roadmap (P0–P5) & Post-MVP boundary (WHEN)
 ├── fr-map.md               # Functional Requirements Map & Status (WHAT)
 ├── fr/                     # 18 detailed normative requirement specifications
@@ -42,6 +44,7 @@ docs/en/
 
 | Document | Role | Authority |
 |---|---|---|
+| [`development/local-setup.md`](development/local-setup.md) | Local installation, execution modes & scripts | **Development & Operations Guide** |
 | [`roadmap.md`](roadmap.md) | Phased milestones, exit criteria | **Source of truth (WHEN)** |
 | [`fr-map.md`](fr-map.md) | Requirement catalog & status | **Source of truth (WHAT)** |
 | [`architecture/overview.md`](architecture/overview.md) | Technical implementation pattern | **Technical source (HOW)** |
