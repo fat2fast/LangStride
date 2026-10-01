@@ -1,0 +1,2 @@
+export const supportedLocales = ['en', 'vi'] as const;
+export type Locale = (typeof supportedLocales)[number];

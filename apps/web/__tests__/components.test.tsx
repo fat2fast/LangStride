@@ -75,12 +75,18 @@ describe('UI Component rendering (Task 3.2, FR-PHP-003..008, FR-LESSON-001..007)
     // Published node link
     const publishedLink = screen.getByRole('link', { name: /Variables Topic/i });
     expect(publishedLink).toBeDefined();
-    expect(publishedLink.getAttribute('href')).toBe('/php/concepts/test-variables');
+    expect(publishedLink.getAttribute('href')).toBe('/en/php/concepts/test-variables');
 
     // Planned node should NOT be a link and have aria-disabled
     expect(screen.getByText('Fibers Topic')).toBeDefined();
     const plannedElement = screen.getByText('Fibers Topic').closest('[aria-disabled="true"]');
     expect(plannedElement).not.toBeNull();
+  });
+
+  it('PhpRoadmap renders localized hrefs in Vietnamese when locale="vi"', () => {
+    render(<PhpRoadmap roadmap={sampleRoadmap} locale="vi" />);
+    const publishedLink = screen.getByRole('link', { name: /Variables Topic/i });
+    expect(publishedLink.getAttribute('href')).toBe('/vi/php/concepts/test-variables');
   });
 
   it('PhpRoadmap resolves prerequisite IDs to readable titles and never leaks internal identifiers (Finding 2)', () => {
@@ -181,6 +187,29 @@ describe('UI Component rendering (Task 3.2, FR-PHP-003..008, FR-LESSON-001..007)
     // Official sources link
     const sourceLink = screen.getByRole('link', { name: /Official PHP Doc/i });
     expect(sourceLink.getAttribute('href')).toBe('https://www.php.net/manual');
+
+    // Section headings in English default
+    expect(screen.getByRole('heading', { level: 2, name: /Why it matters/i })).toBeDefined();
+    expect(screen.getByRole('heading', { level: 2, name: /Mental model/i })).toBeDefined();
+    expect(screen.getByRole('heading', { level: 2, name: /Code example/i })).toBeDefined();
+    expect(screen.getByRole('heading', { level: 2, name: /Common mistakes/i })).toBeDefined();
+    expect(screen.getByText(/Authoritative sources:/i)).toBeDefined();
+
+    const backLink = screen.getByRole('link', { name: /Back to PHP Roadmap/i });
+    expect(backLink.getAttribute('href')).toBe('/en/php');
+  });
+
+  it('LessonRenderer renders localized headings and navigation in Vietnamese when locale="vi"', () => {
+    render(<LessonRenderer lesson={sampleLesson} locale="vi" />);
+
+    expect(screen.getByRole('heading', { level: 2, name: /Vì sao điều này quan trọng/i })).toBeDefined();
+    expect(screen.getByRole('heading', { level: 2, name: /Mô hình tư duy/i })).toBeDefined();
+    expect(screen.getByRole('heading', { level: 2, name: /Ví dụ mã nguồn/i })).toBeDefined();
+    expect(screen.getByRole('heading', { level: 2, name: /Các lỗi thường gặp/i })).toBeDefined();
+    expect(screen.getByText(/Nguồn tham khảo chuẩn tắc:/i)).toBeDefined();
+
+    const backLink = screen.getByRole('link', { name: /Quay lại Lộ trình PHP/i });
+    expect(backLink.getAttribute('href')).toBe('/vi/php');
   });
 
   it('LessonRenderer renders formatted Markdown lists and emphasis via MarkdownProse', () => {
@@ -281,7 +310,7 @@ describe('UI Component rendering (Task 3.2, FR-PHP-003..008, FR-LESSON-001..007)
     const { container } = render(<PhpRoadmap roadmap={multiSectionRoadmap} />);
 
     // In collapsed section, links must have tabIndex = -1
-    const link = container.querySelector('a[href="/php/concepts/accessible-lesson"]');
+    const link = container.querySelector('a[href="/en/php/concepts/accessible-lesson"]');
     expect(link).not.toBeNull();
     expect(link?.getAttribute('tabIndex')).toBe('-1');
 
@@ -294,7 +323,7 @@ describe('UI Component rendering (Task 3.2, FR-PHP-003..008, FR-LESSON-001..007)
     expect(link?.getAttribute('tabIndex')).toBe('0');
   });
 
-  it('PhpRoadmap popover uses accessible region semantics and handles close button and Escape key', () => {
+  it('PhpRoadmap popover uses accessible region semantics in English (default)', () => {
     const testRoadmap: Roadmap = {
       language: 'php',
       title: 'Popover Test Roadmap',
@@ -319,8 +348,8 @@ describe('UI Component rendering (Task 3.2, FR-PHP-003..008, FR-LESSON-001..007)
 
     render(<PhpRoadmap roadmap={testRoadmap} />);
 
-    // Single section starts expanded
-    const nodeBtn = screen.getByRole('button', { name: /Bài học 1\.1: Interactive Node/i });
+    // Single section starts expanded - English default
+    const nodeBtn = screen.getByRole('button', { name: /Lesson 1\.1: Interactive Node/i });
     expect(nodeBtn.getAttribute('aria-expanded')).toBe('false');
 
     // Click button to open popover
@@ -331,8 +360,8 @@ describe('UI Component rendering (Task 3.2, FR-PHP-003..008, FR-LESSON-001..007)
     const region = screen.getByRole('region');
     expect(region).toBeDefined();
 
-    // Accessible close button
-    const closeBtn = screen.getByRole('button', { name: /Đóng chi tiết bài học/i });
+    // Accessible close button in English
+    const closeBtn = screen.getByRole('button', { name: /Close lesson details/i });
     expect(closeBtn).toBeDefined();
 
     // Click close button
@@ -343,6 +372,48 @@ describe('UI Component rendering (Task 3.2, FR-PHP-003..008, FR-LESSON-001..007)
     fireEvent.click(nodeBtn);
     expect(screen.getByRole('region')).toBeDefined();
     fireEvent.keyDown(window, { key: 'Escape' });
+    expect(screen.queryByRole('region')).toBeNull();
+  });
+
+  it('PhpRoadmap popover uses accessible region semantics in Vietnamese when locale="vi"', () => {
+    const testRoadmap: Roadmap = {
+      language: 'php',
+      title: 'Lộ trình kiểm thử',
+      sections: [
+        {
+          id: 'sec-popover',
+          title: 'Phần kiểm thử',
+          order: 1,
+          nodes: [
+            {
+              id: 'node-pop',
+              conceptId: 'concept-pop',
+              title: 'Interactive Node',
+              status: 'published',
+              lessonSlug: 'interactive-slug',
+              order: 1,
+            },
+          ],
+        },
+      ],
+    };
+
+    render(<PhpRoadmap roadmap={testRoadmap} locale="vi" />);
+
+    // Single section starts expanded - Vietnamese
+    const nodeBtn = screen.getByRole('button', { name: /Bài học 1\.1: Interactive Node/i });
+    expect(nodeBtn.getAttribute('aria-expanded')).toBe('false');
+
+    // Click button to open popover
+    fireEvent.click(nodeBtn);
+    expect(nodeBtn.getAttribute('aria-expanded')).toBe('true');
+
+    // Accessible close button in Vietnamese
+    const closeBtn = screen.getByRole('button', { name: /Đóng chi tiết bài học/i });
+    expect(closeBtn).toBeDefined();
+
+    // Click close button
+    fireEvent.click(closeBtn);
     expect(screen.queryByRole('region')).toBeNull();
   });
 

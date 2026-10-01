@@ -1,0 +1,93 @@
+{
+  "language": "php",
+  "title": "PHP Engineering Roadmap",
+  "description": "Structured roadmap for modern PHP 8.x, from fundamental data representations to robust object models and runtime error management.",
+  "sections": [
+    {
+      "id": "section-fundamentals",
+      "title": "PHP Fundamentals",
+      "description": "Core language mechanics, variables, control flow, and functions.",
+      "order": 1,
+      "nodes": [
+        {
+          "id": "node-php-variables",
+          "conceptId": "concept-variables",
+          "title": "Variables and Type System",
+          "lessonSlug": "variables-and-types",
+          "status": "published",
+          "order": 1,
+          "prerequisites": []
+        },
+        {
+          "id": "node-php-control-flow",
+          "conceptId": "concept-control-flow",
+          "title": "Control Flow and Match Expressions",
+          "lessonSlug": "control-flow",
+          "status": "published",
+          "order": 2,
+          "prerequisites": ["node-php-variables"]
+        },
+        {
+          "id": "node-php-functions",
+          "conceptId": "concept-functions",
+          "title": "Functions, Signatures and Closures",
+          "lessonSlug": "functions",
+          "status": "published",
+          "order": 3,
+          "prerequisites": ["node-php-variables"]
+        }
+      ]
+    },
+    {
+      "id": "section-oop",
+      "title": "Object-Oriented Architecture",
+      "description": "Clean domain modeling with modern PHP classes, constructor promotion, and interfaces.",
+      "order": 2,
+      "nodes": [
+        {
+          "id": "node-php-classes",
+          "conceptId": "concept-classes-and-objects",
+          "title": "Classes, Visibility and Constructor Promotion",
+          "lessonSlug": "classes-and-objects",
+          "status": "published",
+          "order": 1,
+          "prerequisites": ["node-php-functions"]
+        },
+        {
+          "id": "node-php-interfaces",
+          "conceptId": "concept-interfaces",
+          "title": "Interfaces and Contract-Driven Design",
+          "lessonSlug": "interfaces",
+          "status": "published",
+          "order": 2,
+          "prerequisites": ["node-php-classes"]
+        }
+      ]
+    },
+    {
+      "id": "section-robustness",
+      "title": "Runtime Safety & Error Handling",
+      "description": "Handling unexpected states, exceptions hierarchy, and asynchronous execution.",
+      "order": 3,
+      "nodes": [
+        {
+          "id": "node-php-exceptions",
+          "conceptId": "concept-exceptions",
+          "title": "Exceptions Hierarchy and Defensive Traps",
+          "lessonSlug": "exceptions",
+          "status": "published",
+          "order": 1,
+          "prerequisites": ["node-php-classes"]
+        },
+        {
+          "id": "node-php-fibers",
+          "conceptId": "concept-fibers",
+          "title": "Asynchronous Concurrency with Fibers",
+          "status": "planned",
+          "order": 2,
+          "prerequisites": ["node-php-functions"]
+        }
+      ]
+    }
+  ]
+}

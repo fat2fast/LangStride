@@ -1,0 +1,58 @@
+[
+  {
+    "id": "concept-variables",
+    "slug": "variables-and-types",
+    "title": "Biến và Hệ thống Kiểu Dữ liệu",
+    "description": "Các định danh lưu trữ cơ bản, ngữ nghĩa giá trị so với tham chiếu, và biểu diễn kiểu dữ liệu.",
+    "prerequisites": [],
+    "related": ["concept-control-flow", "concept-functions"]
+  },
+  {
+    "id": "concept-control-flow",
+    "slug": "control-flow",
+    "title": "Luồng Điều Khiển",
+    "description": "Các rẽ nhánh điều kiện, vòng lặp và so khớp mẫu dựa trên biểu thức.",
+    "prerequisites": ["concept-variables"],
+    "related": ["concept-functions"]
+  },
+  {
+    "id": "concept-functions",
+    "slug": "functions-and-scope",
+    "title": "Hàm và Phạm vi Biến",
+    "description": "Các khối lệnh có thể tái sử dụng, phạm vi từ vựng, closures và chữ ký kiểu dữ liệu.",
+    "prerequisites": ["concept-variables"],
+    "related": ["concept-classes-and-objects"]
+  },
+  {
+    "id": "concept-classes-and-objects",
+    "slug": "classes-and-objects",
+    "title": "Lớp và Đối tượng",
+    "description": "Khuôn mẫu hướng đối tượng, đóng gói, phương thức khởi tạo và tính hiển thị thuộc tính.",
+    "prerequisites": ["concept-functions"],
+    "related": ["concept-interfaces"]
+  },
+  {
+    "id": "concept-interfaces",
+    "slug": "interfaces",
+    "title": "Giao diện và Hợp đồng",
+    "description": "Hợp đồng hành vi trừu tượng, tính đa hình và tách rời hiện thực khỏi trừu tượng.",
+    "prerequisites": ["concept-classes-and-objects"],
+    "related": ["concept-classes-and-objects"]
+  },
+  {
+    "id": "concept-exceptions",
+    "slug": "exceptions-and-errors",
+    "title": "Xử lý Ngoại lệ",
+    "description": "Lan truyền lỗi lúc chạy (runtime), cơ chế try/catch và cô lập sự cố an toàn.",
+    "prerequisites": ["concept-classes-and-objects"],
+    "related": []
+  },
+  {
+    "id": "concept-fibers",
+    "slug": "fibers-and-concurrency",
+    "title": "Fibers và Đồng thời",
+    "description": "Đa nhiệm hợp tác (cooperative multitasking), coroutines và thực thi bất đồng bộ không chặn.",
+    "prerequisites": ["concept-functions"],
+    "related": ["concept-exceptions"]
+  }
+]

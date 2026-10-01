@@ -20,13 +20,17 @@ import {
   ChevronUp,
   Move,
 } from 'lucide-react';
-import type { Roadmap, RoadmapNode, RoadmapSection } from '@langstride/learning';
+import type { Roadmap, RoadmapNode, RoadmapSection, Locale } from '@langstride/learning';
+import { getMessages, localizePath, type Messages } from '../lib/i18n';
 
 interface PhpRoadmapProps {
   roadmap: Roadmap;
+  locale?: Locale;
 }
 
-export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
+export function PhpRoadmap({ roadmap, locale = 'en' }: PhpRoadmapProps) {
+  const messages = getMessages(locale);
+
   // Non-mutating shallow copy of sections and nodes (Finding 4)
   const sortedSections = [...roadmap.sections].sort((a, b) => a.order - b.order);
   const allNodes = sortedSections.flatMap((s) => [...s.nodes].sort((a, b) => a.order - b.order));
@@ -161,11 +165,10 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
   }, []);
 
   // Global Ctrl + Wheel Listener: Prevents browser full-page zoom everywhere and zooms roadmap only!
-  // Registered at capture phase on both window and document so no element or margin can trigger browser zoom
   useEffect(() => {
     const handleGlobalWheel = (e: WheelEvent) => {
       if (e.ctrlKey || e.metaKey) {
-        e.preventDefault(); // Stop native browser page zoom!
+        e.preventDefault();
         e.stopPropagation();
         const delta = e.deltaY < 0 ? 0.08 : -0.08;
         setZoom((z) => Math.min(1.4, Math.max(0.65, +(z + delta).toFixed(2))));
@@ -221,14 +224,12 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
     }
   };
 
-  // Partition sections for branching tree:
-  // Root Section (Foundation) -> Parallel branches (OOP and Safety/Fibers)
   const rootSection = sortedSections[0];
   const branchSections = sortedSections.slice(1);
 
   return (
     <div className="relative min-h-screen">
-      {/* 1. Full-page Architectural Dot-Grid Background (Covers entire page behind all content) */}
+      {/* 1. Full-page Architectural Dot-Grid Background */}
       <div
         className="fixed inset-0 pointer-events-none -z-10"
         style={{
@@ -245,14 +246,14 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
               <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse motion-reduce:animate-none" />
-              <span>Official Track</span>
+              <span>{messages.roadmap.officialTrack}</span>
               <span>•</span>
-              <span>PHP 8.x Architecture</span>
+              <span>{messages.roadmap.phpArchitecture}</span>
             </div>
 
             <div className="flex items-center gap-2 text-xs font-medium text-slate-500">
               <Sparkles className="w-4 h-4 text-amber-500" aria-hidden="true" />
-              <span>Cây lộ trình phân nhánh tương tác</span>
+              <span>{messages.roadmap.interactiveTree}</span>
             </div>
           </div>
 
@@ -276,13 +277,13 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
             <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600 bg-white/90 backdrop-blur px-5 py-3 rounded-2xl border border-slate-200 shadow-xs relative z-10">
               <div className="flex items-center gap-2.5 font-medium">
                 <Move className="w-4 h-4 text-indigo-600" />
-                <span>Cầm &amp; kéo chuột để di chuyển cây</span>
+                <span>{messages.roadmap.dragPan}</span>
                 <span className="text-slate-300">•</span>
                 <span className="text-slate-500">
                   <kbd className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200 font-mono text-[11px]">
-                    Ctrl
+                    {messages.roadmap.ctrlKey}
                   </kbd>{' '}
-                  + Cuộn chuột để Zoom
+                  {messages.roadmap.scrollZoom}
                 </span>
               </div>
 
@@ -300,13 +301,13 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
                   className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition-colors border border-slate-200"
                 >
                   {sortedSections.every((s) => !!expandedSections[s.id])
-                    ? 'Thu gọn tất cả'
-                    : 'Mở rộng tất cả'}
+                    ? messages.roadmap.collapseAll
+                    : messages.roadmap.expandAll}
                 </button>
               </div>
             </div>
 
-            {/* Seamless Canvas Stage (Natural page flow, no inner scrollbox) */}
+            {/* Seamless Canvas Stage */}
             <div
               ref={stageRef}
               className="relative w-full cursor-grab active:cursor-grabbing select-none py-4"
@@ -328,12 +329,14 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
               >
                 {/* Tree Nodes Container */}
                 <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center w-full">
-                  {/* Root Node: Chủ đề 1 (PHP Fundamentals) */}
+                  {/* Root Node */}
                   {rootSection && (
                     <div className="w-full max-w-md mx-auto">
                       <TopicTreeNode
                         section={rootSection}
                         sIdx={0}
+                        locale={locale}
+                        messages={messages}
                         isExpanded={!!expandedSections[rootSection.id]}
                         toggleSection={toggleSection}
                         nodeTitleMap={nodeTitleMap}
@@ -344,10 +347,9 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
                     </div>
                   )}
 
-                  {/* Branching Connectors & Parallel Branches - Only rendered when branch sections exist */}
+                  {/* Branching Connectors & Parallel Branches */}
                   {branchSections.length > 0 && (
                     <>
-                      {/* For 2 parallel branches: Desktop SVG branching curves */}
                       {branchSections.length === 2 ? (
                         <div className="w-full h-20 relative hidden md:block pointer-events-none -my-1">
                           <svg
@@ -403,14 +405,12 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
                           </svg>
                         </div>
                       ) : (
-                        /* Generic connector for 1 or 3+ branches */
                         <div className="w-full flex flex-col items-center pointer-events-none my-2">
                           <div className="w-1 h-8 bg-indigo-600 rounded-full" />
                           <div className="w-0 h-0 border-x-4 border-x-transparent border-t-6 border-t-indigo-600 -mt-0.5" />
                         </div>
                       )}
 
-                      {/* Mobile connector for 2 branches */}
                       {branchSections.length === 2 && (
                         <div className="w-full flex flex-col items-center md:hidden pointer-events-none my-1">
                           <div className="w-1 h-8 bg-indigo-600 rounded-full" />
@@ -440,6 +440,8 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
                                 <TopicTreeNode
                                   section={section}
                                   sIdx={actualIdx}
+                                  locale={locale}
+                                  messages={messages}
                                   isExpanded={!!expandedSections[section.id]}
                                   toggleSection={toggleSection}
                                   nodeTitleMap={nodeTitleMap}
@@ -464,8 +466,8 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
                 type="button"
                 onClick={handleZoomIn}
                 className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-700 hover:text-indigo-600 hover:bg-slate-100 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
-                title="Phóng to (Ctrl + +)"
-                aria-label="Phóng to"
+                title={messages.roadmap.zoomIn}
+                aria-label={messages.roadmap.zoomIn}
               >
                 <ZoomIn className="w-4 h-4" />
               </button>
@@ -473,8 +475,8 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
                 type="button"
                 onClick={handleZoomOut}
                 className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-700 hover:text-indigo-600 hover:bg-slate-100 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
-                title="Thu nhỏ (Ctrl + -)"
-                aria-label="Thu nhỏ"
+                title={messages.roadmap.zoomOut}
+                aria-label={messages.roadmap.zoomOut}
               >
                 <ZoomOut className="w-4 h-4" />
               </button>
@@ -483,8 +485,8 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
                 type="button"
                 onClick={handleResetZoom}
                 className="px-2.5 h-8 rounded-xl flex items-center justify-center text-xs font-bold font-mono text-indigo-600 hover:bg-indigo-50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
-                title="Đặt lại 100% (Ctrl + 0)"
-                aria-label="Đặt lại 100%"
+                title={messages.roadmap.resetZoom}
+                aria-label={messages.roadmap.resetZoom}
               >
                 {Math.round(zoom * 100)}%
               </button>
@@ -492,15 +494,15 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
                 type="button"
                 onClick={handleResetZoom}
                 className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-500 hover:text-indigo-600 hover:bg-slate-100 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
-                title="Mặc định vị trí &amp; zoom"
-                aria-label="Mặc định"
+                title={messages.roadmap.defaultView}
+                aria-label={messages.roadmap.defaultView}
               >
                 <RotateCcw className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
 
-          {/* Right Column: Sticky Curriculum Coverage Sidebar (Relabeled from fake progress/streak claims) */}
+          {/* Right Column: Sticky Curriculum Coverage Sidebar */}
           <aside className="lg:col-span-4 sticky top-24 self-start space-y-5 z-20">
             <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-6">
               <div className="flex items-center justify-between pb-3 border-b border-slate-100">
@@ -509,11 +511,11 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
                     <Trophy className="w-4 h-4" />
                   </span>
                   <span className="text-sm font-bold text-slate-900">
-                    Nội dung giáo trình
+                    {messages.roadmap.curriculumContent}
                   </span>
                 </div>
                 <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-                  {publishedPercent}% Đã phát hành
+                  {publishedPercent}{messages.roadmap.publishedPercent}
                 </span>
               </div>
 
@@ -552,7 +554,7 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
                       </span>
                     </div>
                     <div className="text-[10px] uppercase font-bold text-slate-400">
-                      Sẵn sàng
+                      {messages.roadmap.ready}
                     </div>
                   </div>
                 </div>
@@ -560,17 +562,17 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
                 <div className="space-y-2 text-xs">
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                    <span className="text-slate-600">Đã mở:</span>
+                    <span className="text-slate-600">{messages.roadmap.opened}</span>
                     <span className="font-bold text-slate-900">{publishedNodes.length}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
-                    <span className="text-slate-600">Kế hoạch:</span>
+                    <span className="text-slate-600">{messages.roadmap.planned}</span>
                     <span className="font-bold text-slate-900">{plannedNodes.length}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-indigo-500" />
-                    <span className="text-slate-600">Chủ đề:</span>
+                    <span className="text-slate-600">{messages.roadmap.topics}</span>
                     <span className="font-bold text-slate-900">{sortedSections.length}</span>
                   </div>
                 </div>
@@ -579,7 +581,7 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
               {/* Topic Quick Jump List */}
               <div className="space-y-2 pt-2 border-t border-slate-100">
                 <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                  Chuyển nhanh theo Chủ đề
+                  {messages.roadmap.quickJump}
                 </div>
                 <div className="space-y-2">
                   {sortedSections.map((sec, sIdx) => {
@@ -604,7 +606,7 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
                             {sIdx + 1}
                           </span>
                           <span className="truncate">
-                            Chủ đề {sIdx + 1}: {sec.title}
+                            {messages.roadmap.topicPrefix} {sIdx + 1}: {sec.title}
                           </span>
                         </div>
                         {isExpanded ? (
@@ -629,6 +631,8 @@ export function PhpRoadmap({ roadmap }: PhpRoadmapProps) {
 interface TopicTreeNodeProps {
   section: RoadmapSection;
   sIdx: number;
+  locale: Locale;
+  messages: Messages;
   isExpanded: boolean;
   toggleSection: (id: string) => void;
   nodeTitleMap: Map<string, string>;
@@ -640,6 +644,8 @@ interface TopicTreeNodeProps {
 function TopicTreeNode({
   section,
   sIdx,
+  locale,
+  messages,
   isExpanded,
   toggleSection,
   nodeTitleMap,
@@ -657,7 +663,7 @@ function TopicTreeNode({
         sortedNodes.some((n) => n.id === activePopoverNodeId) ? 'z-40' : 'z-10'
       }`}
     >
-      {/* Topic Card (Semantic Button for Keyboard Disclosure & Screen Readers) */}
+      {/* Topic Card */}
       <button
         type="button"
         id={`section-header-${section.id}`}
@@ -674,14 +680,14 @@ function TopicTreeNode({
         <div className="flex items-center justify-between mb-2">
           <span className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-indigo-600">
             {getSectionIcon(sIdx)}
-            <span>Chủ đề 0{sIdx + 1}</span>
+            <span>{messages.roadmap.topicPrefix} 0{sIdx + 1}</span>
           </span>
           <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
-            {publishedInSec}/{sortedNodes.length} bài đã mở
+            {publishedInSec}/{sortedNodes.length} {messages.roadmap.lessonsOpened}
           </span>
         </div>
 
-        {/* Section Title (Unique H2 element for exact match) */}
+        {/* Section Title */}
         <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight group-hover:text-indigo-600 transition-colors">
           {section.title}
         </h2>
@@ -705,19 +711,19 @@ function TopicTreeNode({
         <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-center gap-1.5 text-xs font-semibold text-indigo-600">
           {isExpanded ? (
             <>
-              <span>Thu gọn các bài học</span>
+              <span>{messages.roadmap.collapseLessons}</span>
               <ChevronUp className="w-4 h-4" />
             </>
           ) : (
             <>
-              <span>Bấm để mở các bài học ({sortedNodes.length} bài)</span>
+              <span>{messages.roadmap.clickToExpand} ({sortedNodes.length})</span>
               <ChevronDown className="w-4 h-4" />
             </>
           )}
         </div>
       </button>
 
-      {/* Stepping-Stone Learning Path (Expanded under the topic) */}
+      {/* Stepping-Stone Learning Path */}
       <div
         id={`section-content-${section.id}`}
         aria-labelledby={`section-header-${section.id}`}
@@ -732,14 +738,14 @@ function TopicTreeNode({
           <div className="bg-gradient-to-r from-indigo-600 to-blue-600 rounded-2xl p-4 sm:p-5 text-white shadow-sm flex items-center justify-between">
             <div className="space-y-1">
               <div className="text-[11px] font-bold uppercase tracking-wider text-indigo-100">
-                Chặng học tập 0{sIdx + 1}
+                {messages.roadmap.learningMilestone} 0{sIdx + 1}
               </div>
               <div className="text-base font-extrabold tracking-tight">
-                Chặng: {section.title}
+                {messages.roadmap.milestonePrefix} {section.title}
               </div>
             </div>
             <span className="px-3 py-1 rounded-xl bg-white/20 text-xs font-bold uppercase tracking-wider">
-              {publishedInSec}/{sortedNodes.length} Sẵn sàng
+              {publishedInSec}/{sortedNodes.length} {messages.roadmap.readyBadge}
             </span>
           </div>
 
@@ -752,10 +758,11 @@ function TopicTreeNode({
                 const isLastNode = nIdx === sortedNodes.length - 1;
                 const isFirstNode = nIdx === 0;
 
-                // Resolved Prerequisites
                 const resolvedPrerequisites = (node.prerequisites || []).map((pId) => {
                   return nodeTitleMap.get(pId) || pId;
                 });
+
+                const lessonUrl = node.lessonSlug ? localizePath(locale, `/php/concepts/${node.lessonSlug}`) : '';
 
                 return (
                   <React.Fragment key={node.id}>
@@ -767,7 +774,7 @@ function TopicTreeNode({
                       onMouseEnter={() => setActivePopoverNodeId(node.id)}
                       onMouseLeave={() => setActivePopoverNodeId(null)}
                     >
-                      {/* 3D Circular Stepping Stone Button (Icons ONLY, NO bottom text labels) */}
+                      {/* 3D Circular Stepping Stone Button */}
                       <button
                         type="button"
                         data-node-id={node.id}
@@ -783,9 +790,8 @@ function TopicTreeNode({
                             ? 'bg-gradient-to-b from-amber-400 to-amber-500 text-white shadow-[0_7px_0_#d97706] hover:brightness-110 active:shadow-[0_1px_0_#d97706]'
                             : 'bg-gradient-to-b from-slate-400 to-slate-500 text-slate-100 shadow-[0_7px_0_#475569] active:shadow-[0_1px_0_#475569]'
                         }`}
-                        aria-label={`Bài học ${sIdx + 1}.${nIdx + 1}: ${node.title}`}
+                        aria-label={`${messages.roadmap.lessonPrefix} ${sIdx + 1}.${nIdx + 1}: ${node.title}`}
                       >
-                        {/* Pure icon inside button */}
                         {isPublished ? (
                           nIdx % 3 === 0 ? (
                             <Sparkles className="w-8 h-8 text-white drop-shadow" />
@@ -798,7 +804,6 @@ function TopicTreeNode({
                           <Lock className="w-7 h-7 text-slate-200 drop-shadow" />
                         )}
 
-                        {/* Top-right checkmark indicator */}
                         {isPublished && (
                           <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-white shadow-xs">
                             <Check className="w-3.5 h-3.5 stroke-[3]" />
@@ -806,7 +811,7 @@ function TopicTreeNode({
                         )}
                       </button>
 
-                      {/* Transparent Hover Bridge connecting button and popover so mouse doesn't leave when moving between them */}
+                      {/* Transparent Hover Bridge */}
                       {isPopoverOpen && (
                         <div
                           className={`absolute w-40 h-6 pointer-events-auto ${
@@ -815,7 +820,7 @@ function TopicTreeNode({
                         />
                       )}
 
-                      {/* Speech Bubble Popover (Proper Non-Modal Region with Accessible Close and Heading) */}
+                      {/* Speech Bubble Popover */}
                       {isPopoverOpen && (
                         <div
                           id={`popover-panel-${node.id}`}
@@ -826,7 +831,7 @@ function TopicTreeNode({
                           role="region"
                           aria-labelledby={`lesson-heading-${node.id}`}
                         >
-                          {/* Speech Bubble Arrow Tail pointing directly to button */}
+                          {/* Speech Bubble Arrow Tail */}
                           {isFirstNode ? (
                             <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-0 h-0 border-x-8 border-x-transparent border-b-12 border-b-rose-500" />
                           ) : (
@@ -835,10 +840,10 @@ function TopicTreeNode({
 
                           <div className="space-y-3">
                             <div className="flex items-center justify-between text-xs font-bold text-rose-100">
-                              <span>Bài {sIdx + 1}.{nIdx + 1}</span>
+                              <span>{messages.roadmap.lessonPrefix} {sIdx + 1}.${nIdx + 1}</span>
                               <button
                                 type="button"
-                                aria-label="Đóng chi tiết bài học"
+                                aria-label={messages.roadmap.closeLessonDetails}
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   setActivePopoverNodeId(null);
@@ -849,17 +854,17 @@ function TopicTreeNode({
                               </button>
                             </div>
 
-                            {/* Lesson Title as H3 with accessible ID */}
+                            {/* Lesson Title */}
                             <h3 id={`lesson-heading-${node.id}`} className="text-lg font-extrabold leading-snug">
                               {node.title}
                             </h3>
 
-                            {/* Prerequisites Display with Resolved Titles (Finding 2) */}
+                            {/* Prerequisites Display */}
                             {resolvedPrerequisites.length > 0 && (
                               <div className="text-xs text-rose-100 space-y-1 pt-1 border-t border-rose-400/40">
                                 <div className="font-semibold flex items-center gap-1">
                                   <GitBranch className="w-3.5 h-3.5" />
-                                  <span>Yêu cầu học trước:</span>
+                                  <span>{messages.roadmap.prerequisites}</span>
                                 </div>
                                 <div className="flex flex-wrap gap-1">
                                   {resolvedPrerequisites.map((title) => (
@@ -878,18 +883,18 @@ function TopicTreeNode({
                             <div className="pt-2">
                               {isPublished && node.lessonSlug ? (
                                 <Link
-                                  href={`/php/concepts/${node.lessonSlug}`}
+                                  href={lessonUrl}
                                   tabIndex={isExpanded ? 0 : -1}
                                   className="block w-full py-3 px-4 rounded-2xl bg-white text-rose-600 font-extrabold text-sm uppercase tracking-wider text-center shadow-[0_4px_0_#cbd5e1] hover:bg-slate-50 active:translate-y-1 active:shadow-none transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
                                 >
-                                  Bắt đầu bài học →
+                                  {messages.roadmap.startLesson}
                                 </Link>
                               ) : (
                                 <div
                                   aria-disabled="true"
                                   className="w-full py-2.5 px-4 rounded-2xl bg-white/20 text-white font-bold text-xs uppercase tracking-wider text-center"
                                 >
-                                  Nội dung sắp ra mắt
+                                  {messages.roadmap.comingSoon}
                                 </div>
                               )}
                             </div>
@@ -900,7 +905,7 @@ function TopicTreeNode({
                       {/* Accessible element for automated test runners and screen readers */}
                       <div className="sr-only">
                         {isPublished && node.lessonSlug ? (
-                          <Link href={`/php/concepts/${node.lessonSlug}`} tabIndex={isExpanded ? 0 : -1}>
+                          <Link href={lessonUrl} tabIndex={isExpanded ? 0 : -1}>
                             {node.title}
                           </Link>
                         ) : (
@@ -914,7 +919,6 @@ function TopicTreeNode({
                       </div>
                     </div>
 
-                    {/* Step Connector Line between consecutive stepping stones (Never disappears, high contrast) */}
                     {!isLastNode && (
                       <div className="w-2 h-10 my-1 rounded-full bg-indigo-300 shadow-inner pointer-events-none" />
                     )}

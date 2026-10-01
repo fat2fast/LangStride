@@ -172,10 +172,12 @@ When running in **Full Database Mode**, the following local services are availab
 
 | Service | Local URL / Endpoint | Purpose |
 |---|---|---|
-| **Web Application** | [http://localhost:3000](http://localhost:3000) | Main learning platform UI & interactive roadmaps |
+| **Web Application** | [http://localhost:3000](http://localhost:3000) (bilingual: `/en`, `/vi`) | Main learning platform UI & interactive roadmaps |
 | **Supabase Studio** | [http://127.0.0.1:54323](http://127.0.0.1:54323) | Web GUI to view and query PostgreSQL tables |
 | **PostgreSQL Database** | `postgresql://postgres:postgres@127.0.0.1:54322/postgres` | Direct PostgreSQL connection string |
 | **Kong API Gateway** | `http://127.0.0.1:54321` | Local API Gateway endpoints |
+
+> **Bilingual Localization**: LangStride natively supports English and Vietnamese (`en` and `vi`). URLs are canonical and locale-prefixed (`/en`, `/vi`, `/en/php`, `/vi/php/concepts/:slug`), with content files partitioned in `content/locales/{en,vi}/`. See [Localization Architecture](docs/en/architecture/localization.md).
 
 ### Useful Development Commands
 
